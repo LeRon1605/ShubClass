@@ -1,5 +1,5 @@
-import NotFoundMiddleware from './NotFoundHandler.middleware.js';
-import ExceptionMiddleware from './ExceptionHandler.middleware.js';
+import NotFoundMiddleware from './not-found-handler.middleware.js';
+import ExceptionMiddleware from './exception-handler.middleware.js';
 
 export {
     NotFoundMiddleware,

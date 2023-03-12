@@ -3,7 +3,7 @@ import express from 'express';
 
 import routers from './api/index.js';
 import { NotFoundMiddleware, ExceptionMiddleware } from './middlewares/index.js';
-import { Logger } from './services/index.js';
+import { Logger, Swagger } from './services/index.js';
 
 const app = express();
 
@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(Logger);
+app.use('/api-docs', Swagger());
 app.use('/api', routers);
 app.use(ExceptionMiddleware);
 app.use(NotFoundMiddleware);

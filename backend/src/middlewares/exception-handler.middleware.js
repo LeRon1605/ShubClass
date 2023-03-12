@@ -1,4 +1,4 @@
-import HttpException from '../exceptions/base/Http.exception.js';
+import HttpException from '../exceptions/base/http.exception.js';
 
 const handler = (req, res, next) => {
     try {

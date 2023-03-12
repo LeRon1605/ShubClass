@@ -1,4 +1,4 @@
-import HttpException from './Http.exception.js';
+import HttpException from './http.exception.js';
 
 class BadRequest extends HttpException {
     constructor(message) {
