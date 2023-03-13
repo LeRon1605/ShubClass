@@ -1,6 +1,8 @@
 class HomeService {
-    greeting() {
-        return 'Hello World';
+    greeting(entity) {
+        return {
+            message: `Hello ${entity.username}`
+        };
     }
 }
 
