@@ -9,6 +9,9 @@
   "type": "module",
   "scripts": {
     "start": "nodemon --inspect src/app.js",
+    "db:create": "cd src/database & npx sequelize-cli db:create",
+    "db:migrate": "cd src/database & npx sequelize-cli db:migrate",
+    "db:revert": "cd src/database & npx sequelize-cli db:migrate:undo",
     "test": "jest"
   },
   "author": "",
