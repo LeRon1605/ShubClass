@@ -5,12 +5,16 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate({ Account, Class, StudentClass }) {
-      User.belongsTo(Account, {
+      User.hasOne(Account, {
         foreignKey: 'id'
       });
 
-      User.hasMany(Class);
-      User.hasMany(StudentClass);
+      User.hasMany(Class, {
+        foreignKey: 'teacherId'
+      });
+      User.hasMany(StudentClass, {
+        foreignKey: 'studentId'
+      });
     }
   }
   User.init({

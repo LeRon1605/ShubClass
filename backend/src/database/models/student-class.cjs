@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
         StudentClass.belongsTo(Class, {
             foreignKey: 'classId'
-        })
+        });
     }
   }
   StudentClass.init({

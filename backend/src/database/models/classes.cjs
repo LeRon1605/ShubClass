@@ -4,10 +4,14 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Class extends Model {
-    static associate({ User }) {
+    static associate({ User, StudentClass }) {
         Class.belongsTo(User, {
             foreignKey: 'teacherId'
-        })
+        });
+
+        Class.hasMany(StudentClass, {
+          foreignKey: 'classId'
+        });
     }
   }
   Class.init({
