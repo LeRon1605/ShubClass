@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: dockerfile
+    environment:
+      - DB_PASSWORD=shubclass@2023
+      - DB_HOST=db
+      - DB_DBNAME=ShubClass
+      - DB_USERNAME=root
+      - PORT=3000
+    depends_on:
+      - db
+    ports:
+      - 80:3000
+    restart: always
+  db:
+    image: mysql:5.7.41
+    environment:
+      - MYSQL_ROOT_PASSWORD=shubclass@2023
+    ports:
+      - 33306:3306
+    volumes:
+      - ./docker-database:/var/lib/mysql
+  redis:
+    image: redis:7.0.5-alpine
+    ports:
+      - 6379:6379

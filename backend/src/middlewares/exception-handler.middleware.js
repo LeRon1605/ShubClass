@@ -1,4 +1,4 @@
-import HttpException from '../exceptions/base/http.exception.js';
+import HttpException from '../exceptions/base/Http.exception.js';
 
 const handler = (error, req, res, next) => {
     if (error.statusCode && error.statusCode != 500) {
