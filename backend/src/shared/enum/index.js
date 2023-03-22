@@ -1,5 +1,7 @@
 import ACCOUNT_STATE from './account-state.enum.js';
+import REQUEST_STATE from './request-state.enum.js';
 
-export default {
-    ACCOUNT_STATE
+export {
+    ACCOUNT_STATE,
+    REQUEST_STATE
 }

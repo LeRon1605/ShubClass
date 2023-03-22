@@ -10,13 +10,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-    req.session = {
-        role: 'Teacher',
-        id: '2',
-    }
-    next();
-})
 app.use(Logger);
 app.use('/api-docs', Swagger());
 app.use('/api', routers);

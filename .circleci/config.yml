@@ -1,0 +1,62 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+jobs:
+  test:
+    executor: node/default
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: |
+            echo 'Test passed :))'
+  build-and-deploy-api-image:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login docker
+          command: |
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
+      - run:
+          name: Build docker image
+          command: |
+            TAG=0.1.$CIRCLE_BUILD_NUM 
+            cd ./backend
+            docker build -t $DOCKER_USER/shub_class:latest . 
+            docker build -t $DOCKER_USER/shub_class:$TAG . 
+      - run:
+          name: Deploy docker image
+          command: |
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            docker push $DOCKER_USER/shub_class:latest
+            docker push $DOCKER_USER/shub_class:$TAG
+  deploy:
+    machine:
+      image: ubuntu-2204:2022.10.2
+    steps:
+      - run:
+          name: Deploy over ssh
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd /usr/src/shub_class && ./deploy.sh"
+workflows:
+  deploy-api:
+    jobs:
+      - test
+      - build-and-deploy-api-image:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - build-and-deploy-api-image
+          filters:
+            branches:
+              only:
+                - master

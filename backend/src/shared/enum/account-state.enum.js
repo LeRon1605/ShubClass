@@ -1,5 +1,5 @@
 const ACCOUNT_STATE = {
-    0: PENDING,
-    1: ACTIVE
+    PENDING: 0,
+    ACTIVE: 1
 };
 export default ACCOUNT_STATE;
