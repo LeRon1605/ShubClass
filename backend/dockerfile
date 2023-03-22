@@ -2,10 +2,13 @@ FROM node:16
 
 WORKDIR /usr/app
 
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
 COPY . /usr/app
+
+RUN chmod +x entrypoint.sh
+RUN chmod 777 /usr/app/src/services/data/access.log
 
 ENTRYPOINT [ "./entrypoint.sh" ]

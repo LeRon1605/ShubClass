@@ -1,5 +1,8 @@
 #!/bin/bash
 
-npm run db:create
-npm run db:migrate
-npm run deploy
+cd /usr/app/src/database
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+
+cd /usr/app/src
+node app.js
