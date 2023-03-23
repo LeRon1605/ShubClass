@@ -3,7 +3,7 @@ import express from 'express';
 
 import routers from './api/index.js';
 import { NotFoundMiddleware, ExceptionMiddleware } from './middlewares/index.js';
-import { Logger, Swagger } from './services/index.js';
+import { Swagger } from './services/index.js';
 
 const app = express();
 
