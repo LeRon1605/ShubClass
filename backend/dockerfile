@@ -9,7 +9,5 @@ RUN npm install
 COPY . /usr/app
 
 RUN chmod +x entrypoint.sh
-RUN touch /usr/app/src/services/data/access.log
-RUN chmod 777 /usr/app/src/services/data/access.log
 
 ENTRYPOINT [ "./entrypoint.sh" ]
