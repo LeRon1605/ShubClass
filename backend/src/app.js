@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(Logger);
+// app.use(Logger);
 app.use('/api-docs', Swagger());
 app.use('/api', routers);
 app.use(ExceptionMiddleware);
