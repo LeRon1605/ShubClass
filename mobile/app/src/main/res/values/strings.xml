@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Shub Classroom</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home_fragment">Homefragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="class_fragment">Class fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="calendar_fragment">Calendar fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="alert_fragment">Alert fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile_fragment">Profile fragment</string>
+</resources>
