@@ -10,4 +10,6 @@ public class RegisterViewModel extends BaseObservable {
     private String schoolName;
     private Date dateOfBirth;
     private String provinceName;
+    private String email;
+    private String password;
 }
