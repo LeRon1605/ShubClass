@@ -6,6 +6,8 @@ import {
   EntityForbiddenUpdateException,
   EntityForbiddenDeleteException,
 } from "../../exceptions/index.js";
+import { MailService } from "../../services/index.js";
+import TokenProvider from "./token.provider.js";
 
 const { User, Account, Role } = sequelize;
 
@@ -85,6 +87,23 @@ class AccountService {
         id: id,
       },
     });
+  }
+
+  async login(email, password) {
+    const account = await Account.findOne({
+      where: {
+        email: email,
+        password: password
+      },
+      include: [User, Role]
+    });
+
+    if (account == null) {
+      throw new EntityNotFoundException("User", email)
+    }
+
+    const authCredential = TokenProvider.generateAuthCredential(account);
+    return authCredential;
   }
 }
 

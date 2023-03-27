@@ -55,6 +55,16 @@ class AccountController {
       next(error);
     }
   }
+
+  async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      const authCredential = await AccountService.login(email, password);
+      return res.status(200).json(authCredential);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new AccountController();

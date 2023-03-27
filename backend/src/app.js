@@ -5,6 +5,7 @@ import routers from "./api/index.js";
 import {
   NotFoundMiddleware,
   ExceptionMiddleware,
+  AuthenticationMiddleware
 } from "./middlewares/index.js";
 import { Swagger } from "./services/index.js";
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // @ts-ignore
 app.use("/api-docs", Swagger());
+app.use(AuthenticationMiddleware);
 app.use("/api", routers);
 app.use(ExceptionMiddleware);
 app.use(NotFoundMiddleware);

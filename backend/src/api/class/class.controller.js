@@ -18,16 +18,12 @@ class ClassController {
 
   async createClass(req, res, next) {
     try {
-      if (req.session.role == "Teacher") {
-        const entity = ClassCreateDto.toEntity({
-          ...req.body,
-          teacherId: req.session.id,
-        });
-        const result = await ClassService.createClass(entity);
-        return res.status(201).json(result);
-      } else {
-        throw new ForbiddenException("You are not allowed to create class.");
-      }
+      const entity = ClassCreateDto.toEntity({
+        ...req.body,
+        teacherId: req.session.id,
+      });
+      const result = await ClassService.createClass(entity);
+      return res.status(201).json(result);
     } catch (error) {
       next(error);
     }
