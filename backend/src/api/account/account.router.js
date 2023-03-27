@@ -87,12 +87,14 @@ router
  *      school:
  *        type: string
  *      grade:
- *        type: string
+ *        type: number
  *      phoneNumber:
  *        type: string
  *      address:
  *        type: string
  *      gender:
+ *        type: boolean
+ *      role:
  *        type: string
  *  AuthCredential:
  *    type: object

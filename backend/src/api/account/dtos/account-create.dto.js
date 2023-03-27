@@ -42,7 +42,7 @@ const AccountCreateScheme = Joi.object({
   gender: Joi.boolean(),
   school: Joi.string(),
   dateOfBirth: Joi.date(),
-  role: Joi.string()
+  role: Joi.string().required()
 });
 
 export { AccountCreateDto, AccountCreateScheme };
