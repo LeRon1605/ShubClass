@@ -1,13 +1,26 @@
 import Joi from "joi";
+import { randomUUID } from 'crypto';
+import { ACCOUNT_STATE } from '../../../shared/enum/index.js';
 
 class Dto {
   toEntity(dto) {
+    const id = randomUUID();
     return {
-      id: dto.id,
+      id: id,
       email: dto.email,
       password: dto.password,
-      isActivate: dto.isActivate,
-      roleId: dto.roleId,
+      state: ACCOUNT_STATE.PENDING,
+      User: {
+        id: id,
+        name: dto.name,
+        phoneNumber: dto.phoneNumber,
+        address: dto.address,
+        grade: dto.grade,
+        gender: dto.gender,
+        school: dto.school,
+        dateOfBirth: dto.dateOfBirth,
+        avatar: 'empty'
+      },
       createAt: new Date(),
       updateAt: new Date(),
     };
@@ -20,16 +33,16 @@ class Dto {
 
 const AccountCreateDto = new Dto();
 const AccountCreateScheme = Joi.object({
-  id: Joi.string().min(4).max(8).required(),
   email: Joi.string().email().required(),
-  password: Joi.string()
-    .pattern(
-      new RegExp(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})"
-      )
-    )
-    .required(),
-  isActivated: Joi.bool().required,
+  password: Joi.string().required(),
+  name: Joi.string().required(),
+  phoneNumber: Joi.string(),
+  address: Joi.string(),
+  grade: Joi.number(),
+  gender: Joi.boolean(),
+  school: Joi.string(),
+  dateOfBirth: Joi.date(),
+  role: Joi.string()
 });
 
 export { AccountCreateDto, AccountCreateScheme };

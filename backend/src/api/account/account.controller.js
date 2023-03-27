@@ -1,4 +1,3 @@
-import { ForbiddenException } from "../../exceptions/index.js";
 import AccountService from "./account.service.js";
 import { AccountCreateDto, AccountUpdateDto } from "./dtos/index.js";
 
@@ -12,6 +11,8 @@ class AccountController {
       next(error);
     }
   }
+
+  // doesn't need
   async getAllAccountsOfRole(req, res, next) {
     try {
       let data = null;
@@ -21,16 +22,14 @@ class AccountController {
       next(error);
     }
   }
+
   async createAccount(req, res, next) {
     try {
-      if (req.session.roleId) {
-        const entity = AccountCreateDto.toEntity({
-          ...req.body,
-          roleId: req.session.roleId,
-        });
-        const result = await AccountService.createAccount(entity);
-        return res.status(201).json(result);
-      }
+      const entity = AccountCreateDto.toEntity(req.body);
+      await AccountService.createAccount(entity, req.body.role);
+      return res.status(201).json({
+        message: 'Created account successfully.'
+      })
     } catch (error) {
       next(error);
     }
@@ -61,6 +60,26 @@ class AccountController {
       const { email, password } = req.body;
       const authCredential = await AccountService.login(email, password);
       return res.status(200).json(authCredential);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async activeAccount(req, res, next) {
+    try {
+      const { code, accountId } = req.query;
+      await AccountService.activeAccount(code, accountId);
+      return res.send('Kích hoạt tài khoản thành công');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async requestActiveMail(req, res, next) {
+    try {
+      const { id } = req.body;
+      await AccountService.requestActiveMail(id);
+      return res.status(200);
     } catch (error) {
       next(error);
     }

@@ -9,7 +9,7 @@ class TokenProvider {
             state: account.state,
             role: account.Role.name
         }, process.env.JWT_KEY, {
-            expiresIn: 10 * 60 * 60
+            expiresIn: 3 * 24 * 60 * 60
         });
         return {
             access_token
