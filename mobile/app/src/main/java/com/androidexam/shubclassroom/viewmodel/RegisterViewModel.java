@@ -1,6 +1,5 @@
 package com.androidexam.shubclassroom.viewmodel;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
@@ -10,11 +9,9 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.androidexam.shubclassroom.BR;
+import com.androidexam.shubclassroom.api.RegisterApiService;
+import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.Account;
-
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -199,7 +196,7 @@ public class RegisterViewModel extends BaseObservable {
                     getSchoolName(), Integer.parseInt(getGrade()), getPhoneNumber(), "Quang Nam", gender, role);
             Log.d("TAG", account.getEmail() + "," + account.getPassword() + "," + account.getName() + "," + account.getDateOfBirth() + "," + account.getPhoneNumber() + "," + account.getGrade() + "," + account.getPassword() + ","
                     + account.getAddress() + "," + account.getGender() + "," + account.getRole() + "," + account.getSchool());
-            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+            RegisterApiService apiService = RetrofitClient.getRetrofitInstance().create(RegisterApiService.class);
             Call<Account> call = apiService.postRegister2(account);
             call.enqueue(new Callback<Account>() {
                 @Override

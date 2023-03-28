@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.viewmodel;
+package com.androidexam.shubclassroom.api;
 
 import com.androidexam.shubclassroom.model.Account;
 
@@ -7,7 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.POST;
 
-public interface ApiService {
+public interface RegisterApiService {
     @POST("accounts")
     Call<Account> postRegister(@Field("email") String email,
                                @Field("password") String password,
