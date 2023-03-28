@@ -1,7 +1,7 @@
 import HttpException from '../exceptions/base/Http.exception.js';
 
 const handler = (error, req, res, next) => {
-    console.error(`[Error]: ${error.message}`);
+    console.error(`[Error]: ${error}`);
     if (error.statusCode && error.statusCode != 500) {
         return res.status(error.statusCode).json({
             message: error.message

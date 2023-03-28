@@ -15,19 +15,19 @@ router
     )
     .post(
         '/',
-        AuthorizationMiddleware({ type: ' role', value: 'Teacher' }),
+        AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ValidationMiddleware(ClassCreateScheme, APP_CONSTANT.REQUEST_BODY),
         ClassController.createClass
     )
     .put(
         '/:id',
-        AuthorizationMiddleware({ type: ' role', value: 'Teacher' }),
+        AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ValidationMiddleware(ClassUpdateScheme, APP_CONSTANT.REQUEST_BODY),
         ClassController.updateClass
     )
     .delete(
         '/:id',
-        AuthorizationMiddleware({ type: ' role', value: 'Teacher' }),
+        AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ClassController.deleteClass
     );
 

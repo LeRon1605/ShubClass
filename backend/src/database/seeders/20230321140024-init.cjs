@@ -26,7 +26,7 @@ module.exports = {
         email: 'ronle9519@gmail.com',
         password: '123qwe',
         state: 1,
-        roleId: '1',
+        roleId: '2',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -35,7 +35,7 @@ module.exports = {
         email: 'hp_dut@gmail.com',
         password: '123qwe',
         state: 1,
-        roleId: '2',
+        roleId: '1',
         createdAt: new Date(),
         updatedAt: new Date()
       }

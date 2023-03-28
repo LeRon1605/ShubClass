@@ -1,4 +1,3 @@
-import { ForbiddenException } from '../../exceptions/index.js';
 import ClassService from './class.service.js';
 import { ClassCreateDto, ClassUpdateDto } from './dtos/index.js';
 class ClassController {
