@@ -2,7 +2,7 @@ class Dto {
     toEntity(dto) {
         return {
             username: dto.username
-        }
+        };
     }
 
     toDto(entity) {
@@ -15,12 +15,10 @@ class Dto {
             teacherId: entity.teacherId,
             createdAt: entity.createdAt,
             updatedAt: entity.updatedAt
-        }
+        };
     }
-};
+}
 
 const ClassDto = new Dto();
 
-export {
-    ClassDto
-}
+export { ClassDto };

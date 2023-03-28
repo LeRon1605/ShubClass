@@ -1,15 +1,35 @@
 import express from 'express';
-import ClassController from "./class.controller.js";
+import ClassController from './class.controller.js';
 import { ValidationMiddleware } from '../../middlewares/index.js';
 import { ClassCreateScheme, ClassUpdateScheme } from './dtos/index.js';
+import { AuthorizationMiddleware } from '../../middlewares/index.js';
 import APP_CONSTANT from '../../shared/app.constant.js';
 
 const router = express.Router();
 
-router.get('/', ClassController.getAllClasses)
-      .post('/', ValidationMiddleware(ClassCreateScheme, APP_CONSTANT.REQUEST_BODY), ClassController.createClass)
-      .put('/:id', ValidationMiddleware(ClassUpdateScheme, APP_CONSTANT.REQUEST_BODY), ClassController.updateClass)
-      .delete('/:id', ClassController.deleteClass);
+router
+    .get(
+        '/',
+        AuthorizationMiddleware({ type: 'basic' }),
+        ClassController.getAllClasses
+    )
+    .post(
+        '/',
+        AuthorizationMiddleware({ type: ' role', value: 'Teacher' }),
+        ValidationMiddleware(ClassCreateScheme, APP_CONSTANT.REQUEST_BODY),
+        ClassController.createClass
+    )
+    .put(
+        '/:id',
+        AuthorizationMiddleware({ type: ' role', value: 'Teacher' }),
+        ValidationMiddleware(ClassUpdateScheme, APP_CONSTANT.REQUEST_BODY),
+        ClassController.updateClass
+    )
+    .delete(
+        '/:id',
+        AuthorizationMiddleware({ type: ' role', value: 'Teacher' }),
+        ClassController.deleteClass
+    );
 
 /**
  * @swagger
@@ -67,7 +87,7 @@ router.get('/', ClassController.getAllClasses)
  *        type: string
  *        format: date-time
  *        example: '2023-01-01T00:00:00Z'
- * 
+ *
  *  ClassCreate:
  *    type: object
  *    properties:
@@ -81,7 +101,7 @@ router.get('/', ClassController.getAllClasses)
  *        type: string
  *      numberOfStudent:
  *        type: number
- *   
+ *
  *  ClassUpdate:
  *    type: object
  *    properties:
@@ -112,98 +132,98 @@ router.get('/', ClassController.getAllClasses)
  *       401:
  *         $ref: '#/responses/Unauthorized'
  *       500:
- *         $ref: '#/responses/InternalServerError'  
+ *         $ref: '#/responses/InternalServerError'
  */
 
-/** 
-* @swagger
-*
-* /classes:
-*   post:
-*     tags: [Class]
-*     description: Teacher create new class
-*     produces:
-*       - application/json
-*     parameters:
-*       - name: data
-*         description: class information
-*         required: true
-*         in: body
-*         schema:
-*           $ref: '#/definitions/ClassCreate' 
-*     responses:
-*       200:
-*         description: OK
-*         schema:
-*           $ref: '#/definitions/Class'
-*       400:
-*         $ref: '#/responses/Error'
-*       401:
-*         $ref: '#/responses/Unauthorized'
-*       500:
-*         $ref: '#/responses/InternalServerError'  
-*/
+/**
+ * @swagger
+ *
+ * /classes:
+ *   post:
+ *     tags: [Class]
+ *     description: Teacher create new class
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: data
+ *         description: class information
+ *         required: true
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/ClassCreate'
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *           $ref: '#/definitions/Class'
+ *       400:
+ *         $ref: '#/responses/Error'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
 
-/** 
-* @swagger
-*
-* /classes/{id}:
-*   put:
-*     tags: [Class]
-*     description: Teacher update class information
-*     produces:
-*       - application/json
-*     security:
-*       - BearerAuth: []
-*     parameters:
-*       - name: id
-*         description: class id
-*         required: true
-*         in: path
-*         type: string
-*       - name: data
-*         description: class information
-*         required: true
-*         in: body
-*         schema:
-*           $ref: '#/definitions/ClassUpdate' 
-*     responses:
-*       200:
-*         description: OK
-*         schema:
-*           $ref: '#/definitions/Class'
-*       400:
-*         $ref: '#/responses/Error'
-*       401:
-*         $ref: '#/responses/Unauthorized'
-*       500:
-*         $ref: '#/responses/InternalServerError'  
-*/
+/**
+ * @swagger
+ *
+ * /classes/{id}:
+ *   put:
+ *     tags: [Class]
+ *     description: Teacher update class information
+ *     produces:
+ *       - application/json
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         description: class id
+ *         required: true
+ *         in: path
+ *         type: string
+ *       - name: data
+ *         description: class information
+ *         required: true
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/ClassUpdate'
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *           $ref: '#/definitions/Class'
+ *       400:
+ *         $ref: '#/responses/Error'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
 
-/** 
-* @swagger
-*
-* /classes/{id}:
-*   delete:
-*     tags: [Class]
-*     description: Teacher delete class
-*     produces:
-*       - application/json
-*     security:
-*       - BearerAuth: []
-*     parameters:
-*       - name: id
-*         description: class id
-*         required: true
-*         in: path
-*         type: string 
-*     responses:
-*       200:
-*         description: OK
-*       401:
-*         $ref: '#/responses/Unauthorized'
-*       500:
-*         $ref: '#/responses/InternalServerError'  
-*/
+/**
+ * @swagger
+ *
+ * /classes/{id}:
+ *   delete:
+ *     tags: [Class]
+ *     description: Teacher delete class
+ *     produces:
+ *       - application/json
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         description: class id
+ *         required: true
+ *         in: path
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
 
 export default router;

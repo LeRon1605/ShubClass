@@ -1,5 +1,5 @@
 import HomeService from './home.service.js';
-import { HomeCreateDto,  } from './dtos/home-create.dto.js';
+import { HomeCreateDto } from './dtos/home-create.dto.js';
 class HomeController {
     greeting(req, res) {
         const homeEntity = HomeCreateDto.toEntity(req.body);

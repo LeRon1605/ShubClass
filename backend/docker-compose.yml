@@ -10,6 +10,12 @@ services:
       - DB_DBNAME=ShubClass
       - DB_USERNAME=root
       - PORT=3000
+      - JWT_KEY=shubclass@2023
+      - MAIL_DISPLAY_NAME='Shub Classroom'
+      - MAIL_USER=minishop.pbl3@gmail.com
+      - MAIL_PASSWORD=yimcdficrfejnvfd
+      - SERVER=localhost:3000
+      - REDIS_URL=redis://redis:6379
     depends_on:
       - db
     ports:
@@ -23,6 +29,7 @@ services:
       - 33306:3306
     volumes:
       - ./docker-database:/var/lib/mysql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
   redis:
     image: redis:7.0.5-alpine
     ports:

@@ -1,7 +1,7 @@
 import BadRequest from './base/bad-request.exception.js';
 class EntityAlreadyExistException extends BadRequest {
-    constructor(name, id) {
-        super(`${name} with id '${id}' already exist.`);
+    constructor(name, id, column = null) {
+        super(`${name} with ${column ?? 'id'} '${id}' already exist.`);
     }
 }
 

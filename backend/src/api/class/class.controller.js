@@ -4,10 +4,15 @@ import { ClassCreateDto, ClassUpdateDto } from './dtos/index.js';
 class ClassController {
     async getAllClasses(req, res, next) {
         try {
+            let data = null;
             if (req.session.role == 'Student') {
-                data = await ClassService.getAllClassesOfStudent(req.session.id);
+                data = await ClassService.getAllClassesOfStudent(
+                    req.session.id
+                );
             } else {
-                data = await ClassService.getAllClassesOfTeacher(req.session.id);
+                data = await ClassService.getAllClassesOfTeacher(
+                    req.session.id
+                );
             }
             return res.status(200).json(data);
         } catch (error) {
@@ -17,13 +22,12 @@ class ClassController {
 
     async createClass(req, res, next) {
         try {
-            if (req.session.role == 'Teacher') {
-                const entity = ClassCreateDto.toEntity({ ...req.body, teacherId: req.session.id });
-                const result = await ClassService.createClass(entity);
-                return res.status(201).json(result);
-            } else {
-                throw new ForbiddenException('You are not allowed to create class.');
-            }
+            const entity = ClassCreateDto.toEntity({
+                ...req.body,
+                teacherId: req.session.id
+            });
+            const result = await ClassService.createClass(entity);
+            return res.status(201).json(result);
         } catch (error) {
             next(error);
         }
@@ -31,8 +35,14 @@ class ClassController {
 
     async updateClass(req, res, next) {
         try {
-            const entity = ClassUpdateDto.toEntity({ ...req.body, teacherId: req.session.id });
-            const result = await ClassService.updateClass(req.params.id, entity);
+            const entity = ClassUpdateDto.toEntity({
+                ...req.body,
+                teacherId: req.session.id
+            });
+            const result = await ClassService.updateClass(
+                req.params.id,
+                entity
+            );
             return res.status(200).json(result);
         } catch (error) {
             next(error);

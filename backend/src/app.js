@@ -2,7 +2,11 @@ import 'dotenv/config';
 import express from 'express';
 
 import routers from './api/index.js';
-import { NotFoundMiddleware, ExceptionMiddleware } from './middlewares/index.js';
+import {
+    NotFoundMiddleware,
+    ExceptionMiddleware,
+    AuthenticationMiddleware
+} from './middlewares/index.js';
 import { Swagger } from './services/index.js';
 
 const app = express();
@@ -10,8 +14,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(Logger);
+// @ts-ignore
 app.use('/api-docs', Swagger());
+app.use(AuthenticationMiddleware);
 app.use('/api', routers);
 app.use(ExceptionMiddleware);
 app.use(NotFoundMiddleware);
