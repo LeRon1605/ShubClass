@@ -8,15 +8,13 @@ class Dto {
             numberOfStudent: dto.numberOfStudent,
             teacherId: dto.teacherId,
             updatedAt: new Date()
-        }
+        };
     }
 
     toDto(entity) {
-        return {
-            
-        }
+        return {};
     }
-};
+}
 
 const ClassUpdateDto = new Dto();
 const ClassUpdateScheme = Joi.object({
@@ -26,7 +24,4 @@ const ClassUpdateScheme = Joi.object({
     numberOfStudent: Joi.number().positive().greater(1).required()
 });
 
-export {
-    ClassUpdateDto,
-    ClassUpdateScheme
-}
+export { ClassUpdateDto, ClassUpdateScheme };

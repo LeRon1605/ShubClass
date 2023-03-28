@@ -9,4 +9,4 @@ export {
     ValidationMiddleware,
     AuthenticationMiddleware,
     AuthorizationMiddleware
-}
+};

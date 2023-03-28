@@ -10,15 +10,13 @@ class Dto {
             teacherId: dto.teacherId,
             createdAt: new Date(),
             updatedAt: new Date()
-        }
+        };
     }
 
     toDto(entity) {
-        return {
-            
-        }
+        return {};
     }
-};
+}
 
 const ClassCreateDto = new Dto();
 const ClassCreateScheme = Joi.object({
@@ -29,7 +27,4 @@ const ClassCreateScheme = Joi.object({
     numberOfStudent: Joi.number().positive().greater(1).required()
 });
 
-export {
-    ClassCreateDto,
-    ClassCreateScheme
-}
+export { ClassCreateDto, ClassCreateScheme };

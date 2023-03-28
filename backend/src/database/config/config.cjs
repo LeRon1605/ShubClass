@@ -7,13 +7,19 @@ module.exports = async () => ({
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DBNAME,
         host: process.env.DB_HOST,
-        dialect: 'mysql'
+        port: process.env.DB_PORT,
+        dialect: 'mysql',
+        charset: 'utf8mb4',
+        collate: 'utf8mb4_unicode_ci'
     },
     production: {
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DBNAME,
         host: process.env.DB_HOST,
-        dialect: 'mysql'
+        port: process.env.DB_PORT,
+        dialect: 'mysql',
+        charset: 'utf8mb4',
+        collate: 'utf8mb4_unicode_ci'
     }
 });

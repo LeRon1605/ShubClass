@@ -1,4 +1,4 @@
-import { UnauthorizedException } from "../exceptions/index.js";
+import { UnauthorizedException } from '../exceptions/index.js';
 export default (config) => {
     return (req, res, next) => {
         const { type, value } = config;
@@ -11,7 +11,9 @@ export default (config) => {
         } else if (type.toLowerCase() == 'role') {
             if (req.session != null) {
                 if (req.session.role != value) {
-                    throw new UnauthorizedException('You are not permit to do this action.');
+                    throw new UnauthorizedException(
+                        'You are not permit to do this action.'
+                    );
                 } else {
                     next();
                 }
@@ -19,5 +21,5 @@ export default (config) => {
                 throw new UnauthorizedException('You are not log in.');
             }
         }
-    }
+    };
 };

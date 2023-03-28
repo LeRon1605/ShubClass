@@ -1,19 +1,19 @@
 class Dto {
-  toEntity(dto) {
-    return {};
-  }
+    toEntity(dto) {
+        return {};
+    }
 
-  toDto(entity) {
-    return {
-      id: entity.id,
-      email: entity.email,
-      password: entity.password,
-      isActivate: entity.isActivate,
-      roleId: entity.roleId,
-      createAt: new Date(),
-      updateAt: new Date(),
-    };
-  }
+    toDto(entity) {
+        return {
+            id: entity.id,
+            email: entity.email,
+            password: entity.password,
+            isActivate: entity.isActivate,
+            roleId: entity.roleId,
+            createAt: new Date(),
+            updateAt: new Date()
+        };
+    }
 }
 
 const AccountDto = new Dto();

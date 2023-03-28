@@ -1,7 +1,12 @@
 import sequelize from '../../database/models/index.cjs';
 import { ClassDto } from './dtos/index.js';
 import { REQUEST_STATE } from '../../shared/enum/index.js';
-import { EntityNotFoundException, EntityAlreadyExistException, EntityForbiddenUpdateException, EntityForbiddenDeleteException } from '../../exceptions/index.js';
+import {
+    EntityNotFoundException,
+    EntityAlreadyExistException,
+    EntityForbiddenUpdateException,
+    EntityForbiddenDeleteException
+} from '../../exceptions/index.js';
 
 const { User, Class, StudentClass } = sequelize;
 class ClassService {
@@ -12,7 +17,7 @@ class ClassService {
                 teacherId: userId
             }
         });
-        return data.map(x => ClassDto.toDto(x));
+        return data.map((x) => ClassDto.toDto(x));
     }
 
     async getAllClassesOfStudent(userId) {
@@ -25,11 +30,13 @@ class ClassService {
                 studentId: userId,
                 state: REQUEST_STATE.APPROVED
             },
-            include: [{
-                model: Class
-            }]
+            include: [
+                {
+                    model: Class
+                }
+            ]
         });
-        return data.map(x => ClassDto.toDto(x.Class));
+        return data.map((x) => ClassDto.toDto(x.Class));
     }
 
     async createClass(newClass) {
@@ -61,11 +68,14 @@ class ClassService {
             throw new EntityForbiddenUpdateException('Class', classEntity.id);
         }
 
-        await Class.update({ ...classEntity, ...newClass }, {
-            where: {
-                id: id
+        await Class.update(
+            { ...classEntity, ...newClass },
+            {
+                where: {
+                    id: id
+                }
             }
-        });
+        );
 
         const dto = ClassDto.toDto(await Class.findByPk(id));
         return dto;
@@ -76,7 +86,7 @@ class ClassService {
         if (classEntity == null) {
             throw new EntityNotFoundException('Class', id);
         }
-        
+
         if (classEntity.teacherId != teacherId) {
             throw new EntityForbiddenDeleteException('Class', id);
         }

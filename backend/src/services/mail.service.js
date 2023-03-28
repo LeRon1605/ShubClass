@@ -12,7 +12,7 @@ class MailService {
             },
             tls: {
                 rejectUnauthorized: false,
-                minVersion: "TLSv1.2"
+                minVersion: 'TLSv1.2'
             }
         };
 
