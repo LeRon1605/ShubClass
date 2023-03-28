@@ -8,16 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     public static Retrofit retrofit;
-    static Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
-            .create();
     public static Retrofit getRetrofitInstance() {
         if(retrofit == null) {
-            ApiService apiService = new Retrofit.Builder()
-                    .baseUrl("http://139.162.62.215/api")
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build()
-                    .create(ApiService.class);
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://139.162.62.215/api/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
         return retrofit;
     }

@@ -34,22 +34,19 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         RegisterViewModel registerViewModel = new RegisterViewModel(getApplicationContext());
         binding.setRegisterViewModel(registerViewModel);
-//        binding.edtDate.addTextChangedListener(new DateInputMask(binding.edtDate));
+
         setDate fromDate = new setDate(binding.edtDate, this);
+
         adapterItemsCity = new ArrayAdapter<String>(this, R.layout.list_item, vietnamCities);
         binding.edtProvince.setAdapter(adapterItemsCity);
-        binding.edtProvince.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(RegisterActivity.this, item, Toast.LENGTH_SHORT).show();
-            }
-        });
+
         adapterItemsRole = new ArrayAdapter<String>(this, R.layout.list_item, roles);
         binding.edtRole.setAdapter(adapterItemsRole);
+
         adapterItemsGender = new ArrayAdapter<String>(this, R.layout.list_item, genders);
         binding.edtGender.setAdapter(adapterItemsGender);
     }

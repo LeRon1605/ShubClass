@@ -3,11 +3,12 @@ package com.androidexam.shubclassroom.viewmodel;
 import com.androidexam.shubclassroom.model.Account;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.POST;
 
 public interface ApiService {
-    @POST("/accounts")
+    @POST("accounts")
     Call<Account> postRegister(@Field("email") String email,
                                @Field("password") String password,
                                @Field("name") String name,
@@ -18,4 +19,6 @@ public interface ApiService {
                                @Field("address") String address,
                                @Field("role") String role
                                 );
+    @POST("accounts")
+    Call<Account> postRegister2(@Body Account account);
 }

@@ -193,28 +193,25 @@ public class RegisterViewModel extends BaseObservable {
             Toast.makeText(context, "Password ERR", Toast.LENGTH_SHORT).show();
         }
         else {
-            String pattern = "yyyy-MM-dd";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            String date = simpleDateFormat.format(new Date(getDateOfBirth()));
             Boolean gender = getGender().equalsIgnoreCase("nam") ? true : false;
             String role = getRole().equalsIgnoreCase("học sinh") ? "Student" : "Teacher";
-            Account account = new Account(getEmail(), getPassword(), getName(), date,
-                    getSchoolName(), Integer.parseInt(getGrade()), getPhoneNumber(), getProvinceName(), gender, role);
+            Account account = new Account(getEmail(), getPassword(), getName(), getDateOfBirth(),
+                    getSchoolName(), Integer.parseInt(getGrade()), getPhoneNumber(), "Quang Nam", gender, role);
             Log.d("TAG", account.getEmail() + "," + account.getPassword() + "," + account.getName() + "," + account.getDateOfBirth() + "," + account.getPhoneNumber() + "," + account.getGrade() + "," + account.getPassword() + ","
-                    + account.getAddress() + "," + account.getGender() + "," + account.getRole());
-//            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-//            Call<Account> call = apiService.postRegister();
-//            call.enqueue(new Callback<Account>() {
-//                @Override
-//                public void onResponse(Call<Account> call, Response<Account> response) {
-//
-//                }
-//
-//                @Override
-//                public void onFailure(Call<Account> call, Throwable t) {
-//
-//                }
-//            });
+                    + account.getAddress() + "," + account.getGender() + "," + account.getRole() + "," + account.getSchool());
+            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+            Call<Account> call = apiService.postRegister2(account);
+            call.enqueue(new Callback<Account>() {
+                @Override
+                public void onResponse(Call<Account> call, Response<Account> response) {
+                    Toast.makeText(context, "" + response.code(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<Account> call, Throwable t) {
+                    Log.d("TAG", t.toString());
+                }
+            });
         }
 
     }
