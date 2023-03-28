@@ -1,15 +1,29 @@
 package com.androidexam.shubclassroom.model;
 
-public class Register {
+public class Account {
     private String email;
     private String password;
     private String name;
     private String dateOfBirth;
     private String school;
-    private String grade;
+    private int grade;
     private String phoneNumber;
     private String address;
+    private Boolean gender;
     private String role;
+
+    public Account(String email, String password, String name, String dateOfBirth, String school, int grade, String phoneNumber, String address, Boolean gender, String role) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.school = school;
+        this.grade = grade;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.gender = gender;
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;
@@ -51,11 +65,11 @@ public class Register {
         this.school = school;
     }
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 
@@ -73,6 +87,14 @@ public class Register {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
     }
 
     public String getRole() {
