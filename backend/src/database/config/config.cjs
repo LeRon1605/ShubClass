@@ -8,6 +8,7 @@ module.exports = async () => ({
         database: process.env.DB_DBNAME,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
+        logging: false,
         dialect: 'mysql',
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci'
@@ -18,6 +19,7 @@ module.exports = async () => ({
         database: process.env.DB_DBNAME,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
+        logging: false,
         dialect: 'mysql',
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci'

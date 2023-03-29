@@ -52,7 +52,9 @@ class AccountController {
     async deleteAccount(req, res, next) {
         try {
             await AccountService.deleteAccount(req.params.id);
-            return res.status(200).json;
+            return res.status(200).json({
+                message: 'Deleted account'
+            });
         } catch (error) {
             next(error);
         }
@@ -82,7 +84,49 @@ class AccountController {
         try {
             const { email } = req.body;
             await AccountService.requestActiveMail(email);
-            return res.status(200);
+            return res.status(200).json({
+                message: 'Please check your mail to continue.'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async requestForgetPassword(req, res, next) {
+        try {
+            const { email } = req.body;
+            await AccountService.requestForgetPassword(email);
+            return res.status(200).json({
+                message: 'Please check your mail to continue'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async getForgetPasswordPage(req, res, next) {
+        try {
+            const { token, accountId } = req.query;
+            const accountDto = await AccountService.validateForgetPasswordToken(token, accountId);
+            const html = `
+                <form action="/api/accounts/forget-password/callback" method="POST">
+                    <input name="token" value="${token}" type="hidden"/>
+                    <input name="password"/>
+                    <input name="accountId" value="${accountId}" type="hidden"/>
+                    <button type="submit">Đổi mật khẩu</button>
+                </form>
+            `;
+            return res.send(html);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async forgetPasswordHandler(req, res, next) {
+        try {
+            const { token, accountId, password } = req.body;
+            await AccountService.forgetPassword(token, accountId, password);
+            return res.status(200).send('Đổi mật khẩu thành công');
         } catch (error) {
             next(error);
         }

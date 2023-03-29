@@ -1,7 +1,7 @@
 import NotFoundException from './base/not-found.exception.js';
 class EntityNotFoundException extends NotFoundException {
-    constructor(name, id) {
-        super(`${name} with id '${id}' doesn't exist.`);
+    constructor(name, id, column = null) {
+        super(`${name} with ${column ?? 'id'} '${id}' doesn't exist.`);
     }
 }
 
