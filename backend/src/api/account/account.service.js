@@ -252,7 +252,7 @@ class AccountService {
             <div style="padding: 10px; background-color: #003375">
                 <div style="padding: 10px; background-color: white;">
                     <h4 style="color: #0085ff">Xin chào ${account.User.name}.!!</h4>
-                    <p style="color: black">Để thay đổi mật khẩu, vui lòng nhấn vào <a href="${process.env.SERVER}/api/accounts/forget-password/callback?token=${forgetPasswordToken}&accountId=${account.id}">đây</a> để kích hoạt tài khoản.</p>
+                    <p style="color: black">Để thay đổi mật khẩu, vui lòng nhấn vào <a href="${process.env.SERVER}/api/accounts/forget-password/callback?token=${forgetPasswordToken}&accountId=${account.id}">đây</a> để đổi mật khẩu tài khoản.</p>
                     <p><b style="color:red">Chú ý:</b> Thư có giá trị trong vòng 3 ngày.</p>
                 </div>
             </div>

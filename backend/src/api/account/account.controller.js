@@ -74,7 +74,7 @@ class AccountController {
         try {
             const { code, accountId } = req.query;
             await AccountService.activeAccount(code, accountId);
-            return res.send('Kích hoạt tài khoản thành công');
+            return res.render('active_account_success');
         } catch (error) {
             next(error);
         }
@@ -108,15 +108,11 @@ class AccountController {
         try {
             const { token, accountId } = req.query;
             const accountDto = await AccountService.validateForgetPasswordToken(token, accountId);
-            const html = `
-                <form action="/api/accounts/forget-password/callback" method="POST">
-                    <input name="token" value="${token}" type="hidden"/>
-                    <input name="password"/>
-                    <input name="accountId" value="${accountId}" type="hidden"/>
-                    <button type="submit">Đổi mật khẩu</button>
-                </form>
-            `;
-            return res.send(html);
+            return res.render('forget_password', { 
+                title: 'Đổi mật khẩu',
+                token: token,
+                accountId: accountId
+            });
         } catch (error) {
             next(error);
         }
@@ -126,7 +122,7 @@ class AccountController {
         try {
             const { token, accountId, password } = req.body;
             await AccountService.forgetPassword(token, accountId, password);
-            return res.status(200).send('Đổi mật khẩu thành công');
+            return res.render('forget_password_success');
         } catch (error) {
             next(error);
         }
