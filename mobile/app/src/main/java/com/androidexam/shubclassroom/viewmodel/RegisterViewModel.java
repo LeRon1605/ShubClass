@@ -9,13 +9,13 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.androidexam.shubclassroom.BR;
+import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.RegisterApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
-import com.androidexam.shubclassroom.model.Account;
+import com.androidexam.shubclassroom.model.AccountCreateDto;
+import com.androidexam.shubclassroom.model.MessageResponse;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegisterViewModel extends BaseObservable {
     private String name;
@@ -33,6 +33,17 @@ public class RegisterViewModel extends BaseObservable {
 
     public RegisterViewModel(Context context) {
         this.context = context;
+        name = "Ron";
+        grade = "12";
+        schoolName = "DUT";
+        dateOfBirth = "2022-03-13";
+        provinceName = "Hue";
+        email = "ronl9519@gmail.com";
+        password = "ronle75";
+        confirmPassword = "ronle75";
+        phoneNumber = "0905857760";
+        role = "Student";
+        gender = "true";
     }
 
     @Bindable
@@ -192,21 +203,22 @@ public class RegisterViewModel extends BaseObservable {
         else {
             Boolean gender = getGender().equalsIgnoreCase("nam") ? true : false;
             String role = getRole().equalsIgnoreCase("học sinh") ? "Student" : "Teacher";
-            Account account = new Account(getEmail(), getPassword(), getName(), getDateOfBirth(),
+            AccountCreateDto account = new AccountCreateDto(getEmail(), getPassword(), getName(), getDateOfBirth(),
                     getSchoolName(), Integer.parseInt(getGrade()), getPhoneNumber(), "Quang Nam", gender, role);
             Log.d("TAG", account.getEmail() + "," + account.getPassword() + "," + account.getName() + "," + account.getDateOfBirth() + "," + account.getPhoneNumber() + "," + account.getGrade() + "," + account.getPassword() + ","
                     + account.getAddress() + "," + account.getGender() + "," + account.getRole() + "," + account.getSchool());
+
             RegisterApiService apiService = RetrofitClient.getRetrofitInstance().create(RegisterApiService.class);
-            Call<Account> call = apiService.postRegister2(account);
-            call.enqueue(new Callback<Account>() {
+            Call<MessageResponse> call = apiService.postRegister2(account);
+            call.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
                 @Override
-                public void onResponse(Call<Account> call, Response<Account> response) {
-                    Toast.makeText(context, "" + response.code(), Toast.LENGTH_SHORT).show();
+                public void handleSuccess(MessageResponse responseObject) {
+                    Toast.makeText(context, responseObject.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onFailure(Call<Account> call, Throwable t) {
-                    Log.d("TAG", t.toString());
+                public void handleFailure(MessageResponse errorResponse) {
+                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

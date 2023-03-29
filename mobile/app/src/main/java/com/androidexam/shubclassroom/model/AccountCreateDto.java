@@ -1,6 +1,6 @@
 package com.androidexam.shubclassroom.model;
 
-public class Account {
+public class AccountCreateDto {
     private String email;
     private String password;
     private String name;
@@ -12,7 +12,7 @@ public class Account {
     private Boolean gender;
     private String role;
 
-    public Account(String email, String password, String name, String dateOfBirth, String school, int grade, String phoneNumber, String address, Boolean gender, String role) {
+    public AccountCreateDto(String email, String password, String name, String dateOfBirth, String school, int grade, String phoneNumber, String address, Boolean gender, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
