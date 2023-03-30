@@ -207,14 +207,15 @@ class AccountService {
 
         const activeToken = randomUUID();
         const mailContent = `
-        <div style="padding: 10px; background-color: #003375">
-            <div style="padding: 10px; background-color: white;">
-                <h4 style="color: #0085ff">Xin chào ${account.User.name}, cảm ơn bạn đã chọn chúng tôi!!</h4>
-                <p style="color: black">Để tiếp tục sử dụng ứng dụng, vui lòng nhấn vào <a href="${process.env.SERVER}/api/accounts/active?code=${activeToken}&accountId=${account.id}">đây</a> để kích hoạt tài khoản.</p>
-                <p><b style="color:red">Chú ý:</b> Mã kích hoạt có hạn trong vòng 3 ngày.</p>
+            <div style="padding: 10px; background-color: #003375">
+                <div style="padding: 10px; background-color: white;">
+                    <h4 style="color: #0085ff">Xin chào ${account.User.name}, cảm ơn bạn đã chọn chúng tôi!!</h4>
+                    <p style="color: black">Để tiếp tục sử dụng ứng dụng, vui lòng nhấn vào <a href="${process.env.SERVER}/api/accounts/active?code=${activeToken}&accountId=${account.id}">đây</a> để kích hoạt tài khoản.</p>
+                    <p><b style="color:red">Chú ý:</b> Mã kích hoạt có hạn trong vòng 3 ngày.</p>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+
         await CacheService.set(
             `active_code_${account.id}`,
             { token: activeToken, accountId: account.id },
@@ -225,6 +226,96 @@ class AccountService {
             'Kích hoạt tài khoản ShubClass',
             mailContent
         );
+    }
+
+    async requestForgetPassword(email) {
+        const account = await Account.findOne({
+            where: {
+                email: email
+            },
+            include: User
+        });
+
+        if (account == null) {
+            throw new EntityNotFoundException('Account', email, 'email');
+        }
+
+        const savedRecord = await CacheService.get(`request_change_password_token_${account.id}`);
+        if (savedRecord != null) {
+            throw new BadRequestException(
+                'Forgetpassword request is valid for 3 days, please check your mail for continue.'
+            );
+        }
+
+        const forgetPasswordToken = randomUUID();
+        const mailContent = `
+            <div style="padding: 10px; background-color: #003375">
+                <div style="padding: 10px; background-color: white;">
+                    <h4 style="color: #0085ff">Xin chào ${account.User.name}.!!</h4>
+                    <p style="color: black">Để thay đổi mật khẩu, vui lòng nhấn vào <a href="${process.env.SERVER}/api/accounts/forget-password/callback?token=${forgetPasswordToken}&accountId=${account.id}">đây</a> để đổi mật khẩu tài khoản.</p>
+                    <p><b style="color:red">Chú ý:</b> Thư có giá trị trong vòng 3 ngày.</p>
+                </div>
+            </div>
+        `;
+
+        await CacheService.set(
+            `request_change_password_token_${account.id}`,
+            { token: forgetPasswordToken, accountId: account.id },
+            3 * 60 * 60
+        );
+        MailService.sendMail(
+            account.email,
+            'Thay đổi mật khẩu tài khoản ShubClass',
+            mailContent
+        );
+    }
+
+    async forgetPassword(token, accountId, password) {
+        const account = await Account.findByPk(accountId);
+        if (account == null) {
+            throw new EntityNotFoundException('Account', accountId);
+        }
+
+        const savedRecord = await CacheService.get(`request_change_password_token_${accountId}`);
+        if (savedRecord != null) {
+            if (savedRecord.token == token) {
+                await Account.update(
+                    { password: password },
+                    {
+                        where: {
+                            id: account.id
+                        }
+                    }
+                );
+                await CacheService.remove(`request_change_password_token_${accountId}`);
+            } else {
+                throw new BadRequestException('Invalid token');
+            }
+        } else {
+            throw new BadRequestException(
+                'Token has already expires, please request to send a new email.'
+            );
+        }
+    }
+
+    async validateForgetPasswordToken(token, accountId) {
+        const account = await Account.findByPk(accountId);
+        if (account == null) {
+            throw new EntityNotFoundException('Account', accountId);
+        }
+
+        const savedRecord = await CacheService.get(`request_change_password_token_${accountId}`);
+        if (savedRecord == null) {
+            throw new BadRequestException(
+                'Token has already expires, please request to send a new email.'
+            );
+        } else if (savedRecord.token != token) {
+            throw new BadRequestException(
+                'Invalid token.'
+            );
+        }
+
+        return AccountDto.toDto(account);
     }
 }
 

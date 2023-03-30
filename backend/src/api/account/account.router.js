@@ -25,6 +25,10 @@ router
     .get('/active', AccountController.activeAccount)
     .post('/active', AccountController.requestActiveMail);
 
+router.post('/forget-password', AccountController.requestForgetPassword)
+    .get('/forget-password/callback', AccountController.getForgetPasswordPage)
+    .post('/forget-password/callback', AccountController.forgetPasswordHandler);
+
 /**
  * @swagger
  *
@@ -188,6 +192,33 @@ router
  *         description: OK
  *       400:
  *         $ref: '#/responses/Error'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+/**
+ * @swagger
+ * /accounts/forget-password:
+ *   post:
+ *     tags: [Auth]
+ *     description: Request forget password mail
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: data
+ *         description: email
+ *         required: true
+ *         in: body
+ *         schema:
+ *           type: object
+ *           properties:
+ *              email:
+ *                type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *       404:
+ *         $ref: '#/responses/NotFound'
  *       500:
  *         $ref: '#/responses/InternalServerError'
  */
