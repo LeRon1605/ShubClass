@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="ForgetPassNotifyViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.ForgetPassNotifyViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.ForgetPassNotifyFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:src="@drawable/shubclass_logo"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Link xác nhận đã được gửi đến email của bạn. Xin vui lòng kiểm tra!"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:fontFamily="@font/kantumruy"
+                android:layout_marginTop="20dp"
+                android:padding="20dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:src="@drawable/email"
+                />
+
+            <Button
+                android:id="@+id/btn_backtologin"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/blue"
+                android:text="Đăng nhập"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/kantumruy"
+                android:textFontWeight="600"
+                android:layout_marginTop="20dp"
+                android:onClick="@{()-> ForgetPassNotifyViewModel.onBackLoginClicked()}"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

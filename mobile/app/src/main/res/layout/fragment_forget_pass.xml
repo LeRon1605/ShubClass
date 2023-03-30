@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="ForgetPassViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.ForgetPassViewModel" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.ForgetPassFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:src="@drawable/shubclass_logo"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+                android:drawablePadding="10dp"
+                android:text="Đăng nhập"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/kantumruy"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:onClick="@{() -> ForgetPassViewModel.setNavigate(1)}"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quên mật khẩu"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/kantumruy"
+                android:layout_marginTop="20dp"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập email của bạn"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="@color/white"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/blue"
+                android:text="Tiếp tục"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/kantumruy"
+                android:textFontWeight="600"
+                android:layout_marginTop="20dp"
+                android:onClick="@{()-> ForgetPassViewModel.onContinueClicked()}"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/reset_password_illustration"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
