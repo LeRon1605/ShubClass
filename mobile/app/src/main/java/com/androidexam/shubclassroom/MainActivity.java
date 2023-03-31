@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import com.androidexam.shubclassroom.view.LoginActivity;
 import com.androidexam.shubclassroom.view.RegisterActivity;
+import com.androidexam.shubclassroom.view.StudentHomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, StudentHomeActivity.class));
                 finish();
             }
         }, 1000);
