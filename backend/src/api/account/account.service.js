@@ -1,5 +1,6 @@
 import sequelize from '../../database/models/index.cjs';
 import { AccountDto } from './dtos/account.dto.js';
+import { StudentDto } from './dtos/student.dto.js';
 import {
     EntityNotFoundException,
     EntityAlreadyExistException,
@@ -18,18 +19,13 @@ const { User, Account, Role, StudentClass } = sequelize;
 
 class AccountService {
     async getUserOfAccount(accountId) {
-        try {
-          const user = await User.findOne({
+        const user = await User.findOne({
             where: { userId: accountId }
-          });
-          if (!user) {
-            throw new Error("User not found");
-          }
-          return AccountDto.toDto(user);
-        } catch (error) {
-          console.error(error);
-          throw error;
+        });
+        if (!user) {
+            throw new EntityNotFoundException('User', accountId);
         }
+        return AccountDto.toDto(user);
       }
 
     async getAllAccounts() {
@@ -38,19 +34,30 @@ class AccountService {
     }
 
     async getAllStudentsByClassId(classId) {
-        const studentClassEntity = await StudentClass.findByPk(classId);
-        if (!studentClassEntity) {
-          throw new EntityNotFoundException('Class', classId);
-        }
-        
-        const students = await studentClassEntity.getAccounts({
-          include: [User, Role],
-          where: { roleId: 'student' },
+        const studentClassEntities = await StudentClass.findAll({
+            where: {
+                classId: classId,
+                state: 1
+            }
         });
-        
-        return students.map((student) => AccountDto.toDto(student));
-      }
-      
+    
+        if (studentClassEntities.length === 0) {
+            return [];
+        }
+    
+        const studentIds = studentClassEntities.map((x) => x.studentId);
+    
+        const students = await User.findAll({
+            include: Account,
+            where: {
+                id: studentIds,
+                '$Account.roleId$': 1,
+                '$Account.state$': 1
+            }
+        });
+    
+        return students.map((student) => StudentDto.toDto(student));
+    }    
 
     async createAccount(newAccount, roleName) {
         const accountEntity = await Account.findOne({
@@ -247,7 +254,7 @@ class AccountService {
     async changePassword(accountId, newPassword) {
         const account = await Account.findByPk(accountId);
         if (!account) {
-            throw new Error('Account not found');
+            throw new EntityNotFoundException('Account', accountId);
         }
 
         account.password = newPassword;

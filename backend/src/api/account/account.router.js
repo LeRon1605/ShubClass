@@ -18,7 +18,7 @@ router
         ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
         AccountController.updateAccount
     )
-    .post('/changePassword', AuthorizationMiddleware({ type: 'basic' }), AccountController.changePassword)
+    .post('/change-password', AuthorizationMiddleware({ type: 'basic' }), AccountController.changePassword)
     .delete(':/id', AccountController.deleteAccount);
 
 router.post('/login', AccountController.login);

@@ -4,7 +4,6 @@ class Dto {
     toEntity(dto) {
         return {
             password: dto.password,
-            isActivate: dto.isActivate,
             updateAt: new Date(),
             user: {
                 name: dto.name,
