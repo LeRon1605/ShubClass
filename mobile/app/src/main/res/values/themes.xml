@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ShubClassroom" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/white</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="formDropDown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">24dp</item>
+<!--        <item name="android:paddingTop">20dp</item>-->
+<!--        <item name="android:paddingBottom">20dp</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="android:background">@color/white</item>-->
+        <item name="background">@drawable/edittext_spinner_background</item>
+        <item name="android:drawableRight">@drawable/ic_arrow_down</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+</resources>
