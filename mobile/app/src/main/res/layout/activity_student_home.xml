@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="50dp"
-    tools:context=".view.StudentHomeActivity">
+    tools:context=".view.student.HomeStudentActivity">
     <ImageView
         android:layout_marginLeft="30dp"
         android:src="@drawable/shubclass_logo"

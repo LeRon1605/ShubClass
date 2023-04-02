@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view;
+package com.androidexam.shubclassroom.view.student;
 
 import android.os.Bundle;
 
@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.androidexam.shubclassroom.R;
-public class ClassStudentFragment extends Fragment {
+
+public class AlertStudentFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_class_student, container, false);
+        return inflater.inflate(R.layout.fragment_alert_student, container, false);
     }
 }

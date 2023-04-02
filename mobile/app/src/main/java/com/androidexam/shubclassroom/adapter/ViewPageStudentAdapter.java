@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.androidexam.shubclassroom.view.AlertStudentFragment;
-import com.androidexam.shubclassroom.view.ClassStudentFragment;
-import com.androidexam.shubclassroom.view.ProfileStudentFragment;
-import com.androidexam.shubclassroom.view.ScheduleStudentFragment;
-import com.androidexam.shubclassroom.view.StudentHomeFragment;
+import com.androidexam.shubclassroom.view.student.AlertStudentFragment;
+import com.androidexam.shubclassroom.view.student.ClassStudentFragment;
+import com.androidexam.shubclassroom.view.student.ProfileStudentFragment;
+import com.androidexam.shubclassroom.view.student.ScheduleStudentFragment;
+import com.androidexam.shubclassroom.view.student.HomeStudentFragment;
 
-public class ViewPageAdapter extends FragmentStateAdapter {
+public class ViewPageStudentAdapter extends FragmentStateAdapter {
 
 
-    public ViewPageAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public ViewPageStudentAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
@@ -23,7 +23,7 @@ public class ViewPageAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new StudentHomeFragment();
+                return new HomeStudentFragment();
             case 1:
                 return new ClassStudentFragment();
             case 2:
@@ -33,7 +33,7 @@ public class ViewPageAdapter extends FragmentStateAdapter {
             case 4:
                 return new ProfileStudentFragment();
             default:
-                return new StudentHomeFragment();
+                return new HomeStudentFragment();
         }
     }
 

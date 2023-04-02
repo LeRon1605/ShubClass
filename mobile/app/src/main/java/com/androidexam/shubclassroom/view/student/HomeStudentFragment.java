@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view;
+package com.androidexam.shubclassroom.view.student;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.androidexam.shubclassroom.R;
 
-public class StudentHomeFragment extends Fragment {
+public class HomeStudentFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

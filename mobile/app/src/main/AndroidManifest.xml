@@ -16,7 +16,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.StudentHomeActivity"
+            android:name=".TeacherHomeStudent"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.student.HomeStudentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

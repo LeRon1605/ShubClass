@@ -101,7 +101,7 @@ public class LoginViewModel extends BaseObservable {
                 public void handleSuccess(MessageResponse responseObject) {
                     String jwtToken = responseObject.getMessage();
                     preferencesManager.setAccessToken(jwtToken);
-//                    Toast.makeText(context, "Right Account", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, jwtToken, Toast.LENGTH_LONG).show();
                     rightAccount = true;
                 }
 

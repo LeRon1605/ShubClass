@@ -1,9 +1,9 @@
-package com.androidexam.shubclassroom.view;
+package com.androidexam.shubclassroom.view.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.androidexam.shubclassroom.R;
-import com.androidexam.shubclassroom.adapter.ViewPageAdapter;
+import com.androidexam.shubclassroom.adapter.ViewPageStudentAdapter;
 import com.androidexam.shubclassroom.databinding.ActivityStudentHomeBinding;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import android.os.Bundle;
 import android.view.View;
 
-public class StudentHomeActivity extends AppCompatActivity {
+public class HomeStudentActivity extends AppCompatActivity {
     private ActivityStudentHomeBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class StudentHomeActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.viewpaper.setAdapter(new ViewPageAdapter(this));
+        binding.viewpaper.setAdapter(new ViewPageStudentAdapter(this));
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(binding.tablayout, binding.viewpaper, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {

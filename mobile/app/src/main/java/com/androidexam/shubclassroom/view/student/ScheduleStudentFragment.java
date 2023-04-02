@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view;
+package com.androidexam.shubclassroom.view.student;
 
 import android.os.Bundle;
 
