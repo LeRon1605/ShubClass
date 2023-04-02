@@ -5,7 +5,17 @@ class Dto {
         return {
             password: dto.password,
             isActivate: dto.isActivate,
-            updateAt: new Date()
+            updateAt: new Date(),
+            user: {
+                name: dto.name,
+                phoneNumber: dto.phoneNumber,
+                dateOfBirth: dto.dateOfBirth,
+                school: dto.school,
+                grade: dto.grade,
+                address: dto.address,
+                gender: dto.gender,
+                avatar: dto.avatar
+            }
         };
     }
 

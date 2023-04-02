@@ -14,30 +14,43 @@ import { randomUUID } from 'crypto';
 import { CacheService } from '../../services/index.js';
 import { ACCOUNT_STATE } from '../../shared/enum/index.js';
 
-const { User, Account, Role } = sequelize;
+const { User, Account, Role, StudentClass } = sequelize;
 
 class AccountService {
     async getUserOfAccount(accountId) {
-        const user = await User.findAll({
-            where: {
-                userId: accountId
-            }
-        });
-        return user.map((x) => AccountDto.toDto(x));
-    }
-
-    async getAllAccountsOfRole(roleId) {
-        const role = await Role.findByPk(roleId);
-        if (role == null) {
-            throw new EntityNotFoundException('Role', roleId);
+        try {
+          const user = await User.findOne({
+            where: { userId: accountId }
+          });
+          if (!user) {
+            throw new Error("User not found");
+          }
+          return AccountDto.toDto(user);
+        } catch (error) {
+          console.error(error);
+          throw error;
         }
-        const data = await Account.findAll({
-            where: {
-                accountId: roleId
-            }
-        });
+      }
+
+    async getAllAccounts() {
+        const data = await Account.findAll();
         return data.map((x) => AccountDto.toDto(x));
     }
+
+    async getAllStudentsByClassId(classId) {
+        const studentClassEntity = await StudentClass.findByPk(classId);
+        if (!studentClassEntity) {
+          throw new EntityNotFoundException('Class', classId);
+        }
+        
+        const students = await studentClassEntity.getAccounts({
+          include: [User, Role],
+          where: { roleId: 'student' },
+        });
+        
+        return students.map((student) => AccountDto.toDto(student));
+      }
+      
 
     async createAccount(newAccount, roleName) {
         const accountEntity = await Account.findOne({
@@ -50,6 +63,7 @@ class AccountService {
             throw new EntityAlreadyExistException(
                 'Account',
                 newAccount.email,
+                // @ts-ignore
                 'email'
             );
         }
@@ -61,6 +75,7 @@ class AccountService {
         });
 
         if (role == null) {
+            // @ts-ignore
             throw new EntityNotFoundException('Role', roleName, 'name');
         }
 
@@ -189,6 +204,7 @@ class AccountService {
             include: User
         });
         if (account == null) {
+            // @ts-ignore
             throw new EntityNotFoundException('Account', email, 'email');
         }
 
@@ -226,6 +242,17 @@ class AccountService {
             mailContent
         );
     }
+
+    async changePassword(accountId, newPassword) {
+        const account = await Account.findByPk(accountId);
+        if (!account) {
+            throw new Error('Account not found');
+        }
+
+        account.password = newPassword;
+        await account.save();
+    }
+      
 }
 
 export default new AccountService();

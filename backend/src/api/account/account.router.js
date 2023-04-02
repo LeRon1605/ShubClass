@@ -1,13 +1,13 @@
 import express from 'express';
 import AccountController from './account.controller.js';
-import { ValidationMiddleware } from '../../middlewares/index.js';
+import { ValidationMiddleware, AuthorizationMiddleware } from '../../middlewares/index.js';
 import { AccountCreateScheme, AccountUpdateScheme } from './dtos/index.js';
 import APP_CONSTANT from '../../shared/app.constant.js';
 
 const router = express.Router();
 
 router
-    .get('/', AccountController.getAllAccountsOfRole)
+    .get('/', AccountController.getAllAccounts)
     .post(
         '/',
         ValidationMiddleware(AccountCreateScheme, APP_CONSTANT.REQUEST_BODY),
@@ -18,6 +18,7 @@ router
         ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
         AccountController.updateAccount
     )
+    .post('/changePassword', AuthorizationMiddleware({ type: 'basic' }), AccountController.changePassword)
     .delete(':/id', AccountController.deleteAccount);
 
 router.post('/login', AccountController.login);
