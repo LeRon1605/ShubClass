@@ -1,6 +1,5 @@
 import sequelize from '../../database/models/index.cjs';
 import { AccountDto } from './dtos/account.dto.js';
-import { StudentDto } from './dtos/student.dto.js';
 import {
     EntityNotFoundException,
     EntityAlreadyExistException,
@@ -32,32 +31,6 @@ class AccountService {
         const data = await Account.findAll();
         return data.map((x) => AccountDto.toDto(x));
     }
-
-    async getAllStudentsByClassId(classId) {
-        const studentClassEntities = await StudentClass.findAll({
-            where: {
-                classId: classId,
-                state: 1
-            }
-        });
-    
-        if (studentClassEntities.length === 0) {
-            return [];
-        }
-    
-        const studentIds = studentClassEntities.map((x) => x.studentId);
-    
-        const students = await User.findAll({
-            include: Account,
-            where: {
-                id: studentIds,
-                '$Account.roleId$': 1,
-                '$Account.state$': 1
-            }
-        });
-    
-        return students.map((student) => StudentDto.toDto(student));
-    }    
 
     async createAccount(newAccount, roleName) {
         const accountEntity = await Account.findOne({

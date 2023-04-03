@@ -7,6 +7,7 @@ import {
     EntityForbiddenUpdateException,
     EntityForbiddenDeleteException
 } from '../../exceptions/index.js';
+import { StudentDto } from '../account/dtos/student.dto.js';
 
 const { User, Class, StudentClass } = sequelize;
 class ClassService {
@@ -97,6 +98,24 @@ class ClassService {
             }
         });
     }
+
+    async getAllStudentsByClassId(classId) {
+        const studentClassEntities = await StudentClass.findAll({
+            where: {
+                classId: classId,
+                state: 1
+            },
+            include: User
+        });
+    
+        if (studentClassEntities.length === 0) {
+            return [];
+        }
+    
+        const students = studentClassEntities.map((x) => x.Student);
+    
+        return students.map((student) => StudentDto.toDto(student));
+    }    
 }
 
 export default new ClassService();
