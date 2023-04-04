@@ -34,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         field: 'type'
     },
+    state: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'state'
+    },
     startTime: {
         type: DataTypes.DATE,
         allowNull: false,

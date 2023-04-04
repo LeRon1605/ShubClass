@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '../exceptions/index.js';
+import { UnauthorizedException } from '../shared/exceptions/index.js';
 export default (config) => {
     return (req, res, next) => {
         const { type, value } = config;

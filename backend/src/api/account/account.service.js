@@ -7,7 +7,7 @@ import {
     EntityForbiddenDeleteException,
     BadRequestException,
     NotFoundException
-} from '../../exceptions/index.js';
+} from '../../shared/exceptions/index.js';
 import { MailService } from '../../services/index.js';
 import TokenProvider from './token.provider.js';
 import { randomUUID } from 'crypto';

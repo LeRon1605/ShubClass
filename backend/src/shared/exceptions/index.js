@@ -6,6 +6,7 @@ import EntityForbiddenUpdateException from './entity-forbidden-update.exception.
 import EntityForbiddenDeleteException from './entity-forbidden-delete.exception.js';
 import UnauthorizedException from './base/Unauthorized.exception.js';
 import NotFoundException from './base/not-found.exception.js';
+import EntityForbiddenAccessException from './entity-forbidden-access.exception.js';
 export {
     BadRequestException,
     UnauthorizedException,
@@ -14,5 +15,6 @@ export {
     ForbiddenException,
     EntityForbiddenUpdateException,
     EntityForbiddenDeleteException,
-    NotFoundException
+    NotFoundException,
+    EntityForbiddenAccessException
 };

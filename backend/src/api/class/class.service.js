@@ -1,15 +1,18 @@
 import sequelize from '../../database/models/index.cjs';
-import { ClassDto } from './dtos/index.js';
+import { ClassDto, RequestDto } from './dtos/index.js';
 import { REQUEST_STATE } from '../../shared/enum/index.js';
 import {
     EntityNotFoundException,
     EntityAlreadyExistException,
     EntityForbiddenUpdateException,
-    EntityForbiddenDeleteException
-} from '../../exceptions/index.js';
+    EntityForbiddenDeleteException,
+    BadRequestException,
+    EntityForbiddenAccessException,
+    NotFoundException
+} from '../../shared/exceptions/index.js';
 import { StudentDto } from '../account/dtos/student.dto.js';
 
-const { User, Class, StudentClass } = sequelize;
+const { User, Class, Account, StudentClass } = sequelize;
 class ClassService {
     async getAllClassesOfTeacher(userId) {
         const user = await User.findByPk(userId);
@@ -99,23 +102,134 @@ class ClassService {
         });
     }
 
-    async getAllStudentsByClassId(classId) {
+    async getAllStudentsByClassId(id) {
         const studentClassEntities = await StudentClass.findAll({
             where: {
-                classId: classId,
-                state: 1
+                classId: id,
+                state: REQUEST_STATE.APPROVED
             },
             include: User
         });
     
-        if (studentClassEntities.length === 0) {
-            return [];
-        }
+        const students = studentClassEntities.map(x => x.User);
     
-        const students = studentClassEntities.map((x) => x.Student);
-    
-        return students.map((student) => StudentDto.toDto(student));
+        return students.map(student => StudentDto.toDto(student));
     }    
+
+    async makeRequest(id, studentId) {
+        const classEntity = await Class.findByPk(id);
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', id);
+        }
+
+        const studentClassEntities = await StudentClass.findOne({
+            where: {
+                classId: id,
+                studentId: studentId
+            }
+        });
+
+        if (studentClassEntities == null) {
+            return await StudentClass.create({ classId: id, studentId: studentId, state: REQUEST_STATE.PENDING });
+        } else if (studentClassEntities.state == REQUEST_STATE.REJECT) {
+            await StudentClass.update({ state: REQUEST_STATE.PENDING }, {
+                where: {
+                    id: id
+                }
+            });
+            return studentClassEntities;
+        } else if (studentClassEntities.state == REQUEST_STATE.APPROVED) {
+            throw new BadRequestException('You are already in class.');
+        } else {
+            throw new BadRequestException('Your request are being reviewed.');
+        }
+    }
+
+    async getAllRequest(id, teacherId) {
+        const classEntity = await Class.findByPk(id);
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', id);
+        }
+
+        if (classEntity.teacherId != teacherId) {
+            throw new EntityForbiddenAccessException('Class', id);
+        }
+
+        const requests = await StudentClass.findAll({
+            where: {
+                classId: id,
+                state: REQUEST_STATE.PENDING
+            },
+            include: User
+        });
+
+        return requests.map(x => RequestDto.toDto(x));
+    }
+
+    async removeStudent(id, teacherId, studentId) {
+        const classEntity = await Class.findByPk(id);
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', id);
+        }
+
+        if (classEntity.teacherId != teacherId) {
+            throw new EntityForbiddenAccessException('Class', id);
+        }
+
+        const request = await StudentClass.findOne({
+            where: {
+                studentId: studentId,
+                classId: id,
+                state: REQUEST_STATE.APPROVED
+            }
+        });
+
+        if (request == null) {
+            throw new NotFoundException('Student are not in class.');
+        }
+
+        await Class.destroy({
+            where: {
+                studentId: studentId,
+                classId: id,
+                state: REQUEST_STATE.APPROVED
+            }
+        });
+    }
+
+    async changeRequestState(id, teacherId, studentId, state) {
+        const classEntity = await Class.findByPk(id);
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', id);
+        }
+
+        if (classEntity.teacherId != teacherId) {
+            throw new EntityForbiddenAccessException('Class', id);
+        }
+
+        const request = await StudentClass.findOne({
+            where: {
+                studentId: studentId,
+                classId: id,
+                state: REQUEST_STATE.PENDING
+            }
+        });
+
+        if (request == null) {
+            throw new EntityNotFoundException('Request', studentId);
+        }
+
+        await StudentClass.update(
+            { state: state },
+            {
+                where: {
+                    studentId: studentId,
+                    classId: id
+                }
+            }
+        );
+        return request;
+    }
 }
 
 export default new ClassService();
