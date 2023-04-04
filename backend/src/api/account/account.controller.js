@@ -12,11 +12,10 @@ class AccountController {
         }
     }
 
-    // doesn't need
-    async getAllAccountsOfRole(req, res, next) {
+    async getAllAccounts(req, res, next) {
         try {
             let data = null;
-            data = await AccountService.getAllAccountsOfRole(req.session.id);
+            data = await AccountService.getAllAccounts();
             return res.status(200).json(data);
         } catch (error) {
             next(error);
@@ -123,6 +122,17 @@ class AccountController {
             const { token, accountId, password } = req.body;
             await AccountService.forgetPassword(token, accountId, password);
             return res.render('forget_password_success');
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async changePassword(req, res, next) {
+        try {
+            const accountId = req.session.id;
+            const newPassword = req.body.newPassword;
+            await AccountService.changePassword(accountId, newPassword);
+            res.status(200).json({ message: 'Thay đổi mật khẩu thành công' });
         } catch (error) {
             next(error);
         }

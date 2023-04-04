@@ -14,28 +14,21 @@ import { randomUUID } from 'crypto';
 import { CacheService } from '../../services/index.js';
 import { ACCOUNT_STATE } from '../../shared/enum/index.js';
 
-const { User, Account, Role } = sequelize;
+const { User, Account, Role, StudentClass } = sequelize;
 
 class AccountService {
     async getUserOfAccount(accountId) {
-        const user = await User.findAll({
-            where: {
-                userId: accountId
-            }
+        const user = await User.findOne({
+            where: { userId: accountId }
         });
-        return user.map((x) => AccountDto.toDto(x));
-    }
-
-    async getAllAccountsOfRole(roleId) {
-        const role = await Role.findByPk(roleId);
-        if (role == null) {
-            throw new EntityNotFoundException('Role', roleId);
+        if (!user) {
+            throw new EntityNotFoundException('User', accountId);
         }
-        const data = await Account.findAll({
-            where: {
-                accountId: roleId
-            }
-        });
+        return AccountDto.toDto(user);
+      }
+
+    async getAllAccounts() {
+        const data = await Account.findAll();
         return data.map((x) => AccountDto.toDto(x));
     }
 
@@ -50,6 +43,7 @@ class AccountService {
             throw new EntityAlreadyExistException(
                 'Account',
                 newAccount.email,
+                // @ts-ignore
                 'email'
             );
         }
@@ -61,6 +55,7 @@ class AccountService {
         });
 
         if (role == null) {
+            // @ts-ignore
             throw new EntityNotFoundException('Role', roleName, 'name');
         }
 
@@ -189,6 +184,7 @@ class AccountService {
             include: User
         });
         if (account == null) {
+            // @ts-ignore
             throw new EntityNotFoundException('Account', email, 'email');
         }
 
@@ -226,6 +222,16 @@ class AccountService {
             'Kích hoạt tài khoản ShubClass',
             mailContent
         );
+    }
+
+    async changePassword(accountId, newPassword) {
+        const account = await Account.findByPk(accountId);
+        if (!account) {
+            throw new EntityNotFoundException('Account', accountId);
+        }
+
+        account.password = newPassword;
+        await account.save();
     }
 
     async requestForgetPassword(email) {
