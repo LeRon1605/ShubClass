@@ -1,4 +1,5 @@
 import ClassService from './class.service.js';
+import { ExamService } from '../exam/index.js';
 import { ClassCreateDto, ClassUpdateDto } from './dtos/index.js';
 import { REQUEST_STATE } from '../../shared/enum/index.js';
 class ClassController {
@@ -70,6 +71,11 @@ class ClassController {
     async rejectRequest(req, res, next) {
         const request = await ClassService.changeRequestState(req.params.id, req.session.id, req.params.studentId, REQUEST_STATE.REJECT);
         return res.status(200).json({ message: 'Rejected request successfully.' });
+    }
+
+    async getExams(req, res, next) {
+        const exams = await ExamService.getAllExamInClass(req.params.id, req.query.type, req.session);
+        return res.status(200).json(exams)
     }
 }
 

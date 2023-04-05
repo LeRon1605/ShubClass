@@ -63,6 +63,13 @@ router
         '/:id/requests/:studentId',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ClassController.rejectRequest
-    )
+    );
+
+router
+    .get(
+        '/:id/exams',
+        AuthorizationMiddleware({ type: 'basic' }),
+        ClassController.getExams
+    );
 
 export default router;
