@@ -23,6 +23,7 @@ services:
     restart: always
   db:
     image: mysql:5.7.41
+    platform: linux/amd64
     environment:
       - MYSQL_ROOT_PASSWORD=shubclass@2023
     ports:

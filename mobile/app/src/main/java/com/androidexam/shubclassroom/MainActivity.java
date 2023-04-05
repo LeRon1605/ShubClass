@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.androidexam.shubclassroom.view.LoginActivity;
+import com.androidexam.shubclassroom.view.RegisterActivity;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.teacher.CreateClassFragment">
+    <LinearLayout
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Tên lớp học "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:text="(*)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginVertical="10dp"
+            android:hint="Ví dụ: Lớp Toán 12A5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_nameClass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:text="Mã lớp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginVertical="10dp"
+            android:hint="Nhập mã lớp gồm 5 ký tự tại đây">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:maxLength="5"
+                android:id="@+id/edt_idClass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:text="Mô tả"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginVertical="10dp"
+            android:hint="Ví dụ: triết học Mác le nin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_descriptionClass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:text="Số lượng học sinh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginVertical="10dp"
+            android:hint="Ví dụ: 40">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="number"
+                android:id="@+id/edt_numberOfStudent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btn_createClass"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Tạo lớp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</FrameLayout>

@@ -31,9 +31,10 @@
     "nodemailer": "^6.9.1",
     "prettier": "^2.8.7",
     "redis": "^4.6.5",
-    "sequelize": "^6.29.3",
+    "sequelize": "^6.30.0",
     "sequelize-auto-migrations-v2": "^1.2.1",
     "sequelize-cli": "^6.6.0",
+    "sqlite3": "^5.1.6",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.5.0"
   },
