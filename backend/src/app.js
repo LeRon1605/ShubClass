@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import { engine } from 'express-handlebars';
+import 'express-async-errors';
 
 import routers from './api/index.js';
 import {

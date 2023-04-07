@@ -3,139 +3,90 @@ import { AccountCreateDto, AccountUpdateDto } from './dtos/index.js';
 
 class AccountController {
     async getUserOfAccount(req, res, next) {
-        try {
-            let data = null;
-            data = await AccountService.getUserOfAccount(req.session.id);
-            return res.status(200).json(data);
-        } catch (error) {
-            next(error);
-        }
+        const data = await AccountService.getUserOfAccount(req.session.id);
+        return res.status(200).json(data);
     }
 
     async getAllAccounts(req, res, next) {
-        try {
-            let data = null;
-            data = await AccountService.getAllAccounts();
-            return res.status(200).json(data);
-        } catch (error) {
-            next(error);
-        }
+        const data = null;
+        data = await AccountService.getAllAccounts();
+        return res.status(200).json(data);
     }
 
     async createAccount(req, res, next) {
-        try {
-            const entity = AccountCreateDto.toEntity(req.body);
-            await AccountService.createAccount(entity, req.body.role);
-            return res.status(201).json({
-                message: 'Created account successfully.'
-            });
-        } catch (error) {
-            next(error);
-        }
+        const entity = AccountCreateDto.toEntity(req.body);
+        await AccountService.createAccount(entity, req.body.role);
+        return res.status(201).json({
+            message: 'Created account successfully.'
+        });
     }
     async updateAccount(req, res, next) {
-        try {
-            const entity = AccountUpdateDto.toEntity({
-                ...req.body
-            });
-            const result = await AccountService.updateAccount(
-                req.params.id,
-                entity
-            );
-            return res.status(200).json(result);
-        } catch (error) {
-            next(error);
-        }
+        const entity = AccountUpdateDto.toEntity({
+            ...req.body
+        });
+        const result = await AccountService.updateAccount(
+            req.params.id,
+            entity
+        );
+        return res.status(200).json(result);
     }
 
     async deleteAccount(req, res, next) {
-        try {
-            await AccountService.deleteAccount(req.params.id);
-            return res.status(200).json({
-                message: 'Deleted account'
-            });
-        } catch (error) {
-            next(error);
-        }
+        await AccountService.deleteAccount(req.params.id);
+        return res.status(200).json({
+            message: 'Deleted account'
+        });
     }
 
     async login(req, res, next) {
-        try {
-            const { email, password } = req.body;
-            const authCredential = await AccountService.login(email, password);
-            return res.status(200).json(authCredential);
-        } catch (error) {
-            next(error);
-        }
+        const { email, password } = req.body;
+        const authCredential = await AccountService.login(email, password);
+        return res.status(200).json(authCredential);
     }
 
     async activeAccount(req, res, next) {
-        try {
-            const { code, accountId } = req.query;
-            await AccountService.activeAccount(code, accountId);
-            return res.render('active_account_success');
-        } catch (error) {
-            next(error);
-        }
+        const { code, accountId } = req.query;
+        await AccountService.activeAccount(code, accountId);
+        return res.render('active_account_success');
     }
 
     async requestActiveMail(req, res, next) {
-        try {
-            const { email } = req.body;
-            await AccountService.requestActiveMail(email);
-            return res.status(200).json({
-                message: 'Please check your mail to continue.'
-            });
-        } catch (error) {
-            next(error);
-        }
+        const { email } = req.body;
+        await AccountService.requestActiveMail(email);
+        return res.status(200).json({
+            message: 'Please check your mail to continue.'
+        });
     }
 
     async requestForgetPassword(req, res, next) {
-        try {
-            const { email } = req.body;
-            await AccountService.requestForgetPassword(email);
-            return res.status(200).json({
-                message: 'Please check your mail to continue'
-            });
-        } catch (error) {
-            next(error);
-        }
+        const { email } = req.body;
+        await AccountService.requestForgetPassword(email);
+        return res.status(200).json({
+            message: 'Please check your mail to continue'
+        });
     }
 
     async getForgetPasswordPage(req, res, next) {
-        try {
-            const { token, accountId } = req.query;
-            const accountDto = await AccountService.validateForgetPasswordToken(token, accountId);
-            return res.render('forget_password', { 
-                title: 'Đổi mật khẩu',
-                token: token,
-                accountId: accountId
-            });
-        } catch (error) {
-            next(error);
-        }
+        const { token, accountId } = req.query;
+        const accountDto = await AccountService.validateForgetPasswordToken(token, accountId);
+        return res.render('forget_password', { 
+            title: 'Đổi mật khẩu',
+            token: token,
+            accountId: accountId
+        });
     }
 
     async forgetPasswordHandler(req, res, next) {
-        try {
-            const { token, accountId, password } = req.body;
-            await AccountService.forgetPassword(token, accountId, password);
-            return res.render('forget_password_success');
-        } catch (error) {
-            next(error);
-        }
+        const { token, accountId, password } = req.body;
+        await AccountService.forgetPassword(token, accountId, password);
+        return res.render('forget_password_success');
     }
 
     async changePassword(req, res, next) {
-        try {
-            const accountId = req.session.id;
-            const newPassword = req.body.newPassword;
-            await AccountService.changePassword(accountId, newPassword);
-            res.status(200).json({ message: 'Thay đổi mật khẩu thành công' });
-        } catch (error) {
-            next(error);
-        }
+        const accountId = req.session.id;
+        const newPassword = req.body.newPassword;
+        await AccountService.changePassword(accountId, newPassword);
+        res.status(200).json({ message: 'Thay đổi mật khẩu thành công' });
     }
 }
 

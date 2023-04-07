@@ -1,0 +1,23 @@
+import express from 'express';
+import ExamController from './exam.controller.js';
+
+import { ValidationMiddleware, AuthorizationMiddleware } from '../../middlewares/index.js';
+import { ExamCreateScheme } from './dto/index.js';
+import APP_CONSTANT from '../../shared/app.constant.js';
+
+const router = express.Router();
+
+router
+    .post(
+          '/', 
+          ValidationMiddleware(ExamCreateScheme, APP_CONSTANT.REQUEST_BODY), 
+          AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
+          ExamController.createExam
+    )
+    .delete(
+          '/:id',
+          AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
+          ExamController.removeExam
+    );
+
+export default router;
