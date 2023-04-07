@@ -29,22 +29,6 @@ public class HomeTeacherFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_teacher_home, container, false);
         ClassTeacherViewModel classTeacherViewModel = new ClassTeacherViewModel(getContext());
         binding.setClassTeacherViewModel(classTeacherViewModel);
-        classTeacherViewModel.getNavigate().observe(getViewLifecycleOwner(), nextComponentId -> {
-            Fragment fragment = null;
-            switch (nextComponentId) {
-                case 1:
-                    fragment = new CreateClassFragment();
-                    break;
-            }
-
-            if(fragment != null) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fr_main, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                binding.frMain.setVisibility(View.GONE);
-            }
-        });
         return binding.getRoot();
     }
 }

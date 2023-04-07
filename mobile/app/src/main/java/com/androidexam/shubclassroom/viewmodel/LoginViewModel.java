@@ -2,6 +2,7 @@ package com.androidexam.shubclassroom.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -54,8 +55,8 @@ public class LoginViewModel extends BaseObservable {
     public LoginViewModel(Context context)
     {
         this.context = context;
-        email = "ronle9519@gmail.com";
-        password = "leron1605";
+        email = "hp_dut@gmail.com";
+        password = "123qwe";
     }
 
 
@@ -127,8 +128,12 @@ public class LoginViewModel extends BaseObservable {
                         setNavigate(3);
                     }
                     else {
-                        SharedPreferencesManager sharedPreferencesManager1 = new SharedPreferencesManager(context);
-                        sharedPreferencesManager.setAccessToken("token");
+//                        SharedPreferencesManager sharedPreferencesManager1 = SharedPreferencesManager.getInstance(context);
+//                        sharedPreferencesManager.setAccessToken("token");
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("token",token);
+                        editor.apply();
                         subscriptionMetaData = jwt.getClaim("role");
                         String role = subscriptionMetaData.asString();
                         Log.d("TAG", role);
