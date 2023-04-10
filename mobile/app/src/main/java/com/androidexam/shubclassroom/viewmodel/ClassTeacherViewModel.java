@@ -19,5 +19,4 @@ public class ClassTeacherViewModel extends BaseObservable {
         Intent intent = new Intent(context, CreateClassActivity.class);
         context.startActivity(intent);
     }
-
 }
