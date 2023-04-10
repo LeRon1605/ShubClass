@@ -5,13 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.databinding.ClassItemBinding;
+import com.androidexam.shubclassroom.databinding.FragmentBottomSheetClassTeacherBinding;
 import com.androidexam.shubclassroom.model.Class;
+import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
@@ -25,7 +29,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item, parent, false);
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item, parent, false);
 
         ClassItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.class_item,
@@ -55,6 +59,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         public ItemViewHolder(ClassItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.btnMoreAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BottomSheetClassTeacherFragment dialog = new BottomSheetClassTeacherFragment(binding.getClassItem());
+                    dialog.show(((AppCompatActivity) v.getContext()).getSupportFragmentManager(), dialog.getTag());
+                }
+            });
         }
 
         public void bind(ClassItemViewModel item) {
