@@ -3,10 +3,13 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../../caches/transforms-3/766bb06b480d26d105e9ac191a5f7e92/transformed/jetified-viewbinding-7.3.1/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../../caches/transforms-3/766bb06b480d26d105e9ac191a5f7e92/transformed/jetified-viewbinding-7.3.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../SHubClassroom/caches/transforms-3/766bb06b480d26d105e9ac191a5f7e92/transformed/jetified-viewbinding-7.3.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/transforms-3/766bb06b480d26d105e9ac191a5f7e92/transformed/jetified-viewbinding-7.3.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../caches/modules-2/files-2.1/androidx.databinding/viewbinding/7.3.1/d967b2452594abc8a4aa23f6da52d0a9f2c146f7/viewbinding-7.3.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/modules-2/files-2.1/androidx.databinding/viewbinding/7.3.1/d967b2452594abc8a4aa23f6da52d0a9f2c146f7/viewbinding-7.3.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
