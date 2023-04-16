@@ -3,10 +3,13 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../caches/transforms-3/9abfd103eda95078fcdb7d8a3604db33/transformed/jetified-lifecycle-process-2.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../caches/transforms-3/9abfd103eda95078fcdb7d8a3604db33/transformed/jetified-lifecycle-process-2.0.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../SHubClassroom/caches/transforms-3/9abfd103eda95078fcdb7d8a3604db33/transformed/jetified-lifecycle-process-2.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/transforms-3/9abfd103eda95078fcdb7d8a3604db33/transformed/jetified-lifecycle-process-2.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-process/2.0.0/8987183ddf04ab7f340753ad5d6ceb4ba53e4b37/lifecycle-process-2.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-process/2.0.0/8987183ddf04ab7f340753ad5d6ceb4ba53e4b37/lifecycle-process-2.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

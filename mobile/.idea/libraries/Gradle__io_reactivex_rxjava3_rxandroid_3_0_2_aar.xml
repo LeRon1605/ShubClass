@@ -3,12 +3,16 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../caches/transforms-3/0540857068d7fb840981a1ad25bdc328/transformed/jetified-rxandroid-3.0.2/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../caches/transforms-3/0540857068d7fb840981a1ad25bdc328/transformed/jetified-rxandroid-3.0.2/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../SHubClassroom/caches/transforms-3/0540857068d7fb840981a1ad25bdc328/transformed/jetified-rxandroid-3.0.2/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/transforms-3/0540857068d7fb840981a1ad25bdc328/transformed/jetified-rxandroid-3.0.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../caches/modules-2/files-2.1/io.reactivex.rxjava3/rxandroid/3.0.2/9f54006da683431a4dcefa8334850453c8c5245c/rxandroid-3.0.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/modules-2/files-2.1/io.reactivex.rxjava3/rxandroid/3.0.2/9f54006da683431a4dcefa8334850453c8c5245c/rxandroid-3.0.2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../caches/modules-2/files-2.1/io.reactivex.rxjava3/rxandroid/3.0.2/93e28097b76726227b635b14ec6c410b1e03e86/rxandroid-3.0.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/modules-2/files-2.1/io.reactivex.rxjava3/rxandroid/3.0.2/93e28097b76726227b635b14ec6c410b1e03e86/rxandroid-3.0.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
