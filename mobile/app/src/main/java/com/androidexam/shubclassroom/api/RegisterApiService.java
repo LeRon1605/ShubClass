@@ -9,5 +9,5 @@ import retrofit2.http.POST;
 
 public interface RegisterApiService {
     @POST("accounts")
-    Call<MessageResponse> postRegister2(@Body AccountCreateDto account);
+    Call<MessageResponse> postRegister(@Body AccountCreateDto account);
 }

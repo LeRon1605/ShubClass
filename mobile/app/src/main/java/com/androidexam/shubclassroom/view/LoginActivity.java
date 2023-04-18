@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity{
                 case 2:
                     activity = new RegisterActivity();
                     break;
+                case 3:
+                    fragment = new ActivateEmailFragment();
                 default:
                     break;
             }

@@ -209,7 +209,7 @@ public class RegisterViewModel extends BaseObservable {
                     + account.getAddress() + "," + account.getGender() + "," + account.getRole() + "," + account.getSchool());
 
             RegisterApiService apiService = RetrofitClient.getRetrofitInstance().create(RegisterApiService.class);
-            Call<MessageResponse> call = apiService.postRegister2(account);
+            Call<MessageResponse> call = apiService.postRegister(account);
             call.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
                 @Override
                 public void handleSuccess(MessageResponse responseObject) {

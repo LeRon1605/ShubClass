@@ -12,7 +12,7 @@ services:
       - MAIL_DISPLAY_NAME='Shub Classroom'
       - MAIL_USER=minishop.pbl3@gmail.com
       - MAIL_PASSWORD=yimcdficrfejnvfd
-      - SERVER=139.162.62.215
+      - SERVER=localhost:3000
       - REDIS_URL=redis://redis:6379
     depends_on:
       - db
@@ -24,9 +24,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=shubclass@2023
     ports:
-      - 3306:3306
+      - 33306:3306
     volumes:
-      - ./database:/var/lib/mysql
+      - ./docker-database:/var/lib/mysql
   redis:
     image: redis:7.0.5-alpine
     ports:
