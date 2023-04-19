@@ -18,7 +18,7 @@ class ClassController {
     }
 
     async searchClasses(req, res, next) {
-        const classes = await ClassService.getAllClassesById(req.params.id);
+        const classes = await ClassService.getAllClassesById(req.query.id);
         return res.status(200).json(classes);
     }
 
