@@ -1,4 +1,5 @@
 import sequelize from '../../database/models/index.cjs';
+import { Op } from 'sequelize';
 import { ClassDto, RequestDto } from './dtos/index.js';
 import { REQUEST_STATE } from '../../shared/enum/index.js';
 import {
@@ -42,6 +43,17 @@ class ClassService {
         });
         return data.map((x) => ClassDto.toDto(x.Class));
     }
+
+    async getAllClassesById(classId) {
+        const classes = await Class.findAll({
+          where: {
+            classId: {
+              [Op.like]: `%${classId}%`,
+            },
+          },
+        });
+        return classes.map((x) => ClassDto.toDto(x.Class));
+      }    
 
     async createClass(newClass) {
         const classEntity = await Class.findByPk(newClass.id);

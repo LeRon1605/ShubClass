@@ -13,6 +13,11 @@ router
         AuthorizationMiddleware({ type: 'basic' }),
         ClassController.getAllClasses
     )
+    .get(
+        "/search",
+        AuthorizationMiddleware({ type: "basic" }),
+        ClassController.searchClasses
+      )    
     .post(
         '/',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
