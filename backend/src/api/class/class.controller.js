@@ -17,6 +17,11 @@ class ClassController {
         return res.status(200).json(data);
     }
 
+    async searchClasses(req, res, next) {
+        const classes = await ClassService.getAllClassesById(req.query.id);
+        return res.status(200).json(classes);
+    }
+
     async createClass(req, res, next) {
         const entity = ClassCreateDto.toEntity({
             ...req.body,
