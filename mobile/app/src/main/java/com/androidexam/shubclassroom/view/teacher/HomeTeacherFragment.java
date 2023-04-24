@@ -29,6 +29,12 @@ public class HomeTeacherFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_teacher_home, container, false);
         ClassTeacherViewModel classTeacherViewModel = new ClassTeacherViewModel(getContext());
         binding.setClassTeacherViewModel(classTeacherViewModel);
+        binding.edtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return binding.getRoot();
     }
 }
