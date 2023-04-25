@@ -9,7 +9,7 @@ import { Op } from 'sequelize';
 import sequelize from '../../database/models/index.cjs';
 import { EXAM_STATE } from '../../shared/enum/index.js';
 import { ExamDto } from './dto/exam.dto.js';
-const { Class, ExamDetail, Exam, StudentClass } = sequelize;
+const { Class, ExamDetail, Exam, StudentClass, User_Exam } = sequelize;
 
 class ExamService {
     async create(body, teacherId) {
@@ -128,6 +128,36 @@ class ExamService {
 
         if (type == EXAM_STATE.ALL) return classEntity.Exams.map(x => ExamDto.toDto(x));
         return classEntity.Exams.filter(x => x.state == type).map(x => ExamDto.toDto(x));
+    }
+
+    async StartDoingExam(userId, examId) {
+        const userExam = await User_Exam.findOne({
+            where: {
+                userId,
+                examId
+            }
+        });
+    
+        if (!userExam) {
+            throw new EntityNotFoundException('User_Exam', `${userId}-${examId}`);
+        }
+    
+        if (userExam.StartAt != null) {
+            throw new BadRequestException('User already started this exam');
+        }
+    
+        const now = moment().toDate();
+        const endAt = moment(now).add(1, 'hours').toDate();
+    
+        await User_Exam.update({
+            StartAt: now,
+            EndAt: endAt
+        }, {
+            where: {
+                userId,
+                examId
+            }
+        });
     }
 }
 
