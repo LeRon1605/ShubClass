@@ -151,42 +151,6 @@ class ExamService {
         );
     }
 
-    async StartDoingExam(userId, examId) {
-        const userExam = await UserExam.findOne({
-            where: {
-                userId,
-                examId
-            }
-        });
-
-        if (!userExam) {
-            throw new EntityNotFoundException(
-                'User_Exam',
-                `${userId}-${examId}`
-            );
-        }
-
-        if (userExam.StartAt != null) {
-            throw new BadRequestException('User already started this exam');
-        }
-
-        const now = moment().toDate();
-        const endAt = moment(now).add(1, 'hours').toDate();
-
-        await UserExam.update(
-            {
-                StartAt: now,
-                EndAt: endAt
-            },
-            {
-                where: {
-                    userId,
-                    examId
-                }
-            }
-        );
-    }
-
     async getQuestion(id, currentSession) {
         const exam = await Exam.findOne({
             where: {
@@ -239,6 +203,42 @@ class ExamService {
 
             return exam.ExamDetails.map((x) => QuestionDto.toDto(x));
         }
+    }
+
+    async startDoingExam(userId, examId) {
+        const userExam = await UserExam.findOne({
+            where: {
+                userId,
+                examId
+            }
+        });
+
+        if (!userExam) {
+            throw new EntityNotFoundException(
+                'UserExam',
+                `${userId}-${examId}`
+            );
+        }
+
+        if (userExam.StartAt != null) {
+            throw new BadRequestException('User already started this exam');
+        }
+
+        const now = moment().toDate();
+        const endAt = moment(now).add(1, 'hours').toDate();
+
+        await UserExam.update(
+            {
+                StartAt: now,
+                EndAt: endAt
+            },
+            {
+                where: {
+                    userId,
+                    examId
+                }
+            }
+        );
     }
 }
 

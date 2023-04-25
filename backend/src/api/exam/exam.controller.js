@@ -6,6 +6,8 @@ dotenv.config({ path: '../../.env' });
 
 const JWT_KEY = process.env.JWT_KEY;
 
+const JWT_KEY = process.env.JWT_KEY;
+
 class ExamController {
     async createExam(req, res, next) {
         const exam = ExamCreateDto.toEntity(req.body);
@@ -37,6 +39,19 @@ class ExamController {
             req.session
         );
         return res.status(200).json(questions);
+    }
+
+    async startDoingExam(req, res, next) {
+        const authorizationHeader = req.headers.authorization;
+        const userToken = authorizationHeader.substring(7);
+
+        const isTokenValid = jsonwebtoken.verify(userToken, JWT_KEY);
+        const examId = isTokenValid.id;
+
+        await ExamService.startDoingExam(req.params.id, examId);
+        return res
+            .status(200)
+            .json({ message: 'Start doing exam successfully.' });
     }
 }
 
