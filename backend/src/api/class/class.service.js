@@ -44,16 +44,32 @@ class ClassService {
         return data.map((x) => ClassDto.toDto(x.Class));
     }
 
-    async getAllClassesById(classId) {
+    async getAllClassesByIdForTeacher(classId, teacherId) {
         const classes = await Class.findAll({
           where: {
-            classId: {
+            id: {
               [Op.like]: `%${classId}%`,
             },
+            teacherId: {
+                [Op.not]: teacherId
+            }
           },
         });
-        return classes.map((x) => ClassDto.toDto(x.Class));
-      }    
+        return classes.map((x) => ClassDto.toDto(x));
+    }
+    
+    async getAllClassesByIdForStudent(classId, studentId) {
+        const classes = (await Class.findAll({
+            where: {
+              id: {
+                [Op.like]: `%${classId}%`,
+              }
+            },
+            include: [StudentClass]
+        })).filter(x => x.StudentClasses.some(x => x.studentId == studentId && x.state != REQUEST_STATE.APPROVED));
+
+        return classes.map((x) => ClassDto.toDto(x));
+    }
 
     async createClass(newClass) {
         const classEntity = await Class.findByPk(newClass.id);

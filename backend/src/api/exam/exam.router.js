@@ -25,4 +25,11 @@ router
       ExamController.startDoingExam
       )
 
+router
+    .get(
+          '/:id/questions',
+          AuthorizationMiddleware({ type: 'basic' }),
+          ExamController.getExamQuestion
+    );
+
 export default router;

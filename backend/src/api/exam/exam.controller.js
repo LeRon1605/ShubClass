@@ -1,5 +1,5 @@
 import jsonwebtoken from 'jsonwebtoken';
-import { ExamCreateDto } from './dto/index.js'
+import { ExamCreateDto } from './dto/index.js';
 import ExamService from './exam.service.js';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../.env' });
@@ -25,8 +25,18 @@ class ExamController {
         const isTokenValid = jsonwebtoken.verify(userToken, JWT_KEY);
         const examId = isTokenValid.id;
 
-        await ExamService.startDoingExam(req.params.id, examId)
-        return res.status(200).json({ message: 'Start doing exam successfully.' });
+        await ExamService.startDoingExam(req.params.id, examId);
+        return res
+            .status(200)
+            .json({ message: 'Start doing exam successfully.' });
+    }
+
+    async getExamQuestion(req, res, next) {
+        const questions = await ExamService.getQuestion(
+            req.params.id,
+            req.session
+        );
+        return res.status(200).json(questions);
     }
 }
 
