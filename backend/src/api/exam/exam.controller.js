@@ -12,6 +12,11 @@ class ExamController {
         await ExamService.remove(req.params.id, req.session.id);
         return res.status(200).json({ message: 'Delete exam successfully.' });
     }
+
+    async getExamQuestion(req, res, next) {
+        const questions = await ExamService.getQuestion(req.params.id, req.session);
+        return res.status(200).json(questions);
+    }
 }
 
 export default new ExamController();

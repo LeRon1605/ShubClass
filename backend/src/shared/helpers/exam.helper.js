@@ -35,6 +35,16 @@ class ExamHelper {
         
         return result;
     }
+
+    parseQuestionDetail(details) {
+        return details.map(x => {
+            return {
+                id: x.id,
+                question: x.question,
+                answers: x.answers.split('|')
+            };
+        });
+    }
 }
 
 export default new ExamHelper();

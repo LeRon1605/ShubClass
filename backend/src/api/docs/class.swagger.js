@@ -164,6 +164,36 @@
 /**
  * @swagger
  *
+ * /classes/search:
+ *   get:
+ *     tags: [Class]
+ *     description: Search class by id
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: class id
+ *         required: true
+ *         in: query
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *              type: array
+ *              items:
+ *                  $ref: '#/definitions/Class'
+ *       400:
+ *         $ref: '#/responses/Error'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+/**
+ * @swagger
+ *
  * /classes/{id}:
  *   put:
  *     tags: [Class]

@@ -76,6 +76,17 @@
  *              type: string
  *          classId:
  *              type: string
+ *  QuestionDto:
+ *      type: object
+ *      properties:
+ *          id: 
+ *              type: string
+ *          question:
+ *              type: string
+ *          answers:
+ *              type: array
+ *              items:
+ *                  type: string
  */
 
 /**
@@ -155,6 +166,35 @@
  *              type: array
  *              items:
  *                  $ref: '#/definitions/ExamDto'
+ *       400:
+ *         $ref: '#/responses/Error'
+ *       403:
+ *         $ref: '#/responses/Forbidden'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+/**
+ * @swagger
+ * /exams/{id}/questions:
+ *   get:
+ *     tags: [Exam]
+ *     description: Get all question in exam
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: class id
+ *         required: true
+ *         in: path
+ *         type: string 
+ *     responses:
+ *       200:
+ *          description: Ok
+ *          schema:
+ *              type: array
+ *              items:
+ *                  $ref: '#/definitions/QuestionDto'
  *       400:
  *         $ref: '#/responses/Error'
  *       403:

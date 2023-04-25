@@ -18,7 +18,12 @@ class ClassController {
     }
 
     async searchClasses(req, res, next) {
-        const classes = await ClassService.getAllClassesById(req.query.id);
+        let classes = [];
+        if (req.session.role == 'Teacher') {
+            classes = await ClassService.getAllClassesByIdForTeacher(req.query.id, req.session.id);
+        } else {
+            classes = await ClassService.getAllClassesByIdForStudent(req.query.id, req.session.id);
+        }
         return res.status(200).json(classes);
     }
 

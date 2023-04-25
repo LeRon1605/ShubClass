@@ -1,5 +1,3 @@
-import Joi from 'joi';
-import { randomUUID } from 'crypto';
 import { ExamHelper } from '../../../shared/helpers/index.js';
 import { EXAM_STATE } from '../../../shared/enum/index.js';
 
@@ -10,6 +8,7 @@ class Dto {
             name: entity.name,
             type: entity.type,
             state: EXAM_STATE.PENDING,
+            details: ExamHelper.parseQuestionDetail(entity.ExamDetails),
             classId: entity.classId,
             startTime: entity.startTime,
             endTime: entity.endTime,

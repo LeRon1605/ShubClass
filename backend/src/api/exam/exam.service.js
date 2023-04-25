@@ -8,8 +8,8 @@ import {
 import { Op } from 'sequelize';
 import sequelize from '../../database/models/index.cjs';
 import { EXAM_STATE } from '../../shared/enum/index.js';
-import { ExamDto } from './dto/exam.dto.js';
-const { Class, ExamDetail, Exam, StudentClass } = sequelize;
+import { ExamDto, QuestionDto } from './dto/index.js';
+const { Class, ExamDetail, Exam, StudentClass, UserExam } = sequelize;
 
 class ExamService {
     async create(body, teacherId) {
@@ -128,6 +128,50 @@ class ExamService {
 
         if (type == EXAM_STATE.ALL) return classEntity.Exams.map(x => ExamDto.toDto(x));
         return classEntity.Exams.filter(x => x.state == type).map(x => ExamDto.toDto(x));
+    }
+
+    async getQuestion(id, currentSession) {
+        const exam = await Exam.findOne({
+            where: {
+                id: id
+            },
+            include: [
+                ExamDetail,
+                {
+                    model: Class,
+                    include: [StudentClass]
+                }
+            ]
+        });
+
+        if (exam == null) {
+            throw new EntityNotFoundException('Exam', id);
+        }
+
+        if (currentSession.role == 'Teacher') {
+            if (currentSession.id != exam.Class.teacherId) {
+                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            }
+
+            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+        } else {
+            if (!exam.Class.StudentClasses.some(x => x.studentId == currentSession.id)) {
+                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            }
+
+            const latestTakenExam = await UserExam.findOne({
+                where: {
+                    examId: exam.id,
+                },
+                order: [ [ 'createdAt', 'DESC' ]],
+            });
+
+            if (!latestTakenExam || latestTakenExam.endTime) {
+                throw new EntityForbiddenAccessException('Exam', exam.id);
+            }
+
+            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+        }
     }
 }
 
