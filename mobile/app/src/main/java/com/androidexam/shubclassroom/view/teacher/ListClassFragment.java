@@ -8,22 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.adapter.ItemAdapter;
-import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
-import com.androidexam.shubclassroom.api.RegisterApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
-import com.androidexam.shubclassroom.model.Class;
-import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
