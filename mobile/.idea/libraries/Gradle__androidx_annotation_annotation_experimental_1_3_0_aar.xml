@@ -18,6 +18,8 @@
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../caches/modules-2/files-2.1/androidx.annotation/annotation-experimental/1.3.0/56ca4da0948c085ca4bb0e6077e01a3ab1298dfb/annotation-experimental-1.3.0-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-experimental/1.3.0/56ca4da0948c085ca4bb0e6077e01a3ab1298dfb/annotation-experimental-1.3.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../SHubClassroom/caches/modules-2/files-2.1/androidx.annotation/annotation-experimental/1.3.0/56ca4da0948c085ca4bb0e6077e01a3ab1298dfb/annotation-experimental-1.3.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-experimental/1.3.0/56ca4da0948c085ca4bb0e6077e01a3ab1298dfb/annotation-experimental-1.3.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

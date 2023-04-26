@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listClassFragment"
-        android:name="com.androidexam.shubclassroom.view.teacher.ListClassFragment"
+        android:name="com.androidexam.shubclassroom.view.teacher.ListClassTeacherFragment"
         android:label="fragment_list_class"
         tools:layout="@layout/fragment_list_class" />
 </navigation>

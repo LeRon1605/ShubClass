@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="ClassTeacherViewModel"
-            type="com.androidexam.shubclassroom.viewmodel.ClassTeacherViewModel" />
+            type="com.androidexam.shubclassroom.viewmodel.ClassItemViewModel" />
     </data>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:id="@+id/fr_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,8 +53,10 @@
                     android:layout_weight=".5"
                     android:hint="Tìm kiếm..">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:onTextChanged="@{() -> ClassTeacherViewModel.searchItem()}"
+                        android:text="@={ClassTeacherViewModel.textSearch}"
                         android:drawableStart="@drawable/ic_baseline_search_24"
-                        android:id="@+id/et_email"
+                        android:id="@+id/edt_search"
                         android:layout_width="match_parent"
                         android:layout_height="50dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -66,17 +68,18 @@
                     android:id="@+id/btn_createClass"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight=".4"
-                    android:onClick="@{() -> ClassTeacherViewModel.onlickCreateClass()}"
+                    android:onClick="@{() -> ClassTeacherViewModel.onclickCreateClass()}"
                     android:text="Tạo lớp mới"
                     android:layout_width="0dp"
                     android:layout_height="60dp"/>
             </LinearLayout>
+
             <androidx.fragment.app.FragmentContainerView
-                android:layout_marginTop="10dp"
                 android:id="@+id/fragmentContainerView"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/class_nav"
                 tools:layout_editor_absoluteX="1dp"

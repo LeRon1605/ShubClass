@@ -5,15 +5,16 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.databinding.FragmentTeacherHomeBinding;
-import com.androidexam.shubclassroom.viewmodel.ClassTeacherViewModel;
+import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 public class HomeTeacherFragment extends Fragment {
     private FragmentTeacherHomeBinding binding;
@@ -27,8 +28,25 @@ public class HomeTeacherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_teacher_home, container, false);
-        ClassTeacherViewModel classTeacherViewModel = new ClassTeacherViewModel(getContext());
+        ClassItemViewModel classTeacherViewModel = new ClassItemViewModel(getContext());
         binding.setClassTeacherViewModel(classTeacherViewModel);
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                classTeacherViewModel.setTextSearch(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return binding.getRoot();
     }
+
 }

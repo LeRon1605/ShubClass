@@ -95,7 +95,22 @@ public class CreateClassViewModel extends BaseObservable {
             ClassCreateDto classCreateDto = new ClassCreateDto(getId(), getName(), getDescription(), getSubjectName(), Integer.parseInt(getNumberOfStudent()));
             ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
             Call<Class> call = apiService.createClass("Brear " + token, classCreateDto);
-            call.enqueue(new ApiCallback<Class, Class>(Class.class) {
+
+
+
+//            call.enqueue(new ApiCallback<Class, Class>(Class.class) {
+//                @Override
+//                public void handleSuccess(Class responseObject) {
+//                    Toast.makeText(context, "Tạo lớp thành công!", Toast.LENGTH_SHORT).show();
+//                    context.startActivity(new Intent(context, HomeTeacherActivity.class));
+//                }
+//
+//                @Override
+//                public void handleFailure(Class errorResponse) {
+//                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+            call.enqueue(new ApiCallback<Class, MessageResponse>(MessageResponse.class) {
                 @Override
                 public void handleSuccess(Class responseObject) {
                     Toast.makeText(context, "Tạo lớp thành công!", Toast.LENGTH_SHORT).show();
@@ -103,7 +118,7 @@ public class CreateClassViewModel extends BaseObservable {
                 }
 
                 @Override
-                public void handleFailure(Class errorResponse) {
+                public void handleFailure(MessageResponse errorResponse) {
                     Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
                 }
             });
