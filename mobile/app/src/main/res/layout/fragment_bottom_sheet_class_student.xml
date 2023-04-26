@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="classItem"
             type="com.androidexam.shubclassroom.viewmodel.ClassItemViewModel" />
     </data>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.teacher.BottomSheetClassTeacherFragment">
+        tools:context=".view.student.BottomSheetClassStudentFragment">
+
+        <!-- TODO: Update blank fragment layout -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -23,7 +25,7 @@
                     android:src="@drawable/ic_baseline_clear_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> classItem.onClickCloseBottomSheetTeacher()}"/>
+                    android:onClick="@{() -> classItem.onClickCloseBottomSheetStudent()}"/>
                 <TextView
                     android:layout_marginLeft="5dp"
                     android:text="@{classItem.name}"
@@ -50,38 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-            <LinearLayout
-                android:padding="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/ic_baseline_settings_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="Cài đặt lớp học"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-<!--            <LinearLayout-->
-<!--                android:padding="15dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-<!--                <ImageView-->
-<!--                    android:src="@drawable/ic_baseline_visibility_off_24"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"/>-->
-<!--                <TextView-->
-<!--                    android:textSize="16dp"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    android:text="Ẩn lớp học"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"/>-->
-<!--            </LinearLayout>-->
+
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="horizontal"
@@ -89,16 +60,17 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> classItem.onClickDeleteClass()}">
                 <ImageView
-                    android:src="@drawable/ic_baseline_delete_outline_24"
+                    android:src="@drawable/ic_baseline_output_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:textSize="16dp"
                     android:layout_marginLeft="5dp"
-                    android:text="Xoá lớp học"
+                    android:text="Rời khỏi lớp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
+
     </FrameLayout>
 </layout>

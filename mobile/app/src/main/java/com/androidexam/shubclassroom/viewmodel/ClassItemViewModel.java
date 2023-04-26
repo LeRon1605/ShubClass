@@ -21,6 +21,7 @@ import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.Class;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
 import com.androidexam.shubclassroom.view.teacher.CreateClassActivity;
 import com.google.gson.annotations.SerializedName;
@@ -49,6 +50,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     @SerializedName("updateAt")
     private String updateAt;
     private BottomSheetClassTeacherFragment bottomSheetClassTeacherFragment;
+    private BottomSheetClassStudentFragment bottomSheetClassStudentFragment;
     private Context context;
     private String textSearch;
     public static ItemAdapter adapter;
@@ -137,6 +139,14 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
         this.bottomSheetClassTeacherFragment = bottomSheetClassTeacherFragment;
     }
 
+    public BottomSheetClassStudentFragment getBottomSheetClassStudentFragmentFragment() {
+        return bottomSheetClassStudentFragment;
+    }
+
+    public void setBottomSheetClassStudentFragment(BottomSheetClassStudentFragment bottomSheetClassStudentFragmentFragment) {
+        this.bottomSheetClassStudentFragment = bottomSheetClassStudentFragmentFragment;
+    }
+
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
@@ -149,8 +159,11 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
         this.context = context;
     }
 
-    public void onClickCloseBottomSheet() {
+    public void onClickCloseBottomSheetTeacher() {
         this.bottomSheetClassTeacherFragment.dismiss();
+    }
+    public void onClickCloseBottomSheetStudent() {
+        this.bottomSheetClassStudentFragment.dismiss();
     }
 
     public void onClickDeleteClass() {
