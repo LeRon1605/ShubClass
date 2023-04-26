@@ -113,12 +113,13 @@ public class CreateClassViewModel extends BaseObservable {
             call.enqueue(new ApiCallback<Class, MessageResponse>(MessageResponse.class) {
                 @Override
                 public void handleSuccess(Class responseObject) {
-
+                    Toast.makeText(context, "Tạo lớp thành công!", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, HomeTeacherActivity.class));
                 }
 
                 @Override
                 public void handleFailure(MessageResponse errorResponse) {
-
+                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
