@@ -103,10 +103,10 @@
                     android:layout_height="60dp"
                     android:backgroundTint="@color/blue"
                     android:text="Đăng nhập"
-                    android:textSize="16sp"
                     android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:fontFamily="@font/kantumruy"
-                    android:textFontWeight="600"
                     android:layout_marginTop="10dp"
                     android:onClick="@{()-> LoginViewModel.onLoginClicked()}"
                     />
