@@ -66,7 +66,7 @@ class ClassService {
               }
             },
             include: [StudentClass]
-        })).filter(x => x.StudentClasses.some(x => x.studentId == studentId && x.state != REQUEST_STATE.APPROVED));
+        })).filter(x => !x.StudentClasses.some(x => x.studentId == studentId) || x.StudentClasses.some(x => x.studentId == studentId && x.state != REQUEST_STATE.APPROVED));
 
         return classes.map((x) => ClassDto.toDto(x));
     }
@@ -216,7 +216,7 @@ class ClassService {
             throw new NotFoundException('Student are not in class.');
         }
 
-        await Class.destroy({
+        await StudentClass.destroy({
             where: {
                 studentId: studentId,
                 classId: id,
