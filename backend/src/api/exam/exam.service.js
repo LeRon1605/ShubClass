@@ -240,6 +240,50 @@ class ExamService {
             }
         );
     }
+
+    async getQuestion(id, currentSession) {
+        const exam = await Exam.findOne({
+            where: {
+                id: id
+            },
+            include: [
+                ExamDetail,
+                {
+                    model: Class,
+                    include: [StudentClass]
+                }
+            ]
+        });
+
+        if (exam == null) {
+            throw new EntityNotFoundException('Exam', id);
+        }
+
+        if (currentSession.role == 'Teacher') {
+            if (currentSession.id != exam.Class.teacherId) {
+                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            }
+
+            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+        } else {
+            if (!exam.Class.StudentClasses.some(x => x.studentId == currentSession.id)) {
+                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            }
+
+            const latestTakenExam = await UserExam.findOne({
+                where: {
+                    examId: exam.id,
+                },
+                order: [ [ 'createdAt', 'DESC' ]],
+            });
+
+            if (!latestTakenExam || latestTakenExam.endTime) {
+                throw new EntityForbiddenAccessException('Exam', exam.id);
+            }
+
+            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+        }
+    }
 }
 
 export default new ExamService();

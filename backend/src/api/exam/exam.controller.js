@@ -40,19 +40,6 @@ class ExamController {
         );
         return res.status(200).json(questions);
     }
-
-    async startDoingExam(req, res, next) {
-        const authorizationHeader = req.headers.authorization;
-        const userToken = authorizationHeader.substring(7);
-
-        const isTokenValid = jsonwebtoken.verify(userToken, JWT_KEY);
-        const examId = isTokenValid.id;
-
-        await ExamService.startDoingExam(req.params.id, examId);
-        return res
-            .status(200)
-            .json({ message: 'Start doing exam successfully.' });
-    }
 }
 
 export default new ExamController();
