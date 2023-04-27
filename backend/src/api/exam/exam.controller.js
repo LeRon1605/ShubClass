@@ -17,6 +17,11 @@ class ExamController {
         const questions = await ExamService.getQuestion(req.params.id, req.session);
         return res.status(200).json(questions);
     }
+
+    async getExamResult(req, res, next) {
+        const result = await ExamService.getResult(req.params.id, req.session);
+        return res.status(200).json(result);
+    }
 }
 
 export default new ExamController();

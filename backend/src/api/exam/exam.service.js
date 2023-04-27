@@ -3,13 +3,14 @@ import moment from 'moment';
 import { 
     BadRequestException, 
     EntityForbiddenAccessException, 
-    EntityNotFoundException 
+    EntityNotFoundException, 
+    ForbiddenException
 } from '../../shared/exceptions/index.js';
 import { Op } from 'sequelize';
 import sequelize from '../../database/models/index.cjs';
 import { EXAM_STATE } from '../../shared/enum/index.js';
-import { ExamDto, QuestionDto } from './dto/index.js';
-const { Class, ExamDetail, Exam, StudentClass, UserExam } = sequelize;
+import { ExamDto, QuestionDto, ExamResultDto } from './dto/index.js';
+const { Class, ExamDetail, Exam, User, StudentClass, UserExam, UserAnswer } = sequelize;
 
 class ExamService {
     async create(body, teacherId) {
@@ -167,11 +168,50 @@ class ExamService {
             });
 
             if (!latestTakenExam || latestTakenExam.endTime) {
-                throw new EntityForbiddenAccessException('Exam', exam.id);
+                throw new ForbiddenException(`You are not currently taking exam with id '${exam.id}'`);
             }
 
             return exam.ExamDetails.map(x => QuestionDto.toDto(x));
         }
+    }
+
+    async getResult(id, currentSession) {
+        const exam = await Exam.findOne({
+            where: {
+                id: id
+            },
+            include: [
+                {
+                    model: Class,
+                    include: [StudentClass]
+                }
+            ]
+        });
+        if (exam == null) {
+            throw new EntityNotFoundException('Exam', id);
+        }
+
+        if (currentSession.role == 'Teacher') {
+            if (currentSession.id != exam.Class.teacherId) {
+                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            }
+        } else {
+            if (!exam.Class.StudentClasses.some(x => x.studentId == currentSession.id)) {
+                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            }
+        }
+
+        const userExams = await UserExam.findAll({
+            where: {
+                examId: id,
+                endAt: {
+                    [Op.ne]: null
+                }
+            },
+            include: [User, Exam]
+        });
+
+        return userExams.map(x => ExamResultDto.toDto(x));
     }
 }
 

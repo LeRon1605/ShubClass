@@ -27,4 +27,11 @@ router
           ExamController.getExamQuestion
     );
 
+router
+    .get(
+          '/:id/result',
+          AuthorizationMiddleware({ type: 'basic' }),
+          ExamController.getExamResult
+    );
+
 export default router;

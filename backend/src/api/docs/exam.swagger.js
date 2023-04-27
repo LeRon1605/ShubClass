@@ -184,7 +184,7 @@
  *       - application/json
  *     parameters:
  *       - name: id
- *         description: class id
+ *         description: exam id
  *         required: true
  *         in: path
  *         type: string 
@@ -195,6 +195,68 @@
  *              type: array
  *              items:
  *                  $ref: '#/definitions/QuestionDto'
+ *       400:
+ *         $ref: '#/responses/Error'
+ *       403:
+ *         $ref: '#/responses/Forbidden'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+/**
+ * @swagger
+ * /exams/{id}/result:
+ *   get:
+ *     tags: [Exam]
+ *     description: Get result of exam
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: exam id
+ *         required: true
+ *         in: path
+ *         type: string 
+ *     responses:
+ *       200:
+ *          description: Ok
+ *          schema:
+ *              type: object
+ *              properties:
+ *                  exam:
+ *                      type: object
+ *                      properties:
+ *                          id:
+ *                              type: string
+ *                          name:
+ *                              type: string
+ *                          startTime:
+ *                              type: string
+ *                              format: date-time
+ *                              example: '2023-01-01T00:00:00Z' 
+ *                          endTime:
+ *                              type: string
+ *                              format: date-time
+ *                              example: '2023-01-01T00:00:00Z' 
+ *                  user:
+ *                      type: object
+ *                      properties:
+ *                          id:
+ *                              type: string
+ *                          name:
+ *                              type: string
+ *                          avatar:
+ *                              type: string
+ *                  points:
+ *                      type: number
+ *                  startAt:
+ *                      type: string
+ *                      format: date-time
+ *                      example: '2023-01-01T00:00:00Z'   
+ *                  endAt:
+ *                      type: string
+ *                      format: date-time
+ *                      example: '2023-01-01T00:00:00Z'
  *       400:
  *         $ref: '#/responses/Error'
  *       403:

@@ -14,7 +14,7 @@
     "db:migrate": "cd src/database & npx sequelize-cli db:migrate",
     "db:revert": "cd src/database & npx sequelize-cli db:migrate:undo",
     "db:seed": "cd src/database & npx sequelize-cli db:seed:all --debug",
-    "db:seed:revert": "cd src/database & npx sequelize-cli db:seed:undo --debug",
+    "db:seed:revert": "cd src/database & npx sequelize-cli db:seed:undo:all --debug",
     "prettier": "npx prettier --write \"**//*.js\"",
     "test": "jest"
   },
