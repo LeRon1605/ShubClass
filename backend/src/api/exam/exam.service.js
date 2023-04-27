@@ -1,5 +1,6 @@
 import schedule from 'node-schedule';
 import moment from 'moment';
+import 'moment-timezone';
 import {
     BadRequestException,
     EntityForbiddenAccessException,
@@ -9,6 +10,8 @@ import { Op } from 'sequelize';
 import sequelize from '../../database/models/index.cjs';
 import { EXAM_STATE } from '../../shared/enum/index.js';
 import { ExamDto, QuestionDto } from './dto/index.js';
+import { randomUUID } from 'crypto';
+
 const { Class, ExamDetail, Exam, StudentClass, UserExam } = sequelize;
 
 class ExamService {
@@ -205,83 +208,27 @@ class ExamService {
         }
     }
 
-    async startDoingExam(userId, examId) {
-        const userExam = await UserExam.findOne({
+    async startDoingExam(examId, userId) {
+        let userExam = await UserExam.findOne({
             where: {
                 userId,
                 examId
             }
         });
+        let now_utc = moment.utc();
+        let now_utc_7 = now_utc.tz('Asia/Bangkok');
+        const now = now_utc_7.format('YYYY-MM-DD HH:mm:ss');
 
         if (!userExam) {
-            throw new EntityNotFoundException(
-                'UserExam',
-                `${userId}-${examId}`
-            );
-        }
-
-        if (userExam.StartAt != null) {
-            throw new BadRequestException('User already started this exam');
-        }
-
-        const now = moment().toDate();
-        const endAt = moment(now).add(1, 'hours').toDate();
-
-        await UserExam.update(
-            {
+            userExam = await UserExam.create({
+                id: randomUUID(),
+                userId,
+                examId,
                 StartAt: now,
-                EndAt: endAt
-            },
-            {
-                where: {
-                    userId,
-                    examId
-                }
-            }
-        );
-    }
-
-    async getQuestion(id, currentSession) {
-        const exam = await Exam.findOne({
-            where: {
-                id: id
-            },
-            include: [
-                ExamDetail,
-                {
-                    model: Class,
-                    include: [StudentClass]
-                }
-            ]
-        });
-
-        if (exam == null) {
-            throw new EntityNotFoundException('Exam', id);
-        }
-
-        if (currentSession.role == 'Teacher') {
-            if (currentSession.id != exam.Class.teacherId) {
-                throw new EntityForbiddenAccessException('Class', exam.Class.id);
-            }
-
-            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
-        } else {
-            if (!exam.Class.StudentClasses.some(x => x.studentId == currentSession.id)) {
-                throw new EntityForbiddenAccessException('Class', exam.Class.id);
-            }
-
-            const latestTakenExam = await UserExam.findOne({
-                where: {
-                    examId: exam.id,
-                },
-                order: [ [ 'createdAt', 'DESC' ]],
+                EndAt: null
             });
-
-            if (!latestTakenExam || latestTakenExam.endTime) {
-                throw new EntityForbiddenAccessException('Exam', exam.id);
-            }
-
-            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+        } else {
+            throw new BadRequestException('User already started this exam');
         }
     }
 }
