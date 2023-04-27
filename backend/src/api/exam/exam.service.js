@@ -1,14 +1,17 @@
 import schedule from 'node-schedule';
 import moment from 'moment';
-import { 
-    BadRequestException, 
-    EntityForbiddenAccessException, 
-    EntityNotFoundException 
+import 'moment-timezone';
+import {
+    BadRequestException,
+    EntityForbiddenAccessException,
+    EntityNotFoundException
 } from '../../shared/exceptions/index.js';
 import { Op } from 'sequelize';
 import sequelize from '../../database/models/index.cjs';
 import { EXAM_STATE } from '../../shared/enum/index.js';
 import { ExamDto, QuestionDto } from './dto/index.js';
+import { randomUUID } from 'crypto';
+
 const { Class, ExamDetail, Exam, StudentClass, UserExam } = sequelize;
 
 class ExamService {
@@ -44,17 +47,24 @@ class ExamService {
         });
 
         if (duplicate != null) {
-            throw new BadRequestException('Invalid exam duration time, there is existed exam in that duration');
+            throw new BadRequestException(
+                'Invalid exam duration time, there is existed exam in that duration'
+            );
         }
 
         await Exam.create(exam);
         await ExamDetail.bulkCreate(details);
 
-        const fireDate = moment(exam.startTime, 'YYYY-MM-DDTHH:mm:ssZ').add('hours', -7).toDate();
-        const endExamFireTime = moment(exam.endTime, 'YYYY-MM-DDTHH:mm:ssZ').add('hours', -7).toDate();
+        const fireDate = moment(exam.startTime, 'YYYY-MM-DDTHH:mm:ssZ')
+            .add('hours', -7)
+            .toDate();
+        const endExamFireTime = moment(exam.endTime, 'YYYY-MM-DDTHH:mm:ssZ')
+            .add('hours', -7)
+            .toDate();
 
         schedule.scheduleJob(`exam_start_${exam.id}`, fireDate, async () => {
-            await Exam.update({ state: EXAM_STATE.PUBLISHED },
+            await Exam.update(
+                { state: EXAM_STATE.PUBLISHED },
                 {
                     where: {
                         id: exam.id
@@ -62,15 +72,20 @@ class ExamService {
                 }
             );
 
-            schedule.scheduleJob(`exam_end_${exam.id}`, endExamFireTime, async () => {
-                await Exam.update({ state: EXAM_STATE.CLOSED },
-                    {
-                        where: {
-                            id: exam.id
+            schedule.scheduleJob(
+                `exam_end_${exam.id}`,
+                endExamFireTime,
+                async () => {
+                    await Exam.update(
+                        { state: EXAM_STATE.CLOSED },
+                        {
+                            where: {
+                                id: exam.id
+                            }
                         }
-                    }
-                );
-            });
+                    );
+                }
+            );
         });
 
         return exam;
@@ -92,7 +107,9 @@ class ExamService {
         }
 
         if (exam.state != EXAM_STATE.PENDING) {
-            throw new BadRequestException('Invalid action, can not delete processed exam.');
+            throw new BadRequestException(
+                'Invalid action, can not delete processed exam.'
+            );
         }
 
         await Exam.destroy({
@@ -121,13 +138,20 @@ class ExamService {
                 throw new EntityForbiddenAccessException('Class', classId);
             }
         } else {
-            if (!classEntity.StudentClasses.some(x => x.studentId == currentSession.id)) {
+            if (
+                !classEntity.StudentClasses.some(
+                    (x) => x.studentId == currentSession.id
+                )
+            ) {
                 throw new EntityForbiddenAccessException('Class', classId);
             }
         }
 
-        if (type == EXAM_STATE.ALL) return classEntity.Exams.map(x => ExamDto.toDto(x));
-        return classEntity.Exams.filter(x => x.state == type).map(x => ExamDto.toDto(x));
+        if (type == EXAM_STATE.ALL)
+            return classEntity.Exams.map((x) => ExamDto.toDto(x));
+        return classEntity.Exams.filter((x) => x.state == type).map((x) =>
+            ExamDto.toDto(x)
+        );
     }
 
     async getQuestion(id, currentSession) {
@@ -150,27 +174,61 @@ class ExamService {
 
         if (currentSession.role == 'Teacher') {
             if (currentSession.id != exam.Class.teacherId) {
-                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+                throw new EntityForbiddenAccessException(
+                    'Class',
+                    exam.Class.id
+                );
             }
 
-            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+            return exam.ExamDetails.map((x) => QuestionDto.toDto(x));
         } else {
-            if (!exam.Class.StudentClasses.some(x => x.studentId == currentSession.id)) {
-                throw new EntityForbiddenAccessException('Class', exam.Class.id);
+            if (
+                !exam.Class.StudentClasses.some(
+                    (x) => x.studentId == currentSession.id
+                )
+            ) {
+                throw new EntityForbiddenAccessException(
+                    'Class',
+                    exam.Class.id
+                );
             }
 
             const latestTakenExam = await UserExam.findOne({
                 where: {
-                    examId: exam.id,
+                    examId: exam.id
                 },
-                order: [ [ 'createdAt', 'DESC' ]],
+                order: [['createdAt', 'DESC']]
             });
 
             if (!latestTakenExam || latestTakenExam.endTime) {
                 throw new EntityForbiddenAccessException('Exam', exam.id);
             }
 
-            return exam.ExamDetails.map(x => QuestionDto.toDto(x));
+            return exam.ExamDetails.map((x) => QuestionDto.toDto(x));
+        }
+    }
+
+    async startDoingExam(examId, userId) {
+        let userExam = await UserExam.findOne({
+            where: {
+                userId,
+                examId
+            }
+        });
+        let now_utc = moment.utc();
+        let now_utc_7 = now_utc.tz('Asia/Bangkok');
+        const now = now_utc_7.format('YYYY-MM-DD HH:mm:ss');
+
+        if (!userExam) {
+            userExam = await UserExam.create({
+                id: randomUUID(),
+                userId,
+                examId,
+                StartAt: now,
+                EndAt: null
+            });
+        } else {
+            throw new BadRequestException('User already started this exam');
         }
     }
 }
