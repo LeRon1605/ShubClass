@@ -6,15 +6,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.databinding.ClassItemBinding;
-import com.androidexam.shubclassroom.databinding.FragmentBottomSheetClassTeacherBinding;
-import com.androidexam.shubclassroom.model.Class;
 import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 

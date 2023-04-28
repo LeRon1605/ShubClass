@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view.teacher;
+package com.androidexam.shubclassroom.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,12 @@ import android.os.Bundle;
 
 import com.androidexam.shubclassroom.R;
 
-public class ClassDetailTeacherActivity extends AppCompatActivity {
+public class ClassDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_class_detail);
+        setContentView(R.layout.activity_class_detail);
+
     }
 }

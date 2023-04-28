@@ -38,8 +38,6 @@ public class LoginViewModel extends BaseAuthViewModel {
             redirectByRole(sharedPreferencesManager.getString("role", ""));
         }
         accountLoginDto = new AccountLoginDto();
-
-
     }
 
     public AccountLoginDto getAccountLoginDto() {
