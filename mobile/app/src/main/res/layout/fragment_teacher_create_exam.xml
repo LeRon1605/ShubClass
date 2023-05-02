@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.teacher.CreateExamTeacherFragment">
+<layout>
+    <data>
+        <variable
+            name="CreateExamTeacherViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.teacher.exam.CreateExamTeacherViewModel" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.teacher.exam.CreateExamTeacherFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +27,7 @@
                 android:padding="15dp"
                 android:scaleType="fitXY"
                 android:layout_marginLeft="10dp"
-                android:onClick="@{() -> Exam.onBackClicked()}"
+                android:onClick="@{() -> CreateExamTeacherViewModel.navigateTo(com.androidexam.shubclassroom.shared.TeacherExamFragment.ListExamTeacher)}"
                 />
 
             <LinearLayout
@@ -85,7 +91,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_name"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp" />
+                        android:layout_height="55dp"
+                        android:text="@={CreateExamTeacherViewModel.examCreateDto.name}"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -110,7 +117,9 @@
                         android:id="@+id/et_type"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:inputType="none" />
+                        android:inputType="none"
+                        android:text="@={CreateExamTeacherViewModel.examCreateDto.type}"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -128,15 +137,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:hint="Giờ"
+                    android:hint="hh:mm:ss"
                     android:layout_marginVertical="5dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_datestart"
+                        android:id="@+id/et_timestart"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp" />
+                        android:layout_height="55dp"
+                        android:text="@={CreateExamTeacherViewModel.startTime}"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -149,9 +159,11 @@
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_timestart"
+                        android:id="@+id/et_datestart"
+                        android:inputType="datetime"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp" />
+                        android:layout_height="55dp"
+                        android:text="@={CreateExamTeacherViewModel.startDate}"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -169,14 +181,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:hint="Giờ"
+                    android:hint="hh:mm:ss"
                     android:layout_marginVertical="5dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_dateend"
+                        android:id="@+id/et_timeend"
                         android:layout_width="match_parent"
+                        android:text="@={CreateExamTeacherViewModel.endTime}"
                         android:layout_height="55dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,8 +203,10 @@
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_timeend"
+                        android:id="@+id/et_dateend"
                         android:layout_width="match_parent"
+                        android:inputType="datetime"
+                        android:text="@={CreateExamTeacherViewModel.endDate}"
                         android:layout_height="55dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -215,7 +230,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="55dp"
-                        android:text="hello.txt"
+                        android:text="@={CreateExamTeacherViewModel.filePath}"
                         android:textSize="18sp"
                         android:textColor="@color/black"
                         android:layout_weight="1"
@@ -232,6 +247,7 @@
                         android:textColor="@color/white"
                         android:fontFamily="@font/kantumruy"
                         android:layout_gravity="center"
+                        android:onClick="@{() -> CreateExamTeacherViewModel.onUploadFileSelect()}"
                         />
                 </LinearLayout>
 
@@ -244,7 +260,9 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:fontFamily="@font/kantumruy"
+                    android:onClick="@{() -> CreateExamTeacherViewModel.onCreateClicked()}"
                     />
             </LinearLayout>
         </ScrollView>
-</LinearLayout>
+    </LinearLayout>
+</layout>

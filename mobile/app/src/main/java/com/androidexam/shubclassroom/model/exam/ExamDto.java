@@ -1,17 +1,19 @@
-package com.androidexam.shubclassroom.model;
+package com.androidexam.shubclassroom.model.exam;
 
-import java.time.LocalDateTime;
+import com.androidexam.shubclassroom.utilities.DateHelper;
+
+import java.util.Date;
 
 public class ExamDto {
     private String id;
     private int state;
     private String type;
     private String name;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private String startTime;
+    private String endTime;
     private String classId;
 
-    public ExamDto(String id, int state, String type, String name, LocalDateTime startTime, LocalDateTime endTime, String classId) {
+    public ExamDto(String id, int state, String type, String name, String startTime, String endTime, String classId) {
         this.id = id;
         this.state = state;
         this.type = type;
@@ -53,19 +55,19 @@ public class ExamDto {
         this.name = name;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public String getStartTime() {
+        return DateHelper.parseOsiToString(this.startTime);
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
+    public String getEndTime() {
+        return DateHelper.parseOsiToString(this.endTime);
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -75,5 +77,8 @@ public class ExamDto {
 
     public void setClassId(String classId) {
         this.classId = classId;
+    }
+    public String getStateString() {
+        return state == 0 ? "Chưa mở" : (state == 1 ? "Đang diễn ra" : "Đã kết thúc");
     }
 }
