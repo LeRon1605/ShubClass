@@ -58,7 +58,7 @@
  *         required: true
  *         in: body
  *         schema:
- *          $ref: '#/definitions/DoExamDto' 
+ *          $ref: '#/definitions/DoExamDto'
  *     responses:
  *       200:
  *         description: OK

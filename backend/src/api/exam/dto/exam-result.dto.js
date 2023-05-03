@@ -16,13 +16,11 @@ class Dto {
             },
             point: entity.points,
             startAt: entity.startAt,
-            endAt: entity.endAt 
-        }
+            endAt: entity.endAt
+        };
     }
 }
 
 const ExamResultDto = new Dto();
 
-export {
-    ExamResultDto
-}
+export { ExamResultDto };

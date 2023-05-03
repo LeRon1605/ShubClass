@@ -20,7 +20,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(path.dirname(fileURLToPath(import.meta.url)), 'views'));
+app.set(
+    'views',
+    path.join(path.dirname(fileURLToPath(import.meta.url)), 'views')
+);
 // @ts-ignore
 app.use('/api-docs', Swagger());
 app.use(AuthenticationMiddleware);

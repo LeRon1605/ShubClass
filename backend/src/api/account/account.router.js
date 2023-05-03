@@ -1,6 +1,9 @@
 import express from 'express';
 import AccountController from './account.controller.js';
-import { ValidationMiddleware, AuthorizationMiddleware } from '../../middlewares/index.js';
+import {
+    ValidationMiddleware,
+    AuthorizationMiddleware
+} from '../../middlewares/index.js';
 import { AccountCreateScheme, AccountUpdateScheme } from './dtos/index.js';
 import APP_CONSTANT from '../../shared/app.constant.js';
 
@@ -18,7 +21,11 @@ router
         ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
         AccountController.updateAccount
     )
-    .post('/change-password', AuthorizationMiddleware({ type: 'basic' }), AccountController.changePassword)
+    .post(
+        '/change-password',
+        AuthorizationMiddleware({ type: 'basic' }),
+        AccountController.changePassword
+    )
     .delete(':/id', AccountController.deleteAccount);
 
 router.post('/login', AccountController.login);
@@ -26,7 +33,8 @@ router
     .get('/active', AccountController.activeAccount)
     .post('/active', AccountController.requestActiveMail);
 
-router.post('/forget-password', AccountController.requestForgetPassword)
+router
+    .post('/forget-password', AccountController.requestForgetPassword)
     .get('/forget-password/callback', AccountController.getForgetPasswordPage)
     .post('/forget-password/callback', AccountController.forgetPasswordHandler);
 

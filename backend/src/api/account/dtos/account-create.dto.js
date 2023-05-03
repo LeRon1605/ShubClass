@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { randomUUID } from 'crypto';
-import { ACCOUNT_STATE } from '../../../shared/enum/index.js';
+import { ACCOUNT_STATE, DEFAULT_AVATAR } from '../../../shared/enum/index.js';
 
 class Dto {
     toEntity(dto) {
@@ -19,7 +19,7 @@ class Dto {
                 gender: dto.gender,
                 school: dto.school,
                 dateOfBirth: dto.dateOfBirth,
-                avatar: 'empty'
+                avatar: dto.gender ? DEFAULT_AVATAR.MAN : DEFAULT_AVATAR.WOMAN
             },
             createAt: new Date(),
             updateAt: new Date()

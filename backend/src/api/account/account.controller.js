@@ -68,8 +68,11 @@ class AccountController {
 
     async getForgetPasswordPage(req, res, next) {
         const { token, accountId } = req.query;
-        const accountDto = await AccountService.validateForgetPasswordToken(token, accountId);
-        return res.render('forget_password', { 
+        const accountDto = await AccountService.validateForgetPasswordToken(
+            token,
+            accountId
+        );
+        return res.render('forget_password', {
             title: 'Đổi mật khẩu',
             token: token,
             accountId: accountId

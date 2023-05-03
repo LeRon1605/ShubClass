@@ -27,7 +27,7 @@
  *    properties:
  *      message:
  *        type: string
- *  
+ *
  */
 
 /**

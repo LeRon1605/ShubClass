@@ -1,4 +1,4 @@
-import { ExamCreateDto } from './dto/index.js'
+import { ExamCreateDto } from './dto/index.js';
 import ExamService from './exam.service.js';
 
 class ExamController {
@@ -14,12 +14,20 @@ class ExamController {
     }
 
     async getExamQuestion(req, res, next) {
-        const questions = await ExamService.getQuestion(req.params.id, req.session);
+        const questions = await ExamService.getQuestion(
+            req.params.id,
+            req.session
+        );
         return res.status(200).json(questions);
     }
 
     async getExamResult(req, res, next) {
         const result = await ExamService.getResult(req.params.id, req.session);
+        return res.status(200).json(result);
+    }
+
+    async getExamResultOfStudent(req, res, next) {
+        const result = await ExamService.getStudentResultInExam(req.params.id, req.params.studentId);
         return res.status(200).json(result);
     }
 }

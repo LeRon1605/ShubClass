@@ -6,12 +6,10 @@ class Dto {
             userAnswer: dto.answer,
             createdAt: DateHelper.getCurrentDate(),
             updatedAt: DateHelper.getCurrentDate()
-        }
+        };
     }
 }
 
 const DoExamDto = new Dto();
 
-export {
-    DoExamDto
-}
+export { DoExamDto };

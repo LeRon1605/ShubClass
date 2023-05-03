@@ -14,10 +14,10 @@ router
         ClassController.getAllClasses
     )
     .get(
-        "/search",
-        AuthorizationMiddleware({ type: "basic" }),
+        '/search',
+        AuthorizationMiddleware({ type: 'basic' }),
         ClassController.searchClasses
-      )    
+    )
     .post(
         '/',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
@@ -38,7 +38,7 @@ router
 
 router
     .get(
-        '/:id/students', 
+        '/:id/students',
         AuthorizationMiddleware({ type: 'basic' }),
         ClassController.getAllStudentsInClass
     )
@@ -46,7 +46,7 @@ router
         '/:id/students/:studentId',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ClassController.removeStudent
-    )
+    );
 
 router
     .get(
@@ -55,7 +55,7 @@ router
         ClassController.getAllRequestInClass
     )
     .post(
-        '/:id/requests', 
+        '/:id/requests',
         AuthorizationMiddleware({ type: 'role', value: 'Student' }),
         ClassController.makeRequestToClass
     )
@@ -70,11 +70,10 @@ router
         ClassController.rejectRequest
     );
 
-router
-    .get(
-        '/:id/exams',
-        AuthorizationMiddleware({ type: 'basic' }),
-        ClassController.getExams
-    );
+router.get(
+    '/:id/exams',
+    AuthorizationMiddleware({ type: 'basic' }),
+    ClassController.getExams
+);
 
 export default router;

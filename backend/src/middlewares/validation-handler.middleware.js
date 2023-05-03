@@ -1,7 +1,10 @@
 export default (scheme, source) => {
     return (req, res, next) => {
-        const result = scheme.validate(req[source]);
+        const result = scheme.validate(req[source], {
+            abortEarly: false
+        });
         if (result.error) {
+            console.log(result.error);
             const responseMessage = result.error.details.reduce(
                 (result, element) => {
                     result.details[element.path[0]] = element.message;

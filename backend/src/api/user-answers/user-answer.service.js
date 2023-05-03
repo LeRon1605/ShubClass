@@ -1,16 +1,15 @@
 import sequelize from '../../database/models/index.cjs';
-import { 
+import {
     ForbiddenException,
     NotFoundException,
     BadRequestException,
     EntityNotFoundException
 } from '../../shared/exceptions/index.js';
-import {
-    EXAM_STATE
-} from '../../shared/enum/index.js';
+import { EXAM_STATE } from '../../shared/enum/index.js';
 import { DateHelper } from '../../shared/helpers/index.js';
 
-const { Class, ExamDetail, Exam, User, StudentClass, UserExam, UserAnswer } = sequelize;
+const { Class, ExamDetail, Exam, User, StudentClass, UserExam, UserAnswer } =
+    sequelize;
 
 class UserAnswerService {
     async createUserAnswer(entity, userExamId, currentSession) {
@@ -22,19 +21,27 @@ class UserAnswerService {
         });
 
         if (userExam == null) {
-            throw new NotFoundException('You are not currently taking this exam.');
+            throw new NotFoundException(
+                'You are not currently taking this exam.'
+            );
         }
 
         if (userExam.studentId != currentSession.id) {
-            throw new ForbiddenException(`You are not allowed to do another's assigment.`);
+            throw new ForbiddenException(
+                `You are not allowed to do another's assigment.`
+            );
         }
 
         if (userExam.Exam.state != EXAM_STATE.PUBLISHED) {
-            throw new BadRequestException('Invalid exam state, exam has already been closed or has not been opened yet');
+            throw new BadRequestException(
+                'Invalid exam state, exam has already been closed or has not been opened yet'
+            );
         }
 
         if (userExam.endAt) {
-            throw new BadRequestException('You have already submitted your submission.');
+            throw new BadRequestException(
+                'You have already submitted your submission.'
+            );
         }
 
         const examDetail = await ExamDetail.findOne({
@@ -48,7 +55,9 @@ class UserAnswerService {
         }
 
         if (examDetail.examId != userExam.Exam.id) {
-            throw new NotFoundException(`Question is not exist in exam with '${userExam.Exam.id}'`)
+            throw new NotFoundException(
+                `Question is not exist in exam with '${userExam.Exam.id}'`
+            );
         }
 
         const userAnswer = await UserAnswer.findOne({
@@ -63,16 +72,19 @@ class UserAnswerService {
             entity.state = examDetail.trueAnswer == entity.userAnswer;
             await UserAnswer.create(entity);
         } else {
-            await UserAnswer.update({
-                userAnswer: entity.userAnswer,
-                state: examDetail.trueAnswer == entity.userAnswer,
-                updatedAt: DateHelper.getCurrentDate()
-            }, {
-                where: {
-                    userExamId: userExamId,
-                    examDetailId: entity.examDetailId
+            await UserAnswer.update(
+                {
+                    userAnswer: entity.userAnswer,
+                    state: examDetail.trueAnswer == entity.userAnswer,
+                    updatedAt: DateHelper.getCurrentDate()
+                },
+                {
+                    where: {
+                        userExamId: userExamId,
+                        examDetailId: entity.examDetailId
+                    }
                 }
-            });
+            );
         }
     }
 }

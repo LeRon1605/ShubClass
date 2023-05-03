@@ -46,27 +46,37 @@ class ClassService {
 
     async getAllClassesByIdForTeacher(classId, teacherId) {
         const classes = await Class.findAll({
-          where: {
-            id: {
-              [Op.like]: `%${classId}%`,
-            },
-            teacherId: {
-                [Op.not]: teacherId
+            where: {
+                id: {
+                    [Op.like]: `%${classId}%`
+                },
+                teacherId: {
+                    [Op.not]: teacherId
+                }
             }
-          },
         });
         return classes.map((x) => ClassDto.toDto(x));
     }
-    
+
     async getAllClassesByIdForStudent(classId, studentId) {
-        const classes = (await Class.findAll({
-            where: {
-              id: {
-                [Op.like]: `%${classId}%`,
-              }
-            },
-            include: [StudentClass]
-        })).filter(x => !x.StudentClasses.some(x => x.studentId == studentId) || x.StudentClasses.some(x => x.studentId == studentId && x.state != REQUEST_STATE.APPROVED));
+        const classes = (
+            await Class.findAll({
+                where: {
+                    id: {
+                        [Op.like]: `%${classId}%`
+                    }
+                },
+                include: [StudentClass]
+            })
+        ).filter(
+            (x) =>
+                !x.StudentClasses.some((x) => x.studentId == studentId) ||
+                x.StudentClasses.some(
+                    (x) =>
+                        x.studentId == studentId &&
+                        x.state != REQUEST_STATE.APPROVED
+                )
+        );
 
         return classes.map((x) => ClassDto.toDto(x));
     }
@@ -138,11 +148,11 @@ class ClassService {
             },
             include: User
         });
-    
-        const students = studentClassEntities.map(x => x.User);
-    
-        return students.map(student => StudentDto.toDto(student));
-    }    
+
+        const students = studentClassEntities.map((x) => x.User);
+
+        return students.map((student) => StudentDto.toDto(student));
+    }
 
     async makeRequest(id, studentId) {
         const classEntity = await Class.findByPk(id);
@@ -158,13 +168,20 @@ class ClassService {
         });
 
         if (studentClassEntities == null) {
-            return await StudentClass.create({ classId: id, studentId: studentId, state: REQUEST_STATE.PENDING });
-        } else if (studentClassEntities.state == REQUEST_STATE.REJECT) {
-            await StudentClass.update({ state: REQUEST_STATE.PENDING }, {
-                where: {
-                    id: id
-                }
+            return await StudentClass.create({
+                classId: id,
+                studentId: studentId,
+                state: REQUEST_STATE.PENDING
             });
+        } else if (studentClassEntities.state == REQUEST_STATE.REJECT) {
+            await StudentClass.update(
+                { state: REQUEST_STATE.PENDING },
+                {
+                    where: {
+                        id: id
+                    }
+                }
+            );
             return studentClassEntities;
         } else if (studentClassEntities.state == REQUEST_STATE.APPROVED) {
             throw new BadRequestException('You are already in class.');
@@ -191,7 +208,7 @@ class ClassService {
             include: User
         });
 
-        return requests.map(x => RequestDto.toDto(x));
+        return requests.map((x) => RequestDto.toDto(x));
     }
 
     async removeStudent(id, teacherId, studentId) {
