@@ -21,11 +21,6 @@ router
         '/:id',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ExamController.removeExam
-    )
-    .post(
-        '/:id',
-        AuthorizationMiddleware({ type: 'role', value: 'Student' }),
-        ExamController.startDoingExam
     );
 
 router.get(
@@ -33,5 +28,17 @@ router.get(
     AuthorizationMiddleware({ type: 'basic' }),
     ExamController.getExamQuestion
 );
+
+router
+    .get(
+        '/:id/result',
+        AuthorizationMiddleware({ type: 'basic' }),
+        ExamController.getExamResult
+    )
+    .get(
+        '/:id/result/:studentId',
+        AuthorizationMiddleware({ type: 'basic' }),
+        ExamController.getExamResultOfStudent
+    );
 
 export default router;

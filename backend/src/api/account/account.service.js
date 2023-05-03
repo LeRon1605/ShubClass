@@ -25,7 +25,7 @@ class AccountService {
             throw new EntityNotFoundException('User', accountId);
         }
         return AccountDto.toDto(user);
-      }
+    }
 
     async getAllAccounts() {
         const data = await Account.findAll();
@@ -246,7 +246,9 @@ class AccountService {
             throw new EntityNotFoundException('Account', email, 'email');
         }
 
-        const savedRecord = await CacheService.get(`request_change_password_token_${account.id}`);
+        const savedRecord = await CacheService.get(
+            `request_change_password_token_${account.id}`
+        );
         if (savedRecord != null) {
             throw new BadRequestException(
                 'Forgetpassword request is valid for 3 days, please check your mail for continue.'
@@ -282,7 +284,9 @@ class AccountService {
             throw new EntityNotFoundException('Account', accountId);
         }
 
-        const savedRecord = await CacheService.get(`request_change_password_token_${accountId}`);
+        const savedRecord = await CacheService.get(
+            `request_change_password_token_${accountId}`
+        );
         if (savedRecord != null) {
             if (savedRecord.token == token) {
                 await Account.update(
@@ -293,7 +297,9 @@ class AccountService {
                         }
                     }
                 );
-                await CacheService.remove(`request_change_password_token_${accountId}`);
+                await CacheService.remove(
+                    `request_change_password_token_${accountId}`
+                );
             } else {
                 throw new BadRequestException('Invalid token');
             }
@@ -310,15 +316,15 @@ class AccountService {
             throw new EntityNotFoundException('Account', accountId);
         }
 
-        const savedRecord = await CacheService.get(`request_change_password_token_${accountId}`);
+        const savedRecord = await CacheService.get(
+            `request_change_password_token_${accountId}`
+        );
         if (savedRecord == null) {
             throw new BadRequestException(
                 'Token has already expires, please request to send a new email.'
             );
         } else if (savedRecord.token != token) {
-            throw new BadRequestException(
-                'Invalid token.'
-            );
+            throw new BadRequestException('Invalid token.');
         }
 
         return AccountDto.toDto(account);

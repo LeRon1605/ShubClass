@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { DEFAULT_AVATAR } from '../../../shared/enum/index.js';
 
 class Dto {
     toEntity(dto) {
@@ -13,7 +14,7 @@ class Dto {
                 grade: dto.grade,
                 address: dto.address,
                 gender: dto.gender,
-                avatar: dto.avatar
+                avatar: dto.gender ? DEFAULT_AVATAR.MAN : DEFAULT_AVATAR.WOMAN
             }
         };
     }

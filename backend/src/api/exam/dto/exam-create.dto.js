@@ -19,9 +19,9 @@ class Dto {
                 updateAt: Date.now() + 7 * 3600 * 1000
             },
             details: ExamHelper.parseQuestionFromFile(dto.details, id)
-        }
+        };
     }
-};
+}
 
 const ExamCreateDto = new Dto();
 const ExamCreateScheme = Joi.object({
@@ -33,7 +33,4 @@ const ExamCreateScheme = Joi.object({
     details: Joi.string().required()
 });
 
-export {
-    ExamCreateDto,
-    ExamCreateScheme
-}
+export { ExamCreateDto, ExamCreateScheme };

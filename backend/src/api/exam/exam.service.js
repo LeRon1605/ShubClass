@@ -1,18 +1,17 @@
 import schedule from 'node-schedule';
-import moment from 'moment';
-import 'moment-timezone';
 import {
     BadRequestException,
     EntityForbiddenAccessException,
-    EntityNotFoundException
+    EntityNotFoundException,
+    ForbiddenException,
+    NotFoundException
 } from '../../shared/exceptions/index.js';
 import { Op } from 'sequelize';
 import sequelize from '../../database/models/index.cjs';
-import { EXAM_STATE } from '../../shared/enum/index.js';
-import { ExamDto, QuestionDto } from './dto/index.js';
-import { randomUUID } from 'crypto';
-
-const { Class, ExamDetail, Exam, StudentClass, UserExam } = sequelize;
+import { EXAM_STATE, EXAM_TYPE } from '../../shared/enum/index.js';
+import { ExamDto, QuestionDto, ExamResultDto } from './dto/index.js';
+const { Class, ExamDetail, Exam, User, StudentClass, UserExam, UserAnswer } =
+    sequelize;
 
 class ExamService {
     async create(body, teacherId) {
@@ -27,29 +26,31 @@ class ExamService {
             throw new EntityForbiddenAccessException('Class', exam.classId);
         }
 
-        const duplicate = await Exam.findOne({
-            where: {
-                [Op.and]: {
-                    startTime: {
-                        [Op.and]: {
-                            [Op.gte]: exam.startTime,
-                            [Op.lte]: exam.endTime
-                        }
-                    },
-                    endTime: {
-                        [Op.and]: {
-                            [Op.gte]: exam.startTime,
-                            [Op.lte]: exam.endTime
+        if (exam.type == EXAM_TYPE.TEST) {
+            const duplicate = await Exam.findOne({
+                where: {
+                    [Op.and]: {
+                        startTime: {
+                            [Op.and]: {
+                                [Op.gte]: exam.startTime,
+                                [Op.lte]: exam.endTime
+                            }
+                        },
+                        endTime: {
+                            [Op.and]: {
+                                [Op.gte]: exam.startTime,
+                                [Op.lte]: exam.endTime
+                            }
                         }
                     }
                 }
+            });
+    
+            if (duplicate != null) {
+                throw new BadRequestException(
+                    'Invalid exam duration time, there is existed exam in that duration'
+                );
             }
-        });
-
-        if (duplicate != null) {
-            throw new BadRequestException(
-                'Invalid exam duration time, there is existed exam in that duration'
-            );
         }
 
         await Exam.create(exam);
@@ -121,7 +122,7 @@ class ExamService {
         schedule.scheduledJobs[`exam_start_${exam.id}`]?.cancel();
     }
 
-    async getAllExamInClass(classId, type, currentSession) {
+    async getAllExamInClass(classId, currentSession) {
         const classEntity = await Class.findOne({
             where: {
                 id: classId
@@ -147,9 +148,7 @@ class ExamService {
             }
         }
 
-        if (type == EXAM_STATE.ALL)
-            return classEntity.Exams.map((x) => ExamDto.toDto(x));
-        return classEntity.Exams.filter((x) => x.state == type).map((x) =>
+        return classEntity.Exams.map((x) =>
             ExamDto.toDto(x)
         );
     }
@@ -201,35 +200,78 @@ class ExamService {
             });
 
             if (!latestTakenExam || latestTakenExam.endTime) {
-                throw new EntityForbiddenAccessException('Exam', exam.id);
+                throw new ForbiddenException(
+                    `You are not currently taking exam with id '${exam.id}'`
+                );
             }
 
             return exam.ExamDetails.map((x) => QuestionDto.toDto(x));
         }
     }
 
-    async startDoingExam(examId, userId) {
-        let userExam = await UserExam.findOne({
+    async getResult(id, currentSession) {
+        const exam = await Exam.findOne({
             where: {
-                userId,
-                examId
-            }
+                id: id
+            },
+            include: [
+                {
+                    model: Class,
+                    include: [StudentClass]
+                }
+            ]
         });
-        let now_utc = moment.utc();
-        let now_utc_7 = now_utc.tz('Asia/Bangkok');
-        const now = now_utc_7.format('YYYY-MM-DD HH:mm:ss');
-
-        if (!userExam) {
-            userExam = await UserExam.create({
-                id: randomUUID(),
-                userId,
-                examId,
-                StartAt: now,
-                EndAt: null
-            });
-        } else {
-            throw new BadRequestException('User already started this exam');
+        if (exam == null) {
+            throw new EntityNotFoundException('Exam', id);
         }
+
+        if (currentSession.role == 'Teacher') {
+            if (currentSession.id != exam.Class.teacherId) {
+                throw new EntityForbiddenAccessException(
+                    'Class',
+                    exam.Class.id
+                );
+            }
+        } else {
+            if (
+                !exam.Class.StudentClasses.some(
+                    (x) => x.studentId == currentSession.id
+                )
+            ) {
+                throw new EntityForbiddenAccessException(
+                    'Class',
+                    exam.Class.id
+                );
+            }
+        }
+
+        const userExams = await UserExam.findAll({
+            where: {
+                examId: id,
+                endAt: {
+                    [Op.ne]: null
+                }
+            },
+            include: [User, Exam]
+        });
+
+        return userExams.map((x) => ExamResultDto.toDto(x));
+    }
+
+    async getStudentResultInExam(examId, userId) {
+        const userExams = await UserExam.findAll({
+            where: {    
+                examId: examId,
+                studentId: userId
+            },
+            include: [User, Exam]
+        });
+
+        if (!userExams) {
+            throw NotFoundException('Student did not take this exam.');
+        }
+
+        return userExams.map(x => ExamResultDto.toDto(x));
     }
 }
 

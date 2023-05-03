@@ -24,7 +24,7 @@
  *      $ref: '#/definitions/Error'
  *  Success:
  *    description: Success with message
- *    schema: 
+ *    schema:
  *      $ref: '#/definitions/Error'
  *
  * definitions:
@@ -85,7 +85,7 @@
  *        type: string
  *      numberOfStudent:
  *        type: number
- *  
+ *
  *  Student:
  *    type: object
  *    properties:
@@ -99,7 +99,7 @@
  *          type: boolean
  *      avatar:
  *          type: string
- * 
+ *
  *  Request:
  *    type: object
  *    properties:
@@ -107,7 +107,7 @@
  *          type: string
  *      student:
  *          $ref: '#/definitions/Student'
- *      
+ *
  */
 
 /**
