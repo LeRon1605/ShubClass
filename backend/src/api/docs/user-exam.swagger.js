@@ -54,3 +54,56 @@
  *       500:
  *         $ref: '#/responses/InternalServerError'
  */
+
+/**
+ * @swagger
+ * /user-exams/{id}:
+ *   post:
+ *     tags: [Exam]
+ *     description: Start doing exam
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: exam id
+ *         required: true
+ *         in: path
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *              type: object
+ *              properties:
+ *                  id:
+ *                      type: string
+ *                  userId:
+ *                      type: string
+ *                  examId:
+ *                      type: string
+ *                  startAt:
+ *                      type: string
+ *                      format: date-time
+ *                      example: '2023-01-01T00:00:00Z'
+ *                  endAt:
+ *                      type: string
+ *                      format: date-time
+ *                      example: '2023-01-01T00:00:00Z'
+ *                  userAnswers:
+ *                      type: array
+ *                      items:
+ *                          type: object
+ *                          properties:
+ *                              userExamId:
+ *                                  type: string
+ *                              examDetailId:
+ *                                  type: string
+ *                              answer:
+ *                                  type: string
+ *       400:
+ *         $ref: '#/responses/Error'
+ *       403:
+ *         $ref: '#/responses/Forbidden'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */

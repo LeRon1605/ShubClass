@@ -11,6 +11,6 @@ router.use('/classes', ClassRoute);
 router.use('/accounts', AccountRoute);
 router.use('/exams', ExamRoute);
 router.use('/user-exams', UserExamRouter);
-router.use('/user-exams/:id/user-answers', UserAnswerRouter);
+router.use('/user-exams', UserAnswerRouter);
 
 export default router;

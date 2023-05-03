@@ -123,8 +123,7 @@
  *          endAt: 
  *              type: string
  *              format: date-time
- *              example: '2023-01-01T00:00:00Z'
- *                      
+ *              example: '2023-01-01T00:00:00Z'       
  */
 
 /**
@@ -254,7 +253,7 @@
  *       200:
  *          description: Ok
  *          schema:
- *              $ref: '#/responses/ExamResultDto'
+ *              $ref: '#/definitions/ExamResultDto'
  *       400:
  *         $ref: '#/responses/Error'
  *       403:
@@ -286,7 +285,7 @@
  *       200:
  *          description: Ok
  *          schema:
- *              $ref: '#/responses/ExamResultDto'
+ *              $ref: '#/definition/ExamResultDto'
  *       400:
  *         $ref: '#/responses/Error'
  *       403:
