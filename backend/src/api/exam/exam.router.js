@@ -21,6 +21,11 @@ router
         '/:id',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ExamController.removeExam
+    )
+    .post(
+        '/:id',
+        AuthorizationMiddleware({ type: 'role', value: 'Student' }),
+        ExamController.startDoingExam
     );
 
 router.get(

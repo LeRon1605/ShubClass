@@ -13,6 +13,16 @@ class ExamController {
         return res.status(200).json({ message: 'Delete exam successfully.' });
     }
 
+    async startDoingExam(req, res, next) {
+        const examId = req.params.id;
+        const userId = req.session.id;
+
+        await ExamService.startDoingExam(examId, userId);
+        return res
+            .status(200)
+            .json({ message: 'Start doing exam successfully.' });
+    }
+
     async getExamQuestion(req, res, next) {
         const questions = await ExamService.getQuestion(
             req.params.id,

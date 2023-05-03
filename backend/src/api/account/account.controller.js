@@ -91,6 +91,12 @@ class AccountController {
         await AccountService.changePassword(accountId, newPassword);
         res.status(200).json({ message: 'Thay đổi mật khẩu thành công' });
     }
+
+    async sayValid(req, res, next) {
+        return res.status(200).json({
+            message: 'Valid token'
+        })
+    }
 }
 
 export default new AccountController();

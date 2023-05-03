@@ -1,5 +1,6 @@
 import schedule from 'node-schedule';
 import moment from 'moment';
+import 'moment-timezone';
 import {
     BadRequestException,
     EntityForbiddenAccessException,
@@ -207,6 +208,30 @@ class ExamService {
             }
 
             return exam.ExamDetails.map((x) => QuestionDto.toDto(x));
+        }
+    }
+
+    async startDoingExam(examId, userId) {
+        let userExam = await UserExam.findOne({
+            where: {
+                userId,
+                examId
+            }
+        });
+        let now_utc = moment.utc();
+        let now_utc_7 = now_utc.tz('Asia/Bangkok');
+        const now = now_utc_7.format('YYYY-MM-DD HH:mm:ss');
+
+        if (!userExam) {
+            userExam = await UserExam.create({
+                id: randomUUID(),
+                userId,
+                examId,
+                StartAt: now,
+                EndAt: null
+            });
+        } else {
+            throw new BadRequestException('User already started this exam');
         }
     }
 

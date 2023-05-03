@@ -38,4 +38,10 @@ router
     .get('/forget-password/callback', AccountController.getForgetPasswordPage)
     .post('/forget-password/callback', AccountController.forgetPasswordHandler);
 
+router.get(
+        '/me', 
+        AuthorizationMiddleware({ type: 'basic' }),
+        AccountController.sayValid
+    );
+
 export default router;
