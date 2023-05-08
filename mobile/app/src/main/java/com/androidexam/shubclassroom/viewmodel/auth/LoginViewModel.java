@@ -18,6 +18,7 @@ import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.view.teacher.HomeTeacherActivity;
+import com.androidexam.shubclassroom.view.teacher.exam.TeacherExamActivity;
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
 
@@ -25,21 +26,29 @@ import retrofit2.Call;
 
 public class LoginViewModel extends BaseAuthViewModel {
     private AuthApiService authApiService;
-    private SharedPreferences sharedPreferencesManager;
 
     private AccountLoginDto accountLoginDto;
 
     public LoginViewModel(Context context, INavigation navigation) {
         super(context, navigation);
         authApiService = RetrofitClient.getRetrofitInstance().create(AuthApiService.class);
-        sharedPreferencesManager = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if (!sharedPreferencesManager.getString("token", "").isEmpty()) {
-            redirectByRole(sharedPreferencesManager.getString("role", ""));
+        if (SharedPreferencesManager.getInstance(context).getAccessToken() != null) {
+            Call<MessageResponse> validateToken = authApiService.validate(SharedPreferencesManager.getInstance(context).getAccessToken());
+            validateToken.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+                @Override
+                public void handleSuccess(MessageResponse responseObject) {
+                    redirectByRole(SharedPreferencesManager.getInstance(context).getRole());
+                }
+
+                @Override
+                public void handleFailure(MessageResponse errorResponse) {
+                    Toast.makeText(context, "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+                    SharedPreferencesManager.getInstance(context).clear();
+                }
+            });
         }
         accountLoginDto = new AccountLoginDto();
-
-
     }
 
     public AccountLoginDto getAccountLoginDto() {
@@ -66,14 +75,12 @@ public class LoginViewModel extends BaseAuthViewModel {
                     if (subscriptionMetaData.asInt() == 0) {
                         navigateTo(AuthFragment.ActivateAccount);
                     } else {
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         subscriptionMetaData = jwt.getClaim("role");
                         String role = subscriptionMetaData.asString();
 
-                        editor.putString("token", token);
-                        editor.putString("role", role);
-                        editor.apply();
+                        SharedPreferencesManager.getInstance(context).setAccessToken(token);
+                        SharedPreferencesManager.getInstance(context).setRole(role);
+
                         redirectByRole(role);
                     }
                 }
@@ -91,7 +98,7 @@ public class LoginViewModel extends BaseAuthViewModel {
         if (role.isEmpty()) return;
         Intent intent;
         if (role.equals("Teacher")) {
-            intent = new Intent(context, HomeTeacherActivity.class);
+            intent = new Intent(context, TeacherExamActivity.class);
         } else {
             intent = new Intent(context, HomeStudentActivity.class);
         }

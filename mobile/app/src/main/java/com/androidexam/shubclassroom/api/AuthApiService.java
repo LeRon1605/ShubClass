@@ -9,6 +9,8 @@ import com.androidexam.shubclassroom.model.auth.ForgetPasswordDto;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface AuthApiService {
@@ -23,4 +25,8 @@ public interface AuthApiService {
 
     @POST("accounts/active")
     Call<MessageResponse> active(@Body AccountActivateDto accountActivateDto);
+
+    // dump endpoint for testing only
+    @GET("accounts/me")
+    Call<MessageResponse> validate(@Header("authorization") String token);
 }

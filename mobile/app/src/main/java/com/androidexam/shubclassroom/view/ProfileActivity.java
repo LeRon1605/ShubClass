@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view.student;
+package com.androidexam.shubclassroom.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.androidexam.shubclassroom.R;
 
-public class ProfileStudentActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_profile);
+        setContentView(R.layout.activity_profile);
     }
 }
