@@ -4,14 +4,14 @@
     <data>
         <variable
             name="ForgetPassViewModel"
-            type="com.androidexam.shubclassroom.viewmodel.ForgetPassViewModel" />
+            type="com.androidexam.shubclassroom.viewmodel.auth.ForgetPassViewModel" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".view.ForgetPassFragment">
+        tools:context=".view.auth.ForgetPassFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:fontFamily="@font/kantumruy"
                 android:gravity="center_vertical"
                 android:layout_marginTop="20dp"
-                android:onClick="@{() -> ForgetPassViewModel.setNavigate(1)}"
+                android:onClick="@{() -> ForgetPassViewModel.navigateTo(com.androidexam.shubclassroom.shared.AuthFragment.Login)}"
                 />
 
             <TextView
@@ -66,6 +66,7 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
+                    android:text="@={ForgetPassViewModel.forgetPasswordDto.email}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 

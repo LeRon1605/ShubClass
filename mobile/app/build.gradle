@@ -32,7 +32,6 @@ android {
     }
 }
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -48,11 +47,23 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 
     implementation 'com.auth0:java-jwt:4.3.0'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
 
     testImplementation 'junit:junit:4.13.2'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation 'com.auth0.android:jwtdecode:2.0.2'
+
+    api 'io.jsonwebtoken:jjwt-api:0.11.5'
+
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+
+    runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.11.5') {
+        exclude group: 'org.json', module: 'json' //provided by Android natively
+    }
 }

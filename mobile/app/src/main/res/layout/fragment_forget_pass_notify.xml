@@ -3,7 +3,7 @@
     <data>
         <variable
             name="ForgetPassNotifyViewModel"
-            type="com.androidexam.shubclassroom.viewmodel.ForgetPassNotifyViewModel" />
+            type="com.androidexam.shubclassroom.viewmodel.auth.ForgetPassNotifyViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".view.ForgetPassNotifyFragment">
+        tools:context=".view.auth.ForgetPassNotifyFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

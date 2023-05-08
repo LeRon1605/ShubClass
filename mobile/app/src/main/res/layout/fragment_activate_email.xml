@@ -3,7 +3,7 @@
     <data>
         <variable
             name="ActivateEmailViewModel"
-            type="com.androidexam.shubclassroom.viewmodel.ActivateMailViewModel" />
+            type="com.androidexam.shubclassroom.viewmodel.auth.ActivateMailViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,6 +41,7 @@
                 android:fontFamily="@font/kantumruy"
                 android:gravity="center_vertical"
                 android:layout_marginTop="20dp"
+                android:onClick="@{() -> ActivateEmailViewModel.navigateTo(com.androidexam.shubclassroom.shared.AuthFragment.Login)}"
                 />
 
             <TextView
@@ -66,6 +67,7 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
+                    android:text="@={ActivateEmailViewModel.accountActivateDto.email}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +82,7 @@
                 android:fontFamily="@font/kantumruy"
                 android:textFontWeight="600"
                 android:layout_marginTop="20dp"
+                android:onClick="@{() -> ActivateEmailViewModel.onRequestBtnClick()}"
                 />
 
             <ImageView
