@@ -112,7 +112,7 @@
  *                      type: string
  *                  name:
  *                      type: string
- *                  avatar: 
+ *                  avatar:
  *                      type: string
  *          points:
  *              type: number
@@ -120,10 +120,10 @@
  *              type: string
  *              format: date-time
  *              example: '2023-01-01T00:00:00Z'
- *          endAt: 
+ *          endAt:
  *              type: string
  *              format: date-time
- *              example: '2023-01-01T00:00:00Z'       
+ *              example: '2023-01-01T00:00:00Z'
  */
 
 /**

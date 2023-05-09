@@ -12,10 +12,11 @@ class UserExamController {
     }
 
     async startDoingExam(req, res, next) {
-        const result = await UserExamService.startDoingExam(req.params.id, req.session);
-        return res
-            .status(200)
-            .json(result);
+        const result = await UserExamService.startDoingExam(
+            req.params.id,
+            req.session
+        );
+        return res.status(200).json(result);
     }
 }
 

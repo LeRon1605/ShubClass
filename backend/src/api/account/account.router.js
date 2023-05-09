@@ -21,6 +21,11 @@ router
         ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
         AccountController.updateAccount
     )
+    .put(
+        '/users:/id',
+        ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
+        AccountController.updateUser
+    )
     .post(
         '/change-password',
         AuthorizationMiddleware({ type: 'basic' }),
@@ -39,9 +44,9 @@ router
     .post('/forget-password/callback', AccountController.forgetPasswordHandler);
 
 router.get(
-        '/me', 
-        AuthorizationMiddleware({ type: 'basic' }),
-        AccountController.sayValid
-    );
+    '/me',
+    AuthorizationMiddleware({ type: 'basic' }),
+    AccountController.sayValid
+);
 
 export default router;
