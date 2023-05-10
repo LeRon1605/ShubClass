@@ -46,6 +46,11 @@ router
         '/:id/students/:studentId',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ClassController.removeStudent
+    )
+    .get(
+        '/:id/students/me',
+        AuthorizationMiddleware({ type: 'role', value: 'Student' }),
+        ClassController.getStudentInfo
     );
 
 router

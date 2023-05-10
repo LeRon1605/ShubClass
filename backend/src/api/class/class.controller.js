@@ -119,6 +119,11 @@ class ClassController {
         );
         return res.status(200).json(exams);
     }
+
+    async getStudentInfo(req, res, next) {
+        const info = await ClassService.getStudentSummaryInClass(req.session.id, req.params.id);
+        return res.status(200).json(info);
+    }
 }
 
 export default new ClassController();

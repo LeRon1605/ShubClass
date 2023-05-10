@@ -13,7 +13,7 @@ import {
 } from '../../shared/exceptions/index.js';
 import { StudentDto } from '../account/dtos/student.dto.js';
 
-const { User, Class, Account, StudentClass } = sequelize;
+const { User, Class, Account, StudentClass, UserExam, Exam } = sequelize;
 class ClassService {
     async getAllClassesOfTeacher(userId) {
         const user = await User.findByPk(userId);
@@ -274,6 +274,50 @@ class ClassService {
             }
         );
         return request;
+    }
+
+    async getStudentSummaryInClass(classId, studentId) {
+        const classEntity = await Class.findOne({
+            where: {
+                id: classId,
+            },
+            include: [Exam, StudentClass]
+        });
+
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', id);
+        }
+
+        if (!classEntity.StudentClasses.some((x) => x.studentId == studentId)) {
+            throw new EntityForbiddenAccessException('Class', classId);
+        }
+
+        const userExams = await UserExam.findAll({
+            where: {
+                studentId: studentId,
+                endAt: {
+                    [Op.ne]: null
+                }
+            },
+            include: [
+                {
+                    model: Exam,
+                    where: {
+                        classId: classId
+                    }
+                }
+            ]
+        });
+
+        const average = userExams.map(x => x.points).reduce((acc, element, index, arr) => acc + (element * 1.0 / arr.length), 0);
+        const completedExam = new Set(userExams.map(x => x.Exam.id)).size;
+        const numberOfExams = classEntity.Exams.length;
+
+        return {
+            average: average,
+            completedExam: completedExam,
+            numberOfExams: numberOfExams
+        }
     }
 }
 
