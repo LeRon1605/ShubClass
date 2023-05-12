@@ -127,7 +127,13 @@ class ExamService {
             where: {
                 id: classId
             },
-            include: [Exam, StudentClass]
+            include: [
+                {
+                    model: Exam,
+                    include: UserExam
+                }, 
+                StudentClass
+            ]
         });
 
         if (classEntity == null) {
@@ -147,9 +153,9 @@ class ExamService {
                 throw new EntityForbiddenAccessException('Class', classId);
             }
         }
-
+        
         return classEntity.Exams.map((x) =>
-            ExamDto.toDto(x)
+            { return { ...ExamDto.toDto(x), isDone: x.UserExams.filter(y => y.studentId == currentSession.id && y.endAt).length > 0 } }
         );
     }
 
