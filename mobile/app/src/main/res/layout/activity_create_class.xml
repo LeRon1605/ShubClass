@@ -37,7 +37,7 @@
             android:hint="Ví dụ: Lớp Toán 12A5">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={CreateClassViewModel.name}"
+                android:text="@={CreateClassViewModel.classCreateDto.name}"
                 android:id="@+id/edt_nameClass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -54,7 +54,7 @@
             android:hint="Nhập mã lớp gồm 5 ký tự tại đây">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={CreateClassViewModel.id}"
+                android:text="@={CreateClassViewModel.classCreateDto.id}"
                 android:maxLength="5"
                 android:id="@+id/edt_idClass"
                 android:layout_width="match_parent"
@@ -72,7 +72,7 @@
             android:hint="Nhập tên lớp học">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={CreateClassViewModel.subjectName}"
+                android:text="@={CreateClassViewModel.classCreateDto.subjectName}"
                 android:maxLength="5"
                 android:id="@+id/edt_subjectName"
                 android:layout_width="match_parent"
@@ -90,7 +90,7 @@
             android:hint="Ví dụ: triết học Mác le nin">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={CreateClassViewModel.description}"
+                android:text="@={CreateClassViewModel.classCreateDto.description}"
                 android:id="@+id/edt_descriptionClass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -107,7 +107,7 @@
             android:hint="Ví dụ: 40">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={CreateClassViewModel.numberOfStudent}"
+                android:text="@={CreateClassViewModel.classCreateDto.numberOfStudent}"
                 android:inputType="number"
                 android:id="@+id/edt_numberOfStudent"
                 android:layout_width="match_parent"

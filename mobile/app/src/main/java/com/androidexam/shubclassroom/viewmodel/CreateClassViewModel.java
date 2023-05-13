@@ -26,78 +26,36 @@ import retrofit2.Response;
 
 public class CreateClassViewModel extends BaseObservable {
     private Context context;
-    private String id;
-    private String name;
-    private String description;
-    private String subjectName;
-    private String numberOfStudent;
+    ClassCreateDto classCreateDto;
+    private ClassApiService apiService;
 
     public CreateClassViewModel(Context context) {
         this.context = context;
-    }
-    @Bindable
-    public String getId() {
-        return id;
+        apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
     }
 
-    public void setId(String id) {
-        this.id = id;
-        notifyPropertyChanged(BR.id);
-    }
-    @Bindable
-    public String getName() {
-        return name;
+    public ClassCreateDto getClassCreateDto() {
+        return classCreateDto;
     }
 
-    public void setName(String name) {
-        this.name = name;
-        notifyPropertyChanged(BR.name);
-    }
-    @Bindable
-    public String getDescription() {
-        return description;
+    public void setClassCreateDto(ClassCreateDto classCreateDto) {
+        this.classCreateDto = classCreateDto;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-        notifyPropertyChanged(BR.description);
-    }
-    @Bindable
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-        notifyPropertyChanged(BR.subjectName);
-    }
-    @Bindable
-    public String getNumberOfStudent() {
-        return numberOfStudent;
-    }
-
-    public void setNumberOfStudent(String numberOfStudent) {
-        this.numberOfStudent = numberOfStudent;
-        notifyPropertyChanged(BR.numberOfStudent);
-    }
     public void onButtonCreateClick() {
-        if (getName() == null || getId() == null || getDescription() == null
-                || getSubjectName() == null || getNumberOfStudent() == null) {
+        if (classCreateDto.getName() == null || classCreateDto.getId() == null || classCreateDto.getDescription() == null
+                || classCreateDto.getSubjectName() == null || classCreateDto.getNumberOfStudent() == null) {
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         }
-        else if (getName() == "" || getId() == "" || getDescription() == ""
-                || getSubjectName() == "" || getNumberOfStudent() == "") {
+        else if (classCreateDto.getName() == "" || classCreateDto.getId() == "" || classCreateDto.getDescription() == ""
+                || classCreateDto.getSubjectName() == "" || classCreateDto.getNumberOfStudent() == "") {
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         }
         else {
             SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
             String token = sharedPreferences.getString("token", null);
-            ClassCreateDto classCreateDto = new ClassCreateDto(getId(), getName(), getDescription(), getSubjectName(), Integer.parseInt(getNumberOfStudent()));
-            ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
+//            ClassCreateDto classCreateDto = new ClassCreateDto(classCreateDto.getId(), classCreateDto.getName(), classCreateDto.getDescription(), classCreateDto.getSubjectName(), Integer.parseInt(classCreateDto.getNumberOfStudent()));
             Call<Class> call = apiService.createClass("Brear " + token, classCreateDto);
-
-
-
 //            call.enqueue(new ApiCallback<Class, Class>(Class.class) {
 //                @Override
 //                public void handleSuccess(Class responseObject) {

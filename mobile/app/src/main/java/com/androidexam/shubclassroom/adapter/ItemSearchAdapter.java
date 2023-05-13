@@ -70,7 +70,7 @@ public class ItemSearchAdapter extends RecyclerView.Adapter<ItemSearchAdapter.It
         }
         else {
             for (ClassItemViewModel item : itemList) {
-                if (item.getId().toLowerCase().contains(searchText.toLowerCase())) {
+                if (item.getClassModel().getId().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredList.add(item);
                 }
             }

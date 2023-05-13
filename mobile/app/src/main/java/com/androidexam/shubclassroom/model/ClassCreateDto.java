@@ -53,7 +53,7 @@ public class ClassCreateDto implements Serializable {
         return String.valueOf(numberOfStudent);
     }
 
-    public void setNumberOfStudent(int numberOfStudent) {
-        this.numberOfStudent = numberOfStudent;
+    public void setNumberOfStudent(String numberOfStudent) {
+        this.numberOfStudent = Integer.parseInt(numberOfStudent);
     }
 }

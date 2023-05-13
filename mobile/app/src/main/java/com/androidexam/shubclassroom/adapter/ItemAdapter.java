@@ -59,11 +59,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
                     Bundle bundle = new Bundle();
                     ClassCreateDto classCreateDto = new ClassCreateDto(
-                            itemList.get(position).getId(),
-                            itemList.get(position).getName(),
-                            itemList.get(position).getDescription(),
-                            itemList.get(position).getSubjectName(),
-                            itemList.get(position).getNumberOfStudent()
+                            itemList.get(position).getClassModel().getId(),
+                            itemList.get(position).getClassModel().getName(),
+                            itemList.get(position).getClassModel().getDescription(),
+                            itemList.get(position).getClassModel().getSubjectName(),
+                            itemList.get(position).getClassModel().getNumberOfStudent()
                     );
                     bundle.putSerializable("Class", (Serializable) classCreateDto);
                     bundle.putInt("FragmentIndex", FragmentIndex.Teacher.getValue());
@@ -120,7 +120,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
         else {
             for (ClassItemViewModel item : itemList) {
-                if (item.getId().toLowerCase().contains(searchText.toLowerCase())) {
+                if (item.getClassModel().getId().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredList.add(item);
                 }
             }
