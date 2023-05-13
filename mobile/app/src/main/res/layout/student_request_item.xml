@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.class_detail.teacher.RequestViewModel" />
+    </data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:elevation="10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@drawable/user_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+            <LinearLayout
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="@{ViewModel.requestIn4.student.name}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:onClick="@{() -> ViewModel.onClickAcceptRequest()}"
+                        android:textAllCaps="false"
+                        android:text="Chấp nhận"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:onClick="@{() -> ViewModel.onClickRejectRequest()}"
+                        android:layout_marginLeft="60dp"
+                        android:layout_gravity="right"
+                        android:textColor="@color/black"
+                        android:backgroundTint="#DDDDDD"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="Xoá" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.adapter.ItemAdapter;
+import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class ListClassStudentFragment extends Fragment {
         listClass.add(new ClassItemViewModel(
                 "3", "NodeJS", "Lap trinh JS", "Lap Trinh", 20, "TT3", "1-1-2022", "1-2-2022", getContext()
         ));
-        adapter = new ItemAdapter(listClass, 0);
+        adapter = new ItemAdapter(listClass, FragmentIndex.Student.getValue(), getContext());
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
         ClassItemViewModel.adapter = adapter;

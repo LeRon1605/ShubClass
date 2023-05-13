@@ -9,7 +9,7 @@ public class RetrofitClient {
     public static Retrofit getRetrofitInstance() {
         if(retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://shubclass-api.onrender.com/api/")
+                    .baseUrl("http://167.172.93.75:3000/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

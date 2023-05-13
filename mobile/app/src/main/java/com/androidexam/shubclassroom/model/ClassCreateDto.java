@@ -1,6 +1,8 @@
 package com.androidexam.shubclassroom.model;
 
-public class ClassCreateDto {
+import java.io.Serializable;
+
+public class ClassCreateDto implements Serializable {
     private String id;
     private String name;
     private String description;
@@ -47,8 +49,8 @@ public class ClassCreateDto {
         this.subjectName = subjectName;
     }
 
-    public int getNumberOfStudent() {
-        return numberOfStudent;
+    public String getNumberOfStudent() {
+        return String.valueOf(numberOfStudent);
     }
 
     public void setNumberOfStudent(int numberOfStudent) {

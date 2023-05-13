@@ -15,13 +15,17 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.androidexam.shubclassroom.BR;
 import com.androidexam.shubclassroom.adapter.ItemAdapter;
+import com.androidexam.shubclassroom.adapter.ItemSearchAdapter;
 import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
+import com.androidexam.shubclassroom.api.RequestApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.Class;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
+import com.androidexam.shubclassroom.view.student.FindClassStudentActivity;
+import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
 import com.androidexam.shubclassroom.view.teacher.CreateClassActivity;
 import com.google.gson.annotations.SerializedName;
@@ -54,6 +58,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     private Context context;
     private String textSearch;
     public static ItemAdapter adapter;
+    public static ItemSearchAdapter itemSearchAdapter;
 
     public ClassItemViewModel(String id, String name, String description, String subjectName, int numberOfStudent, String teacherId, String createAt, String updateAt, Context context) {
         this.id = id;
@@ -208,5 +213,28 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     }
     public void searchItem() {
         adapter.filterList(getTextSearch());
+    }
+    public void onClickRedirectSearchClassStudent() {
+        Intent intent = new Intent(context, FindClassStudentActivity.class);
+        context.startActivity(intent);
+    }
+    public void onClickRequestClass() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+        RequestApiService apiService = RetrofitClient.getRetrofitInstance().create(RequestApiService.class);
+        Call<MessageResponse> call = apiService.requestJoinClass("Bear " + token, getId());
+        call.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+            @Override
+            public void handleSuccess(MessageResponse responseObject) {
+                Toast.makeText(context, responseObject.getMessage(), Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, HomeStudentActivity.class
+                ));
+            }
+
+            @Override
+            public void handleFailure(MessageResponse errorResponse) {
+                Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
