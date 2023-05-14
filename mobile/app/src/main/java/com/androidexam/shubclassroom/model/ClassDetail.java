@@ -1,6 +1,6 @@
 package com.androidexam.shubclassroom.model;
 
-public class Class {
+public class ClassDetail {
     private String id;
     private String name;
     private String description;
@@ -10,7 +10,7 @@ public class Class {
     private String createAt;
     private String updateAt;
 
-    public Class(String id, String name, String description, String subjectName, int numberOfStudent, String teacherId, String createAt, String updateAt) {
+    public ClassDetail(String id, String name, String description, String subjectName, int numberOfStudent, String teacherId, String createAt, String updateAt) {
         this.id = id;
         this.name = name;
         this.description = description;

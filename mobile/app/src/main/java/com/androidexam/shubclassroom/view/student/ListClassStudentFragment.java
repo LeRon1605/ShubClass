@@ -13,11 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.adapter.ItemAdapter;
+import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
+import com.androidexam.shubclassroom.model.ClassDetail;
+import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
@@ -59,20 +63,20 @@ public class ListClassStudentFragment extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
         ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
-        Call<List<ClassItemViewModel>> call = apiService.getListClass("Brear " + token);
-        call.enqueue(new Callback<List<ClassItemViewModel>>() {
+        Call<List<ClassDetail>> call = apiService.getListClass("Brear " + token);
+        call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {
             @Override
-            public void onResponse(Call<List<ClassItemViewModel>> call, Response<List<ClassItemViewModel>> response) {
-                List<ClassItemViewModel> listClassApi = response.body();
-                for(ClassItemViewModel i : listClassApi) {
-                    listClass.add(i);
+            public void handleSuccess(List<ClassDetail> responseObject) {
+                for(ClassDetail i : responseObject) {
+//                    i.setContext(getContext());
+                    listClass.add(new ClassItemViewModel(getContext(), i));
                     adapter.notifyDataSetChanged();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<ClassItemViewModel>> call, Throwable t) {
-
+            public void handleFailure(MessageResponse errorResponse) {
+                Toast.makeText(getContext(), errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -5,13 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.lifecycle.MutableLiveData;
 
 import com.androidexam.shubclassroom.BR;
 import com.androidexam.shubclassroom.adapter.ItemAdapter;
@@ -20,19 +17,15 @@ import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RequestApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
-import com.androidexam.shubclassroom.model.Class;
+import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
-import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.student.FindClassStudentActivity;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
 import com.androidexam.shubclassroom.view.teacher.CreateClassActivity;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.PropertyResourceBundle;
 
 import retrofit2.Call;
 
@@ -53,7 +46,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
 //    private String createAt;
 //    @SerializedName("updateAt")
 //    private String updateAt;
-    private Class classModel;
+    private ClassDetail classModel;
     private ClassApiService classApiService;
     private RequestApiService requestApiService;
     private BottomSheetClassTeacherFragment bottomSheetClassTeacherFragment;
@@ -76,19 +69,24 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
 //        this.context = context;
 //    }
 
-    public ClassItemViewModel(Context context) {
+    public ClassItemViewModel(Context context, ClassDetail classModel) {
         this.context = context;
         classApiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
         requestApiService = RetrofitClient.getRetrofitInstance().create(RequestApiService.class);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", null);
+        this.classModel = classModel;
     }
 
-    public Class getClassModel() {
+    public ClassItemViewModel(Context context) {
+        this.context = context;
+    }
+
+    public ClassDetail getClassModel() {
         return classModel;
     }
 
-    public void setClassModel(Class classModel) {
+    public void setClassModel(ClassDetail classModel) {
         this.classModel = classModel;
     }
 

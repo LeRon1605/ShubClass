@@ -20,6 +20,7 @@ import com.androidexam.shubclassroom.adapter.ItemAdapter;
 import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
+import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
@@ -48,15 +49,6 @@ public class ListClassTeacherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvClass = view.findViewById(R.id.lv_class);
         listClass = new ArrayList<>();
-//        listClass.add(new ClassItemViewModel(
-//                "1", ".NET", "Lap trinh .Net", "Lap Trinh", 20, "TT1", "1-1-2022", "1-2-2022", getContext()
-//        ));
-//        listClass.add(new ClassItemViewModel(
-//                "2", ".JAVA", "Lap trinh Java", "Lap Trinh", 20, "TT2", "1-1-2022", "1-2-2022", getContext()
-//        ));
-//        listClass.add(new ClassItemViewModel(
-//                "3", "NodeJS", "Lap trinh JS", "Lap Trinh", 20, "TT3", "1-1-2022", "1-2-2022", getContext()
-//        ));
         adapter = new ItemAdapter(listClass, FragmentIndex.Teacher.getValue(), getContext());
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
@@ -64,13 +56,13 @@ public class ListClassTeacherFragment extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
         ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
-        Call<List<ClassItemViewModel>> call = apiService.getListClass("Brear " + token);
-        call.enqueue(new ApiCallback<List<ClassItemViewModel>, MessageResponse>(MessageResponse.class) {
+        Call<List<ClassDetail>> call = apiService.getListClass("Brear " + token);
+        call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {
             @Override
-            public void handleSuccess(List<ClassItemViewModel> responseObject) {
-                for(ClassItemViewModel i : responseObject) {
-                    i.setContext(getContext());
-                    listClass.add(i);
+            public void handleSuccess(List<ClassDetail> responseObject) {
+                for(ClassDetail i : responseObject) {
+//                    i.setContext(getContext());
+                    listClass.add(new ClassItemViewModel(getContext(), i));
                     adapter.notifyDataSetChanged();
                 }
             }
