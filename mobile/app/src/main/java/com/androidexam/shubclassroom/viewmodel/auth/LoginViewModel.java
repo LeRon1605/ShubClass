@@ -33,21 +33,21 @@ public class LoginViewModel extends BaseAuthViewModel {
         super(context, navigation);
         authApiService = RetrofitClient.getRetrofitInstance().create(AuthApiService.class);
 
-        if (SharedPreferencesManager.getInstance(context).getAccessToken() != null) {
-            Call<MessageResponse> validateToken = authApiService.validate(SharedPreferencesManager.getInstance(context).getAccessToken());
-            validateToken.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
-                @Override
-                public void handleSuccess(MessageResponse responseObject) {
-                    redirectByRole(SharedPreferencesManager.getInstance(context).getRole());
-                }
-
-                @Override
-                public void handleFailure(MessageResponse errorResponse) {
-                    Toast.makeText(context, "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
-                    SharedPreferencesManager.getInstance(context).clear();
-                }
-            });
-        }
+//        if (SharedPreferencesManager.getInstance(context).getAccessToken() != null) {
+//            Call<MessageResponse> validateToken = authApiService.validate(SharedPreferencesManager.getInstance(context).getAccessToken());
+//            validateToken.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+//                @Override
+//                public void handleSuccess(MessageResponse responseObject) {
+//                    redirectByRole(SharedPreferencesManager.getInstance(context).getRole());
+//                }
+//
+//                @Override
+//                public void handleFailure(MessageResponse errorResponse) {
+//                    Toast.makeText(context, "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+//                    SharedPreferencesManager.getInstance(context).clear();
+//                }
+//            });
+//        }
         accountLoginDto = new AccountLoginDto();
     }
 
@@ -75,12 +75,15 @@ public class LoginViewModel extends BaseAuthViewModel {
                     if (subscriptionMetaData.asInt() == 0) {
                         navigateTo(AuthFragment.ActivateAccount);
                     } else {
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         subscriptionMetaData = jwt.getClaim("role");
                         String role = subscriptionMetaData.asString();
-
-                        SharedPreferencesManager.getInstance(context).setAccessToken(token);
-                        SharedPreferencesManager.getInstance(context).setRole(role);
-
+//                        SharedPreferencesManager.getInstance(context).setAccessToken(token);
+//                        SharedPreferencesManager.getInstance(context).setRole(role);
+                        editor.putString("token", token);
+                        editor.putString("role", role);
+                        editor.apply();
                         redirectByRole(role);
                     }
                 }
@@ -98,7 +101,7 @@ public class LoginViewModel extends BaseAuthViewModel {
         if (role.isEmpty()) return;
         Intent intent;
         if (role.equals("Teacher")) {
-            intent = new Intent(context, TeacherExamActivity.class);
+            intent = new Intent(context, HomeTeacherActivity.class);
         } else {
             intent = new Intent(context, HomeStudentActivity.class);
         }

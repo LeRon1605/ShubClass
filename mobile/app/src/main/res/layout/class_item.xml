@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/coverImg"
                 android:scaleType="centerCrop"
                 android:src="@drawable/splash_screen"
                 android:layout_width="match_parent"
@@ -38,12 +39,12 @@
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="16dp"
-                        android:text="@{classItem.subjectName}"
+                        android:text="@{classItem.classModel.subjectName}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:textSize="20dp"
-                        android:text="@{`Mã lớp: ` + classItem.id}"
+                        android:text="@{`Mã lớp: ` + classItem.classModel.id}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>

@@ -1,635 +1,643 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/backgrounddetail"
-    tools:context=".view.teacher.ClassDetailTeacherFragment">
-
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.class_detail.teacher.ClassDetailTeacherViewModel" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        >
-        <ImageButton
-            android:id="@+id/ib_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
-            android:background="@null"
-            android:padding="15dp"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="10dp"
-            />
+        android:background="@drawable/backgrounddetail"
+        tools:context=".view.class_detail.class_detail.teacher.ClassDetailTeacherFragment">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="hehe"
-            android:textSize="22sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:fontFamily="@font/kantumruy"
-            android:layout_marginLeft="10dp"
-            />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mã lớp:"
-                android:textColor="@color/white"
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                android:background="@null"
+                android:padding="15dp"
+                android:scaleType="centerInside"
+                android:layout_marginLeft="10dp"
                 />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PBKBN"
+                android:text="@{ViewModel.classCreateDto.name}"
+                android:textSize="22sp"
                 android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="@font/kantumruy"
                 android:layout_marginLeft="10dp"
-
                 />
-        </LinearLayout>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="15dp"
-            android:background="@color/white"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mã lớp:"
+                    android:textColor="@color/white"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{ViewModel.classCreateDto.id}"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10dp"
+
+                    />
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="15dp"
                 android:background="@color/white"
-                android:paddingBottom="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:background="@color/white"
+                    android:paddingBottom="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        >
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_avatar"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            app:cardCornerRadius="50dp"
+                            />
+                        <TextView
+                            android:layout_width="230dp"
+                            android:layout_height="34dp"
+                            android:text="Thông tin lớp của bạn"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textAlignment="textEnd"
+                            android:fontFamily="@font/kantumruy"
+                            android:layout_marginLeft="85dp"
+                            android:paddingRight="30dp"
+                            android:paddingTop="5dp"
+                            android:background="@drawable/backgroundtextview"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tao ne"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/kantumruy"
+                        android:layout_marginHorizontal="20dp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_person_24"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Thành viên"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:layout_marginLeft="10dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@{ViewModel.classCreateDto.numberOfStudent}"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:textAlignment="textEnd"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/book"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Bài tập"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:layout_marginLeft="10dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:textAlignment="textEnd"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_calendar_month_24"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Buổi học"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:layout_marginLeft="10dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:textAlignment="textEnd"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_video_library_24"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Bài giảng"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:layout_marginLeft="10dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:textAlignment="textEnd"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="2dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_text_snippet_24"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Tài liệu"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:layout_marginLeft="10dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/kantumruy"
+                            android:textAlignment="textEnd"
+                            />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_createnotify"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:text="+  Tạo thông báo"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/kantumruy"
+                        android:background="@color/blue"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                android:rowCount="3"
+                android:layout_marginTop="20dp"
+                >
+                <LinearLayout
+                    android:id="@+id/ll_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_columnWeight="1"
                     >
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cv_avatar"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#388D3D"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"
-                        app:cardCornerRadius="50dp"
-                        />
-                    <TextView
-                        android:layout_width="230dp"
-                        android:layout_height="34dp"
-                        android:text="Thông tin lớp của bạn"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:textAlignment="textEnd"
-                        android:fontFamily="@font/kantumruy"
-                        android:layout_marginLeft="85dp"
-                        android:paddingRight="30dp"
-                        android:paddingTop="5dp"
-                        android:background="@drawable/backgroundtextview"
-                        />
-                </LinearLayout>
+                        app:cardCornerRadius="15dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tao ne"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_marginHorizontal="20dp"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
-                    >
-                    <ImageView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/notification" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_person_24"
+                        android:fontFamily="@font/kantumruy"
                         android:layout_gravity="center"
-                        />
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:text="Thành viên"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:layout_marginLeft="10dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:textAlignment="textEnd"
-                        />
+                        android:textAlignment="center"
+                        android:text="Bảng tin"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll_schedule"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_columnWeight="1"
                     >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/book"
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#F07D16"
                         android:layout_gravity="center"
-                        />
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/calendar" />
+                    </androidx.cardview.widget.CardView>
+
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="Lịch học"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_exercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_columnWeight="1"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="@color/blue"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/file" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:text="Bài tập"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:layout_marginLeft="10dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:textAlignment="textEnd"
-                        />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll_pointchart"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_columnWeight="1"
                     >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_calendar_month_24"
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#E91E63"
                         android:layout_gravity="center"
-                        />
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/stats" />
+                    </androidx.cardview.widget.CardView>
+
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="Buổi học"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
                         android:fontFamily="@font/kantumruy"
-                        android:layout_marginLeft="10dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:textAlignment="textEnd"
-                        />
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="Bảng điểm"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:onClick="@{() -> ViewModel.onClickMemberButton()}"
+                    android:id="@+id/ll_member"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_video_library_24"
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#3F51B5"
                         android:layout_gravity="center"
-                        />
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="17dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/user" />
+                    </androidx.cardview.widget.CardView>
+
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="Thành viên"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_lesson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#9C27B0"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/youtube" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:text="Bài giảng"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:layout_marginLeft="10dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:textAlignment="textEnd"
-                        />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll_document"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginBottom="2dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_text_snippet_24"
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#FFC107"
                         android:layout_gravity="center"
-                        />
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/empty_folder" />
+                    </androidx.cardview.widget.CardView>
+
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:text="Tài liệu"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:layout_marginLeft="10dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kantumruy"
-                        android:textAlignment="textEnd"
-                        />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_createnotify"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/ll_admin"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="+  Tạo thông báo"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:background="@color/blue"
-                    />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="4"
-            android:rowCount="3"
-            android:layout_marginTop="20dp"
-            >
-            <LinearLayout
-                android:id="@+id/ll_news"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_columnWeight="1"
-                >
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#388D3D"
+                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
+                    android:layout_marginTop="10dp"
+                    >
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#019587"
                         android:layout_gravity="center"
-                        android:src="@drawable/notification" />
-                </androidx.cardview.widget.CardView>
+                        app:cardCornerRadius="15dp">
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Bảng tin"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/briefcase" />
+                    </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/ll_schedule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_columnWeight="1"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#F07D16"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
                         android:layout_gravity="center"
-                        android:src="@drawable/calendar" />
-                </androidx.cardview.widget.CardView>
+                        android:textAlignment="center"
+                        android:text="Quản trị viên"
+                        android:textColor="@color/black" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="80dp"
+                <LinearLayout
+                    android:id="@+id/ll_group"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
+                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Lịch học"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                    android:layout_marginTop="10dp"
+                    >
 
-            <LinearLayout
-                android:id="@+id/ll_exercise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_columnWeight="1"
-                >
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/blue"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#F14334"
                         android:layout_gravity="center"
-                        android:src="@drawable/file" />
-                </androidx.cardview.widget.CardView>
+                        app:cardCornerRadius="15dp">
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Bài tập"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/group" />
+                    </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/ll_pointchart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_columnWeight="1"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#E91E63"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
                         android:layout_gravity="center"
-                        android:src="@drawable/stats" />
-                </androidx.cardview.widget.CardView>
+                        android:textAlignment="center"
+                        android:text="Nhóm"
+                        android:textColor="@color/black" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="80dp"
+                <LinearLayout
+                    android:id="@+id/ll_setting"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
+                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Bảng điểm"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                    android:layout_marginTop="10dp"
+                    >
 
-            <LinearLayout
-                android:id="@+id/ll_member"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#3F51B5"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#595A59"
                         android:layout_gravity="center"
-                        android:src="@drawable/user" />
-                </androidx.cardview.widget.CardView>
+                        app:cardCornerRadius="15dp">
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Thành viên"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/setting" />
+                    </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/ll_lesson"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#9C27B0"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kantumruy"
                         android:layout_gravity="center"
-                        android:src="@drawable/youtube" />
-                </androidx.cardview.widget.CardView>
+                        android:textAlignment="center"
+                        android:text="Cài đặt"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </GridLayout>
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Bài giảng"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_document"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#FFC107"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/empty_folder" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Tài liệu"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_admin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#019587"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/briefcase" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Quản trị viên"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#F14334"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/group" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Nhóm"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#595A59"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/setting" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:text="Cài đặt"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-        </GridLayout>
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</layout>
