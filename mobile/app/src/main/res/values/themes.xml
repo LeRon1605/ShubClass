@@ -24,4 +24,5 @@
         <item name="android:drawableRight">@drawable/ic_arrow_down</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
 </resources>

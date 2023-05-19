@@ -15,7 +15,7 @@ public class ClassTeacherViewModel extends BaseObservable {
     public ClassTeacherViewModel(Context context) {
         this.context = context;
     }
-    public void onlickCreateClass() {
+    public void onClickCreateClass() {
         Intent intent = new Intent(context, CreateClassActivity.class);
         context.startActivity(intent);
     }
