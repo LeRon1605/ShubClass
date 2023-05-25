@@ -11,15 +11,17 @@ public class ExamDto {
     private String name;
     private String startTime;
     private String endTime;
+    private String details;
     private String classId;
 
-    public ExamDto(String id, int state, String type, String name, String startTime, String endTime, String classId) {
+    public ExamDto(String id, int state, String type, String name, String startTime, String endTime, String details, String classId) {
         this.id = id;
         this.state = state;
         this.type = type;
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.details = details;
         this.classId = classId;
     }
 
@@ -80,5 +82,13 @@ public class ExamDto {
     }
     public String getStateString() {
         return state == 0 ? "Chưa mở" : (state == 1 ? "Đang diễn ra" : "Đã kết thúc");
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

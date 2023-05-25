@@ -24,7 +24,6 @@ public class ItemSearchAdapter extends RecyclerView.Adapter<ItemSearchAdapter.It
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item, parent, false);
 
         ItemStudentClassFindingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.item_student_class_finding,
@@ -45,8 +44,6 @@ public class ItemSearchAdapter extends RecyclerView.Adapter<ItemSearchAdapter.It
 
     public void updateItemList(List<ClassItemViewModel> newItemList) {
         itemList.clear();
-//        itemList.addAll(newItemList);
-//        itemListCopy.addAll(newItemList);
         itemList.addAll(newItemList);
         notifyDataSetChanged();
     }
@@ -79,9 +76,4 @@ public class ItemSearchAdapter extends RecyclerView.Adapter<ItemSearchAdapter.It
         this.itemList = filteredList;
         notifyDataSetChanged();
     }
-//    @BindingAdapter("items")
-//    public static void setItems(RecyclerView recyclerView, List<ClassItemViewModel> items) {
-//        ItemAdapter adapter = (ItemAdapter) recyclerView.getAdapter();
-//        adapter.updateItemList(items);
-//    }
 }

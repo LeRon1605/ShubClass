@@ -31,7 +31,7 @@ public class BottomSheetClassTeacherFragment extends BottomSheetDialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_sheet_class_teacher, container, false);
-        binding.setClassItem(classItemViewModel);
+        binding.setViewModel(classItemViewModel);
         return binding.getRoot();
     }
 }
