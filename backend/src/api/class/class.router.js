@@ -43,6 +43,11 @@ router
         ClassController.getAllStudentsInClass
     )
     .delete(
+        '/:id/students',
+        AuthorizationMiddleware({ type: 'role', value: 'Student' }),
+        ClassController.existClass
+    )
+    .delete(
         '/:id/students/:studentId',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
         ClassController.removeStudent

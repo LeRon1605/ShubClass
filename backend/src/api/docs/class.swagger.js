@@ -292,6 +292,35 @@
 /**
  * @swagger
  *
+ * /classes/{id}/students:
+ *   delete:
+ *     tags: [Class]
+ *     description: Exit class
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: class id
+ *         required: true
+ *         in: path
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *              type: array
+ *              items:
+ *                  $ref: '#/definitions/Student'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+
+/**
+ * @swagger
+ *
  * /classes/{id}/students/{studentId}:
  *   delete:
  *     tags: [Class]
