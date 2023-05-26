@@ -3,7 +3,6 @@ package com.androidexam.shubclassroom.adapter;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +12,8 @@ import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.annotations.NonNull;
 
 public class ItemSearchAdapter extends RecyclerView.Adapter<ItemSearchAdapter.ItemViewHolder>{
     private List<ClassItemViewModel> itemList = new ArrayList<>();

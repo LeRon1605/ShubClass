@@ -2,6 +2,7 @@ package com.androidexam.shubclassroom.viewmodel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
@@ -11,6 +12,7 @@ import com.androidexam.shubclassroom.BR;
 import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
+import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class FindClassPerformedStudentViewModel extends BaseObservable {
     private Context context;
     private ClassApiService apiService;
     private List<ClassItemViewModel> listClass;
-
+    private ClassItemViewModel classItemViewModel;
     public FindClassPerformedStudentViewModel(Context context) {
         this.context = context;
         this.txtSearch = "";
@@ -44,17 +46,16 @@ public class FindClassPerformedStudentViewModel extends BaseObservable {
         ClassItemViewModel.itemSearchAdapter.updateItemList(listClass);
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
-        Call<List<ClassItemViewModel>> call = apiService.searchClass(token, getTxtSearch());
-        call.enqueue(new ApiCallback<List<ClassItemViewModel>, MessageResponse>(MessageResponse.class) {
+        Call<List<ClassDetail>> call = apiService.searchClass(token, getTxtSearch());
+        call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {
             @Override
-            public void handleSuccess(List<ClassItemViewModel> responseObject) {
+            public void handleSuccess(List<ClassDetail> responseObject) {
                 if(responseObject.size() < 1) {
                     Toast.makeText(context, "Không tìm thấy lớp hoặc lớp bạn đã tham gia!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "Tìm thấy " + responseObject.size() + "Lớp", Toast.LENGTH_SHORT).show();
-                    for(ClassItemViewModel i : responseObject) {
-                        i.setContext(context);
-                        listClass.add(i);
+                    for(ClassDetail i : responseObject) {
+                        classItemViewModel = new ClassItemViewModel(context, i);
+                        listClass.add(classItemViewModel);
                     }
                     ClassItemViewModel.itemSearchAdapter.updateItemList(listClass);
                 }

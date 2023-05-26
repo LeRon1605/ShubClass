@@ -21,6 +21,7 @@ import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
+import com.androidexam.shubclassroom.model.student.StudentExitClass;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.utilities.DecodeToken;
 import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
@@ -95,6 +96,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     public void onClickCloseBottomSheetTeacher() {
         this.bottomSheetClassTeacherFragment.dismiss();
     }
+
     public void onClickCloseBottomSheetStudent() {
         this.bottomSheetClassStudentFragment.dismiss();
     }
@@ -124,33 +126,68 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
                 .setNegativeButton("No", null)
                 .show();
     }
+
+    public void onClickExitClass() {
+        new AlertDialog.Builder(context)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Xác nhận!")
+                .setMessage("Bạn chắc chắn muốn thoát lớp?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Call<StudentExitClass> call = classApiService.exitClass("Bear " + token, classModel.getId());
+                        call.enqueue(new ApiCallback<StudentExitClass, MessageResponse>(MessageResponse.class) {
+                            @Override
+                            public void handleSuccess(StudentExitClass responseObject) {
+                                Toast.makeText(context, "Rời lớp thành công!", Toast.LENGTH_SHORT).show();
+                                context.startActivity(new Intent(context, HomeStudentActivity.class));
+                            }
+
+                            @Override
+                            public void handleFailure(MessageResponse errorResponse) {
+                                Toast.makeText(context, "Có lỗi, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
     public void onclickCreateClass() {
         Intent intent = new Intent(context, CreateClassActivity.class);
         context.startActivity(intent);
     }
+
     public String getTextSearch() {
         return textSearch;
     }
+
     @Bindable
     public void setTextSearch(String textSearch) {
         this.textSearch = textSearch;
         notifyPropertyChanged(BR.textSearch);
     }
+
     public void searchItem() {
         adapter.filterList(getTextSearch());
     }
+
     public void onClickRedirectSearchClassStudent() {
         Intent intent = new Intent(context, FindClassStudentActivity.class);
         context.startActivity(intent);
     }
+
     public void onClickRequestClass() {
         Call<MessageResponse> call = requestApiService.requestJoinClass("Bear " + token, classModel.getId());
         call.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(MessageResponse responseObject) {
                 Toast.makeText(context, responseObject.getMessage(), Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, HomeStudentActivity.class
-                ));
+                Intent intent = new Intent(context, HomeStudentActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
             }
 
             @Override
@@ -159,6 +196,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
             }
         });
     }
+
     public void redirectClassDetailTeacher() {
         Bundle bundle = new Bundle();
         ClassCreateDto classCreateDto = new ClassCreateDto(
@@ -174,6 +212,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
         intent.putExtra("myBundle", bundle);
         context.startActivity(intent, bundle);
     }
+
     public void redirectClassDetailStudent() {
         Bundle bundle = new Bundle();
         String nameStudent = "";

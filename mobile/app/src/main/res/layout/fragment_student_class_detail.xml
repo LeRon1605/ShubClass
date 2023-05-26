@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="ViewModel"
             type="com.androidexam.shubclassroom.viewmodel.class_detail.student.ClassDetailStudentViewModel" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:background="@drawable/backgrounddetail"
         tools:context=".view.class_detail.student.ClassDetailStudentFragment">
@@ -489,6 +489,7 @@
                     >
 
                     <androidx.cardview.widget.CardView
+                        android:onClick="@{() -> ViewModel.onClickExitClass()}"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
@@ -496,8 +497,8 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="21dp"
+                            android:layout_height="22dp"
                             android:layout_gravity="center"
                             android:src="@drawable/logout" />
                     </androidx.cardview.widget.CardView>
