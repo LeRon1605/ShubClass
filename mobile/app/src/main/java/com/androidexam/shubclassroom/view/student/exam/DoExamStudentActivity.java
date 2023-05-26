@@ -102,6 +102,12 @@ public class DoExamStudentActivity extends AppCompatActivity {
                             binding.btnB.setBackgroundColor(getResources().getColor(R.color.blue_200));
                             binding.btnC.setBackgroundColor(getResources().getColor(R.color.blue_200));
                             break;
+                        default:
+                            binding.btnC.setBackgroundColor(getResources().getColor(R.color.blue_200));
+                            binding.btnA.setBackgroundColor(getResources().getColor(R.color.blue_200));
+                            binding.btnB.setBackgroundColor(getResources().getColor(R.color.blue_200));
+                            binding.btnD.setBackgroundColor(getResources().getColor(R.color.blue_200));
+                            break;
                     }
                 }
             });

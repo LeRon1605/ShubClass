@@ -1,6 +1,8 @@
 package com.androidexam.shubclassroom.viewmodel.student.exam;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -16,8 +18,10 @@ import com.androidexam.shubclassroom.api.ExamApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.view.ClassDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,7 @@ public class ExamStudentViewModel extends BaseStudentExamViewModel {
         adapter = new ItemExamStudentAdapter(navigation);
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
 //        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODQzOTkxMTYsImV4cCI6MTY4NDY1ODMxNn0.rbzt1a1ME35OyUZWeZ74kq29fEeVDRgWyTHqij6Wn-Q";
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODUxMDY0ODAsImV4cCI6MTY4NTM2NTY4MH0.z6wNFPBWfwgRS6qtdF9WJ6Q6zmPsow7Cm_aMWzZNci0";
         Log.d("TOKEN", token);
 
         Call<ArrayList<ExamDto>> call = examApiService.getExams(token, classId);

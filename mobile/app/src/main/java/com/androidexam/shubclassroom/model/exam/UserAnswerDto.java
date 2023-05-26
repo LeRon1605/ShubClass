@@ -1,8 +1,17 @@
 package com.androidexam.shubclassroom.model.exam;
 
-public class DoExamDto {
+public class UserAnswerDto {
+    private String userExamId;
     private String examDetailId;
     private String answer;
+
+    public String getUserExamId() {
+        return userExamId;
+    }
+
+    public void setUserExamId(String userExamId) {
+        this.userExamId = userExamId;
+    }
 
     public String getExamDetailId() {
         return examDetailId;
