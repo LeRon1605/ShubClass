@@ -29,17 +29,19 @@ import com.androidexam.shubclassroom.viewmodel.class_detail.student.ClassDetailS
 import retrofit2.Call;
 
 public class ClassDetailStudentFragment extends Fragment {
-    private INavigation navigation;
+    private final INavigation navigation;
     private FragmentStudentClassDetailBinding binding;
-    private String idClass;
-    private String nameClass;
+    private final String nameStudent;
+    private final String idClass;
+    private final String nameClass;
     private SummaryIn4Student summaryIn4Student;
-    private ClassApiService apiService;
+    private final ClassApiService apiService;
     private String token;
-    public ClassDetailStudentFragment(INavigation navigation, String idClass, String nameClass) {
+    public ClassDetailStudentFragment(INavigation navigation, String idClass, String nameClass, String nameStudent) {
         this.navigation = navigation;
         this.idClass = idClass;
         this.nameClass = nameClass;
+        this.nameStudent = nameStudent;
         apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
     }
 
@@ -54,12 +56,13 @@ public class ClassDetailStudentFragment extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", null);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_student_class_detail , container, false);
+        Log.d("TAG", "idClassClassDetailFragment: " + idClass);
         Call<SummaryIn4Student> call = apiService.getSummaryIn4Student("Bear " + token, idClass);
         call.enqueue(new ApiCallback<SummaryIn4Student, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(SummaryIn4Student responseObject) {
                 summaryIn4Student = responseObject;
-                binding.setViewModel(new ClassDetailStudentViewModel(getContext(), navigation, idClass, nameClass, summaryIn4Student));
+                binding.setViewModel(new ClassDetailStudentViewModel(getContext(), navigation, idClass,nameClass, summaryIn4Student, nameStudent));
             }
 
             @Override

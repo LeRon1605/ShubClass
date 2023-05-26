@@ -59,7 +59,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> classItem.onClickDeleteClass()}">
+                android:onClick="@{() -> classItem.onClickExitClass()}">
                 <ImageView
                     android:src="@drawable/ic_baseline_output_24"
                     android:layout_width="wrap_content"

@@ -23,6 +23,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
     private ClassCreateDto classCreateDto;
     private String idClass;
     private String nameClass;
+    private String nameStudent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,9 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
                 classCreateDto = (ClassCreateDto) bundle.getSerializable("Class");
                 navigate(ClassDetailFragment.TeacherClassDetail.getValue());
             } else {
+                nameStudent = bundle.getString("nameStudent");
                 idClass = bundle.getString("idClass");
+                Log.d("TAG", "idClassClassDetailActivity: " + idClass);
                 nameClass = bundle.getString("nameClass");
                 int id = bundle.getInt("fragment");
                 if (id != 0) {
@@ -53,7 +56,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
         if(id == ClassDetailFragment.TeacherClassDetail.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ClassDetailTeacherFragment(this, classCreateDto));
         } else if(id == ClassDetailFragment.StudentClassDetail.getValue()) {
-            transaction.replace(R.id.fr_classdetail, new ClassDetailStudentFragment(this, idClass,nameClass));
+            transaction.replace(R.id.fr_classdetail, new ClassDetailStudentFragment(this, idClass,nameClass, nameStudent));
         }
         else if(id == ClassDetailFragment.ShowStudentOfClass.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ShowStudentInClassFragment(this, classCreateDto));

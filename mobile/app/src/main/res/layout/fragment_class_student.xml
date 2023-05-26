@@ -22,31 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/class_Studying"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lớp đang học"
-                        app:chipIcon="@drawable/ic_baseline_rocket_launch_24" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/class_Pending"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lớp chờ duyệt"
-                        app:chipIcon="@drawable/ic_baseline_security_24" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/class_hidden"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lớp đã ẩn"
-                        app:chipIcon="@drawable/ic_baseline_hide_source_24" />
-                </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
             <LinearLayout
                 android:weightSum="1.0"

@@ -3,6 +3,7 @@ package com.androidexam.shubclassroom.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.databinding.ClassItemBinding;
 import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.utilities.DecodeToken;
 import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
@@ -73,7 +75,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     intent.putExtra("myBundle", bundle);
                     context.startActivity(intent, bundle);
                 } else {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
+                    String token = sharedPreferences.getString("token", null);
+                    String nameStudent = "";
+                    try {
+                        DecodeToken.decoded(token);
+                        nameStudent = DecodeToken.getStringValueObjectByKey("name");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    bundle.putString("nameStudent", nameStudent);
                     bundle.putString("idClass", itemList.get(position).getClassModel().getId());
+                    Log.d("TAG", "idClass: " + itemList.get(position).getClassModel().getId());
                     bundle.putString("nameClass", itemList.get(position).getClassModel().getName());
                     bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());
                     Intent intent = new Intent(context, ClassDetailActivity.class);
