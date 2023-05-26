@@ -38,11 +38,12 @@ class AccountController {
     }
 
     async updateUser(req, res, next) {
-        const result = await AccountService.updateUser(
-            req.params.token,
-            req.body
-        );
-        return res.status(200).json(result);
+        const userEntity = AccountUpdateDto.toEntity(req.body).user;
+        const id = req.session.id;
+        await AccountService.updateUser(id, userEntity);
+        return res.status(200).json({
+            message: 'Update account successfully.'
+        });
     }
 
     async login(req, res, next) {

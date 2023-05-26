@@ -22,8 +22,9 @@ router
         AccountController.updateAccount
     )
     .put(
-        '/users:/id',
+        '/',
         ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
+        AuthorizationMiddleware({ type: 'basic' }),
         AccountController.updateUser
     )
     .post(

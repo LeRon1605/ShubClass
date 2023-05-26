@@ -132,31 +132,21 @@ class AccountService {
         });
     }
 
-    async updateUser(token, body) {
-        let userId = null;
-        try {
-            userId = jwt.verify(token, process.env.JWT_KEY);
-            userId = userId.id;
-        } catch (error) {
-            throw new Error('Invalid token');
-        }
-        const accountEntity = await Account.findByPk(userId);
+    async updateUser(id, body) {
+        const userEntity = await User.findByPk(id);
 
-        if (!accountEntity) {
-            throw new EntityNotFoundException('Account', userId);
+        if (!userEntity) {
+            throw new EntityNotFoundException('User', id);
         }
 
-        await accountEntity.update(
-            { ...accountEntity, ...body },
+        await userEntity.update(
+            { body },
             {
                 where: {
-                    id: userId
+                    id: id
                 }
             }
         );
-
-        const dto = AccountDto.toDto(await Account.findByPk(userId));
-        return dto;
     }
 
     async login(email, password) {
