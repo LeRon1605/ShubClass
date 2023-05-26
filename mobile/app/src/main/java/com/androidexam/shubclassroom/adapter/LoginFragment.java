@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view.auth;
+package com.androidexam.shubclassroom.adapter;
 
 import android.os.Bundle;
 

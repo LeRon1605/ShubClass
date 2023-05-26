@@ -28,19 +28,15 @@ public class ViewPageTeacherAdapter extends FragmentStateAdapter {
             case 0:
                 return new HomeTeacherFragment();
             case 1:
-                return new ScheduleTeacherFragment();
-            case 2:
-                return new AlertTeacherFragment();
-            case 3:
                 return new ProfileTeacherFragment();
             default:
-                return new HomeStudentFragment();
+                return new HomeTeacherFragment();
         }
     }
 
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 2;
     }
 }
