@@ -17,8 +17,8 @@ public class BaseStudentExamViewModel {
         this.classId = classId;
     }
 
-//    public void navigateTo(ExamStudentFragment fragment)
-//    {
+    public void navigateTo(ExamStudentFragment fragment)
+    {
 //        navigation.navigate(fragment.getValue());
-//    }
+    }
 }

@@ -51,8 +51,7 @@ public class DoExamStudentViewModel {
 
         listQuestions = new ArrayList<>();
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
-//        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODQ0ODEzOTEsImV4cCI6MTY4NDc0MDU5MX0.s7kdvZ6C5D3aUZfcJ0xvSJXfXPrgWk_sHXTd96H7Az0";
+        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
         Call<SessionExamDto> call = examApiService.postSession(token, examDto.getId());
         Log.d("EXAM", examDto.getId());
         call.enqueue(new ApiCallback<SessionExamDto, MessageResponse>(MessageResponse.class) {
@@ -219,25 +218,26 @@ public class DoExamStudentViewModel {
     public void onButtonSubmitClicked() {
         String choiceValue = choice.getValue();
         String userExamId = sessionExamDto.getUserAnswers()[0];
-
+        Log.d("DEBUG", String.valueOf(listQuestions.size()));
+        Log.d("DEBUG", String.valueOf(index.getValue()));
         if (choiceValue != null && (choiceValue.equals("A") || choiceValue.equals("B") || choiceValue.equals("C") || choiceValue.equals("D"))) {
             Log.d("DEBUG", String.valueOf(listQuestions.size()));
             Log.d("DEBUG", String.valueOf(index.getValue()));
-//            doExamDto = new DoExamDto(questionDto.getId(), choiceValue);
-//            Call<MessageResponse> postAnswer = examApiService.postAnswer(token, userExamId, doExamDto);
-//            postAnswer.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
-//                @Override
-//                public void handleSuccess(MessageResponse responseObject) {
-//                    index.setValue(index.getValue() + 1);
-//                    Log.d("DEBUG", String.valueOf(listQuestions.size()));
-//                    setQuestion();
-//                }
-//
-//                @Override
-//                public void handleFailure(MessageResponse errorResponse) {
-//                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
+            doExamDto = new DoExamDto(questionDto.getId(), choiceValue);
+            Call<MessageResponse> postAnswer = examApiService.postAnswer(token, userExamId, doExamDto);
+            postAnswer.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+                @Override
+                public void handleSuccess(MessageResponse responseObject) {
+                    index.setValue(index.getValue() + 1);
+                    Log.d("DEBUG", String.valueOf(listQuestions.size()));
+                    setQuestion();
+                }
+
+                @Override
+                public void handleFailure(MessageResponse errorResponse) {
+                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(context, "Bạn chưa chọn đáp án!", Toast.LENGTH_SHORT).show();
         }
@@ -245,8 +245,8 @@ public class DoExamStudentViewModel {
     }
 
     public void onButtonCancelClicked() {
-        Intent i = new Intent(context, ClassDetailActivity.class);
-        context.startActivity(i);
+//        Intent i = new Intent(context, ClassDetailActivity.class);
+//        context.startActivity(i);
     }
 
 

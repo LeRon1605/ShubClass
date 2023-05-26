@@ -100,11 +100,11 @@
                     />
                 <Button
                     android:id="@+id/btn_doexam"
-                    android:layout_width="120dp"
+                    android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="Làm bài"
+                    android:text='@{ExamStudentItemViewModel.examDto.isDone ? "Xem kết quả" : "Làm bài"}'
                     android:textAllCaps="false"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/kantumruy"
                     android:layout_gravity="end"

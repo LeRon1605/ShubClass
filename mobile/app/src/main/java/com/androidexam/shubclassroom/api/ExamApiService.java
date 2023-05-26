@@ -5,6 +5,7 @@ import com.androidexam.shubclassroom.model.QuestionDto;
 import com.androidexam.shubclassroom.model.exam.DoExamDto;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
 import com.androidexam.shubclassroom.model.exam.SessionExamDto;
+import com.androidexam.shubclassroom.model.exam_result.ExamResult;
 
 import java.util.ArrayList;
 
@@ -31,5 +32,8 @@ public interface ExamApiService {
 
     @POST("user-exams/{id}")
     Call<SessionExamDto> postSession(@Header("authorization") String token, @Path("id") String examId);
+
+    @GET("exams/{id}/result/{studentId}")
+    Call<ExamResult[]> getExamResult(@Header("authorization") String token, @Path("id") String examId, @Path("studentId") String studentId);
 
 }
