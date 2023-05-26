@@ -1,6 +1,8 @@
 package com.androidexam.shubclassroom.viewmodel.student.exam;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -16,8 +18,10 @@ import com.androidexam.shubclassroom.api.ExamApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.view.ClassDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;

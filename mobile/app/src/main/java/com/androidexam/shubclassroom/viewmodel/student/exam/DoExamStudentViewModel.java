@@ -1,5 +1,6 @@
 package com.androidexam.shubclassroom.viewmodel.student.exam;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -15,6 +16,9 @@ import com.androidexam.shubclassroom.model.QuestionDto;
 import com.androidexam.shubclassroom.model.exam.DoExamDto;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
 import com.androidexam.shubclassroom.model.exam.SessionExamDto;
+import com.androidexam.shubclassroom.model.exam.UserAnswerDto;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
+import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.exam.DoExamStudentActivity;
@@ -38,6 +42,8 @@ public class DoExamStudentViewModel {
     private MutableLiveData<Integer> index = new MutableLiveData<>();
     private MutableLiveData<String> totalQuestion = new MutableLiveData<>();
 
+    private ArrayList<UserAnswerDto> userAnswerDtos;
+
     private Context context;
     private ArrayList<QuestionDto> listQuestions;
     private ExamApiService examApiService;
@@ -49,22 +55,46 @@ public class DoExamStudentViewModel {
         this.examDto = examDto;
         index.setValue(0);
 
+        userAnswerDtos = new ArrayList<>();
         listQuestions = new ArrayList<>();
+
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
-        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
-        Call<SessionExamDto> call = examApiService.postSession(token, examDto.getId());
-        Log.d("EXAM", examDto.getId());
-        call.enqueue(new ApiCallback<SessionExamDto, MessageResponse>(MessageResponse.class) {
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODUxMDY0ODAsImV4cCI6MTY4NTM2NTY4MH0.z6wNFPBWfwgRS6qtdF9WJ6Q6zmPsow7Cm_aMWzZNci0";
+
+        Call<SessionExamDto> startSessionCall = examApiService.postSession(token, examDto.getId());
+        startSessionCall.enqueue(new ApiCallback<SessionExamDto, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(SessionExamDto responseObject) {
                 sessionExamDto = responseObject;
-                Call<ArrayList<QuestionDto>> call1 = examApiService.getQuestions(token, examDto.getId());
-                call1.enqueue(new ApiCallback<ArrayList<QuestionDto>, MessageResponse>(MessageResponse.class) {
+                Call<ArrayList<QuestionDto>> examQuestionCall = examApiService.getQuestions(token, examDto.getId());
+                examQuestionCall.enqueue(new ApiCallback<ArrayList<QuestionDto>, MessageResponse>(MessageResponse.class) {
                     @Override
                     public void handleSuccess(ArrayList<QuestionDto> responseObject) {
                         listQuestions = responseObject;
                         totalQuestion.setValue(String.valueOf(listQuestions.size()));
-                        setQuestion();
+
+                        for (int i = 0;i < listQuestions.size();i++) {
+                            boolean isAnswered = false;
+                            for (int j = 0;j < sessionExamDto.getUserAnswers().length;j++) {
+                                UserAnswerDto userAnswerDto = sessionExamDto.getUserAnswers()[j];
+
+                                if (userAnswerDto.getExamDetailId().equals(listQuestions.get(i).getId())) {
+                                    isAnswered = true;
+                                    userAnswerDtos.add(userAnswerDto);
+                                    break;
+                                }
+                            }
+
+                            if (!isAnswered) {
+                                UserAnswerDto userAnswerDto = new UserAnswerDto();
+                                userAnswerDto.setUserExamId(sessionExamDto.getId());
+                                userAnswerDto.setAnswer("");
+                                userAnswerDto.setExamDetailId(listQuestions.get(i).getId());
+                                userAnswerDtos.add(userAnswerDto);
+                            }
+                        }
+
+                        setQuestion(0);
                     }
 
                     @Override
@@ -72,16 +102,100 @@ public class DoExamStudentViewModel {
                         Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
 
             @Override
             public void handleFailure(MessageResponse errorResponse) {
                 Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, ClassDetailActivity.class);
+                intent.putExtra("fragment", ClassDetailFragment.StudentExam.getValue());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
+    }
 
+    public void setQuestion(int questionIndex) {
+        if (questionIndex >= 0 && questionIndex < listQuestions.size()) {
+            questionDto = listQuestions.get(questionIndex);
+            String[] ans = questionDto.getAnswers();
+            index.setValue(questionIndex);
+            question.setValue(questionDto.getQuestion());
+            ansA.setValue(ans[0]);
+            ansB.setValue(ans[1]);
+            ansC.setValue(ans[2]);
+            ansD.setValue(ans[3]);
+            choice.setValue(userAnswerDtos.get(questionIndex).getAnswer());
+        }
+    }
 
+    public void onButtonChoiceClicked(char chosen) {
+        choice.setValue(String.valueOf(chosen));
+    }
+
+    public void onButtonSaveClicked() {
+        String choiceValue = choice.getValue();
+
+        if (choiceValue != null && (choiceValue.equals("A") || choiceValue.equals("B") || choiceValue.equals("C") || choiceValue.equals("D"))) {
+            doExamDto = new DoExamDto();
+            doExamDto.setAnswer(choice.getValue());
+            doExamDto.setExamDetailId(questionDto.getId());
+
+            Call<MessageResponse> postAnswer = examApiService.postAnswer(token, sessionExamDto.getId(), doExamDto);
+            postAnswer.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+                @Override
+                public void handleSuccess(MessageResponse responseObject) {
+                    for (int i = 0;i < userAnswerDtos.size();i++) {
+                        if (userAnswerDtos.get(i).getExamDetailId().equals(questionDto.getId())) {
+                            userAnswerDtos.get(i).setAnswer(choice.getValue());
+                            break;
+                        }
+                    }
+                    Toast.makeText(context, responseObject.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void handleFailure(MessageResponse errorResponse) {
+                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(context, "Bạn chưa chọn đáp án!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onButtonSubmitClicked() {
+        Call<MessageResponse> submit = examApiService.postSubmit(token, sessionExamDto.getId());
+        submit.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+            @Override
+            public void handleSuccess(MessageResponse responseObject) {
+                Toast.makeText(context, responseObject.getMessage(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ClassDetailActivity.class);
+                intent.putExtra("fragment", ClassDetailFragment.StudentExam.getValue());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void handleFailure(MessageResponse errorResponse) {
+                Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBackQuestionClicked() {
+        setQuestion(index.getValue() - 1);
+    }
+
+    public void onNextQuestionClicked() {
+        setQuestion(index.getValue() + 1);
+    }
+
+    public void onButtonCancelClicked() {
+        Intent intent = new Intent(context, ClassDetailActivity.class);
+        intent.putExtra("fragment", ClassDetailFragment.StudentExam.getValue());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public ExamDto getExamDto() {
@@ -179,6 +293,7 @@ public class DoExamStudentViewModel {
     public void setTotalQuestion(MutableLiveData<String> totalQuestion) {
         this.totalQuestion = totalQuestion;
     }
+<<<<<<< HEAD
 
     public void setQuestion() {
         if (index.getValue() == listQuestions.size() - 1) {
@@ -250,4 +365,6 @@ public class DoExamStudentViewModel {
     }
 
 
+=======
+>>>>>>> ed623f5962ebed01cd582d2668b08e08076f7d14
 }

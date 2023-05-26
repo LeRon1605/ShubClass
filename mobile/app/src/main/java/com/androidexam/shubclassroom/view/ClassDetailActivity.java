@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.androidexam.shubclassroom.R;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.view.student.exam.ExamStudentFragment;
 
@@ -17,13 +18,18 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_class_detail);
-        navigate(1);
+
+        int id = getIntent().getIntExtra("fragment", 1);
+
+        navigate(id);
     }
 
     @Override
     public void navigate(int id) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fr_classdetail, new ExamStudentFragment(this, "1"));
+        if (id == ClassDetailFragment.StudentExam.getValue()) {
+            transaction.replace(R.id.fr_classdetail, new ExamStudentFragment(this, "1"));
+        }
         transaction.commit();
     }
 }

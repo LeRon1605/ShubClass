@@ -181,8 +181,6 @@ public class ItemExamStudentAdapter extends RecyclerView.Adapter<ItemExamStudent
                     }
                 }
             });
-
         }
-
     }
 }
