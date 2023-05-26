@@ -293,8 +293,6 @@ public class DoExamStudentViewModel {
     public void setTotalQuestion(MutableLiveData<String> totalQuestion) {
         this.totalQuestion = totalQuestion;
     }
-<<<<<<< HEAD
-
     public void setQuestion() {
         if (index.getValue() == listQuestions.size() - 1) {
             submitExam();
@@ -326,45 +324,4 @@ public class DoExamStudentViewModel {
         });
     }
 
-    public void onButtonChoiceClicked(char chosen) {
-        choice.setValue(String.valueOf(chosen));
-    }
-
-    public void onButtonSubmitClicked() {
-        String choiceValue = choice.getValue();
-        String userExamId = sessionExamDto.getUserAnswers()[0];
-        Log.d("DEBUG", String.valueOf(listQuestions.size()));
-        Log.d("DEBUG", String.valueOf(index.getValue()));
-        if (choiceValue != null && (choiceValue.equals("A") || choiceValue.equals("B") || choiceValue.equals("C") || choiceValue.equals("D"))) {
-            Log.d("DEBUG", String.valueOf(listQuestions.size()));
-            Log.d("DEBUG", String.valueOf(index.getValue()));
-            doExamDto = new DoExamDto(questionDto.getId(), choiceValue);
-            Call<MessageResponse> postAnswer = examApiService.postAnswer(token, userExamId, doExamDto);
-            postAnswer.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
-                @Override
-                public void handleSuccess(MessageResponse responseObject) {
-                    index.setValue(index.getValue() + 1);
-                    Log.d("DEBUG", String.valueOf(listQuestions.size()));
-                    setQuestion();
-                }
-
-                @Override
-                public void handleFailure(MessageResponse errorResponse) {
-                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(context, "Bạn chưa chọn đáp án!", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public void onButtonCancelClicked() {
-//        Intent i = new Intent(context, ClassDetailActivity.class);
-//        context.startActivity(i);
-    }
-
-
-=======
->>>>>>> ed623f5962ebed01cd582d2668b08e08076f7d14
 }

@@ -153,7 +153,7 @@ public class ItemExamStudentAdapter extends RecyclerView.Adapter<ItemExamStudent
                                     ExamResult examResult = arrayExamResult[arrayExamResult.length - 1];
                                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                                     builder.setTitle(exam.getName())
-                                            .setMessage("Người dùng: " + examResult.getUser().getName() +
+                                            .setMessage(examResult.getUser().getName() +
                                                     "\nĐiểm: " + examResult.getPoints() +
                                                     "\nBắt đầu: " + examResult.getStartAt() +
                                                     "\nKết thúc: " + examResult.getEndAt())
