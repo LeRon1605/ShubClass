@@ -24,9 +24,10 @@ public class TeacherExamActivity extends AppCompatActivity implements INavigatio
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (id == TeacherExamFragment.CreateExam.getValue()) {
             transaction.replace(R.id.fr_teacher_exam, new CreateExamTeacherFragment(this, "1"));
-        } else if (id == TeacherExamFragment.ListExamTeacher.getValue()) {
-            transaction.replace(R.id.fr_teacher_exam, new ListExamTeacherFragment(this, "1"));
+//        } else if (id == TeacherExamFragment.ListExamTeacher.getValue()) {
+//            transaction.replace(R.id.fr_teacher_exam, new ListExamTeacherFragment(this, "1"));
+//        }
+            transaction.commit();
         }
-        transaction.commit();
     }
 }

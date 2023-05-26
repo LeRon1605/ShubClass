@@ -2,6 +2,7 @@ package com.androidexam.shubclassroom.view.student;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -17,6 +18,12 @@ import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 public class ClassStudentFragment extends Fragment {
     private FragmentClassStudentBinding binding;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

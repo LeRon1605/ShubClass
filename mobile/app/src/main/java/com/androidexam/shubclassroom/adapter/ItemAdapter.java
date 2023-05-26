@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private List<ClassItemViewModel> itemListCopy = new ArrayList<>();
     private Context context;
     private int fragmentIndex;
-    public ItemAdapter(List<ClassItemViewModel> classList, int fragmentIndex, Context context) {
+    public ItemAdapter(List<ClassItemViewModel> classList, int fragmentIndex, Context context, String test) {
         itemList = classList;
         itemListCopy = classList;
         this.fragmentIndex = fragmentIndex;
         this.context = context;
+        Log.d("TAG", test);
     }
     @NonNull
     @Override
@@ -56,8 +58,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.binding.coverImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
-                    Bundle bundle = new Bundle();
                     ClassCreateDto classCreateDto = new ClassCreateDto(
                             itemList.get(position).getClassModel().getId(),
                             itemList.get(position).getClassModel().getName(),
@@ -65,8 +67,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                             itemList.get(position).getClassModel().getSubjectName(),
                             itemList.get(position).getClassModel().getNumberOfStudent()
                     );
-                    bundle.putSerializable("Class", (Serializable) classCreateDto);
+                    bundle.putSerializable("Class", classCreateDto);
                     bundle.putInt("FragmentIndex", FragmentIndex.Teacher.getValue());
+                    Intent intent = new Intent(context, ClassDetailActivity.class);
+                    intent.putExtra("myBundle", bundle);
+                    context.startActivity(intent, bundle);
+                } else {
+                    bundle.putString("idClass", itemList.get(position).getClassModel().getId());
+                    bundle.putString("nameClass", itemList.get(position).getClassModel().getName());
+                    bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());
                     Intent intent = new Intent(context, ClassDetailActivity.class);
                     intent.putExtra("myBundle", bundle);
                     context.startActivity(intent, bundle);

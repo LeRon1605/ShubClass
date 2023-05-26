@@ -31,4 +31,7 @@ public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
     public void onClickShowAllRequest() {
         navigateTo(ClassDetailFragment.ShowAllRequestOfClass);
     }
+    public void onClickSeePointChart() {
+        navigateTo(ClassDetailFragment.ShowAllExamInClass);
+    }
 }

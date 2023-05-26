@@ -49,7 +49,7 @@ public class ListClassTeacherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvClass = view.findViewById(R.id.lv_class);
         listClass = new ArrayList<>();
-        adapter = new ItemAdapter(listClass, FragmentIndex.Teacher.getValue(), getContext());
+        adapter = new ItemAdapter(listClass, FragmentIndex.Teacher.getValue(), getContext(), "teacher");
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
         ClassItemViewModel.adapter = adapter;

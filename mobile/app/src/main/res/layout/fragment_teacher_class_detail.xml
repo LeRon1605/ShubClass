@@ -405,6 +405,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:onClick="@{() -> ViewModel.onClickSeePointChart()}"
                     android:id="@+id/ll_pointchart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.class_detail.teacher.ExamResultsViewModel" />
+    </data>
+    <TableLayout
+        android:layout_margin="8dp"
+        android:stretchColumns="1,2,3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center"
+                android:layout_column="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@{ViewModel.viewModel.user.id}"/>
+            <TextView
+                android:layout_gravity="center"
+                android:layout_column="2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@{ViewModel.viewModel.user.name}" />
+            <TextView
+                android:layout_gravity="center"
+                android:layout_column="3"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@{ViewModel.viewModel.points.toString()}" />
+        </TableRow>
+    </TableLayout>
+</layout>

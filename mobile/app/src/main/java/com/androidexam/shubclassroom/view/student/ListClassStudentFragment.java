@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,23 +41,15 @@ public class ListClassStudentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_class, container, false);
+        return inflater.inflate(R.layout.fragment_list_class_student, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvClass = view.findViewById(R.id.lv_class);
-//        listClass.add(new ClassItemViewModel(
-//                "1", ".NET", "Lap trinh .Net", "Lap Trinh", 20, "TT1", "1-1-2022", "1-2-2022", getContext()
-//        ));
-//        listClass.add(new ClassItemViewModel(
-//                "2", ".JAVA", "Lap trinh Java", "Lap Trinh", 20, "TT2", "1-1-2022", "1-2-2022", getContext()
-//        ));
-//        listClass.add(new ClassItemViewModel(
-//                "3", "NodeJS", "Lap trinh JS", "Lap Trinh", 20, "TT3", "1-1-2022", "1-2-2022", getContext()
-//        ));
-        adapter = new ItemAdapter(listClass, FragmentIndex.Student.getValue(), getContext());
+        rvClass = view.findViewById(R.id.rcv_class_student);
+        listClass = new ArrayList<>();
+        adapter = new ItemAdapter(listClass, FragmentIndex.Student.getValue(), getContext(), "student");
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
         ClassItemViewModel.adapter = adapter;
@@ -68,7 +61,6 @@ public class ListClassStudentFragment extends Fragment {
             @Override
             public void handleSuccess(List<ClassDetail> responseObject) {
                 for(ClassDetail i : responseObject) {
-//                    i.setContext(getContext());
                     listClass.add(new ClassItemViewModel(getContext(), i));
                     adapter.notifyDataSetChanged();
                 }

@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable
-            name="classItem"
+            name="ViewModel"
             type="com.androidexam.shubclassroom.viewmodel.ClassItemViewModel" />
     </data>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,10 +23,10 @@
                     android:src="@drawable/ic_baseline_clear_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> classItem.onClickCloseBottomSheetTeacher()}"/>
+                    android:onClick="@{() -> ViewModel.onClickCloseBottomSheetTeacher()}"/>
                 <TextView
                     android:layout_marginLeft="5dp"
-                    android:text="@{classItem.classModel.name}"
+                    android:text="@{ViewModel.classModel.name}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
             <LinearLayout
+                android:onClick="@{() -> ViewModel.redirectClassDetailTeacher()}"
                 android:padding="15dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> classItem.onClickDeleteClass()}">
+                android:onClick="@{() -> ViewModel.onClickDeleteClass()}">
                 <ImageView
                     android:src="@drawable/ic_baseline_delete_outline_24"
                     android:layout_width="wrap_content"

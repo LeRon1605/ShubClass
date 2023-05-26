@@ -33,6 +33,7 @@ public class AuthActivity extends AppCompatActivity implements INavigation {
         } else if (id == AuthFragment.ActivateAccount.getValue()) {
             transaction.replace(R.id.fr_auth, new ActivateEmailFragment(this));
         }
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

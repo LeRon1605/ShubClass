@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
@@ -17,8 +18,11 @@ import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RequestApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
+import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
+import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.student.FindClassStudentActivity;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
@@ -30,22 +34,6 @@ import java.io.Serializable;
 import retrofit2.Call;
 
 public class ClassItemViewModel extends BaseObservable implements Serializable {
-//    @SerializedName("id")
-//    private String id;
-//    @SerializedName("name")
-//    private String name;
-//    @SerializedName("description")
-//    private String description;
-//    @SerializedName("subjectName")
-//    private String subjectName;
-//    @SerializedName("numberOfStudent")
-//    private int numberOfStudent;
-//    @SerializedName("teacherId")
-//    private String teacherId;
-//    @SerializedName("createAt")
-//    private String createAt;
-//    @SerializedName("updateAt")
-//    private String updateAt;
     private ClassDetail classModel;
     private ClassApiService classApiService;
     private RequestApiService requestApiService;
@@ -56,18 +44,6 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     private String token;
     public static ItemAdapter adapter;
     public static ItemSearchAdapter itemSearchAdapter;
-
-//    public ClassItemViewModel(Context context) {
-////        this.id = id;
-////        this.name = name;
-////        this.description = description;
-////        this.subjectName = subjectName;
-////        this.numberOfStudent = numberOfStudent;
-////        this.teacherId = teacherId;
-////        this.createAt = createAt;
-////        this.updateAt = updateAt;
-//        this.context = context;
-//    }
 
     public ClassItemViewModel(Context context, ClassDetail classModel) {
         this.context = context;
@@ -89,66 +65,6 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     public void setClassModel(ClassDetail classModel) {
         this.classModel = classModel;
     }
-
-    //    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-//
-//    public String getSubjectName() {
-//        return subjectName;
-//    }
-//
-//    public void setSubjectName(String subjectName) {
-//        this.subjectName = subjectName;
-//    }
-//
-//    public int getNumberOfStudent() {
-//        return numberOfStudent;
-//    }
-//
-//    public void setNumberOfStudent(int numberOfStudent) {
-//        this.numberOfStudent = numberOfStudent;
-//    }
-//
-//    public String getTeacherId() {
-//        return teacherId;
-//    }
-//
-//    public void setTeacherId(String teacherId) {
-//        this.teacherId = teacherId;
-//    }
-//
-//    public String getCreateAt() {
-//        return createAt;
-//    }
-//
-//    public void setCreateAt(String createAt) {
-//        this.createAt = createAt;
-//    }
-//
-//    public String getUpdateAt() {
-//        return updateAt;
-//    }
 
     public BottomSheetClassTeacherFragment getBottomSheetClassTeacherFragment() {
         return bottomSheetClassTeacherFragment;
@@ -241,5 +157,29 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
                 Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void redirectClassDetailTeacher() {
+        Bundle bundle = new Bundle();
+        ClassCreateDto classCreateDto = new ClassCreateDto(
+                classModel.getId(),
+                classModel.getName(),
+                classModel.getDescription(),
+                classModel.getSubjectName(),
+                classModel.getNumberOfStudent()
+        );
+        bundle.putSerializable("Class", (Serializable) classCreateDto);
+        bundle.putInt("FragmentIndex", FragmentIndex.Teacher.getValue());
+        Intent intent = new Intent(context, ClassDetailActivity.class);
+        intent.putExtra("myBundle", bundle);
+        context.startActivity(intent, bundle);
+    }
+    public void redirectClassDetailStudent() {
+        Bundle bundle = new Bundle();
+        bundle.putString("idClass", classModel.getId());
+        bundle.putString("nameClass", classModel.getName());
+        bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());
+        Intent intent = new Intent(context, ClassDetailActivity.class);
+        intent.putExtra("myBundle", bundle);
+        context.startActivity(intent, bundle);
     }
 }
