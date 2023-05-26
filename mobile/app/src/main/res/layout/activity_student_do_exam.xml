@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="DoExamViewModel"
+            name="DoExamStudentViewModel"
             type="com.androidexam.shubclassroom.viewmodel.student.exam.DoExamStudentViewModel" />
     </data>
 
@@ -29,7 +29,7 @@
                 android:background="@null"
                 android:padding="15dp"
                 android:scaleType="centerInside"
-                android:onClick="@{ () -> DoExamViewModel.onButtonCancelClicked()}"
+                android:onClick="@{ () -> DoExamStudentViewModel.onButtonCancelClicked()}"
                 android:src="@drawable/cancel" />
         </LinearLayout>
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="@{DoExamViewModel.examDto.name}"
+                android:text="@{DoExamStudentViewModel.examDto.name}"
                 android:textAlignment="center"
                 android:textColor="@color/deep_blue"
                 android:textSize="18sp"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
                     android:layout_weight="1.3"
-                    android:text="@{DoExamViewModel.examDto.startTime}" />
+                    android:text="@{DoExamStudentViewModel.examDto.startTime}" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
                     android:layout_weight="1.3"
-                    android:text="@{DoExamViewModel.examDto.endTime}" />
+                    android:text="@{DoExamStudentViewModel.examDto.endTime}" />
             </LinearLayout>
 
             <View
@@ -131,7 +131,7 @@
                     android:id="@+id/tv_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{DoExamViewModel.totalQuestion}"
+                    android:text="@{DoExamStudentViewModel.totalQuestion}"
                     android:textColor="@color/deep_blue"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/blue_200"
-                android:onClick="@{ () -> DoExamViewModel.onButtonChoiceClicked('A')}"
+                android:onClick="@{ () -> DoExamStudentViewModel.onButtonChoiceClicked('A')}"
                 android:textAllCaps="false" />
 
             <Button
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/blue_200"
-                android:onClick="@{ () -> DoExamViewModel.onButtonChoiceClicked('B')}"
+                android:onClick="@{ () -> DoExamStudentViewModel.onButtonChoiceClicked('B')}"
                 android:textAllCaps="false" />
 
             <Button
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/blue_200"
-                android:onClick="@{ () -> DoExamViewModel.onButtonChoiceClicked('C')}"
+                android:onClick="@{ () -> DoExamStudentViewModel.onButtonChoiceClicked('C')}"
                 android:textAllCaps="false" />
 
             <Button
@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/blue_200"
-                android:onClick="@{ () -> DoExamViewModel.onButtonChoiceClicked('D')}"
+                android:onClick="@{ () -> DoExamStudentViewModel.onButtonChoiceClicked('D')}"
                 android:textAllCaps="false" />
 
 
@@ -204,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:backgroundTint="#44079C"
-                    android:onClick="@{() -> DoExamViewModel.onBackQuestionClicked()}"
+                    android:onClick="@{() -> DoExamStudentViewModel.onBackQuestionClicked()}"
                     android:text="BACK" />
                 <Button
                     android:id="@+id/btn_save"
@@ -213,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:backgroundTint="#44079C"
-                    android:onClick="@{() -> DoExamViewModel.onButtonSaveClicked()}"
+                    android:onClick="@{() -> DoExamStudentViewModel.onButtonSaveClicked()}"
                     android:text="SAVE" />
                 <Button
                     android:id="@+id/btn_exam_next"
@@ -222,7 +222,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:backgroundTint="#44079C"
-                    android:onClick="@{() -> DoExamViewModel.onNextQuestionClicked()}"
+                    android:onClick="@{() -> DoExamStudentViewModel.onNextQuestionClicked()}"
                     android:text="NEXT" />
             </LinearLayout>
 
@@ -232,8 +232,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#44079C"
-                android:visibility="visible"
-                android:onClick="@{() -> DoExamViewModel.onButtonSubmitClicked()}"
+                android:onClick="@{() -> DoExamStudentViewModel.onButtonSubmitClicked()}"
                 android:text="SUBMIT" />
 
         </LinearLayout>

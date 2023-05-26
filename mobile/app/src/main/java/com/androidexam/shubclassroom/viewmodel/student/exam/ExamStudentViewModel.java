@@ -20,29 +20,34 @@ import retrofit2.Call;
 
 public class ExamStudentViewModel extends BaseStudentExamViewModel {
 
-    private String stateExam;
-
     private ItemExamStudentAdapter adapter;
     private ExamApiService examApiService;
 
     private ArrayList<ExamDto> listReceive;
+    private String token;
+    private String classId;
 
     public ExamStudentViewModel(Context context, INavigation navigation, String classId) {
         super(context, navigation, classId);
-
+        this.classId = classId;
 
         adapter = new ItemExamStudentAdapter(navigation);
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
 //        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODUxMDY0ODAsImV4cCI6MTY4NTM2NTY4MH0.z6wNFPBWfwgRS6qtdF9WJ6Q6zmPsow7Cm_aMWzZNci0";
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODUxMjY2MzQsImV4cCI6MTY4NTM4NTgzNH0.qp_dvUwUo4DENiQWxW0ZZFTWoT947dkijuks729DDsU";
         Log.d("TOKEN", token);
+        getListReceive(3);
 
+    }
+
+    public void getListReceive(int chip)
+    {
         Call<ArrayList<ExamDto>> call = examApiService.getExams(token, classId);
         call.enqueue(new ApiCallback<ArrayList<ExamDto>, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(ArrayList<ExamDto> responseObject) {;
                 listReceive = responseObject;
-                adapter.setExams(listReceive);
+                adapter.setExams(filterExamByState(chip));
             }
 
             @Override
@@ -71,6 +76,8 @@ public class ExamStudentViewModel extends BaseStudentExamViewModel {
                 if (i.getState() == state)
                 {
                     filterList.add(i);
+                    Log.d("DEBUG", i.getName());
+                    Log.d("DEBUG", i.getStartTime());
                 }
             }
         }

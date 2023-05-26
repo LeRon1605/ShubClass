@@ -292,4 +292,35 @@ public class DoExamStudentViewModel {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+    public void setQuestion() {
+        if (index.getValue() == listQuestions.size() - 1) {
+            submitExam();
+        }
+        else
+        {
+            questionDto = listQuestions.get(index.getValue());
+            question.setValue(questionDto.getQuestion());
+            String[] ans = questionDto.getAnswers();
+            ansA.setValue(ans[0]);
+            ansB.setValue(ans[1]);
+            ansC.setValue(ans[2]);
+            ansD.setValue(ans[3]);
+        }
+    }
+
+    public void submitExam() {
+        Call<MessageResponse> submit = examApiService.postSubmit(token, examDto.getId());
+        submit.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+            @Override
+            public void handleSuccess(MessageResponse responseObject) {
+                Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void handleFailure(MessageResponse errorResponse) {
+                Toast.makeText(context, errorResponse.getMessage() + "submit", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

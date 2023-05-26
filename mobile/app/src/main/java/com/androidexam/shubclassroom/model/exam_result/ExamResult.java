@@ -2,6 +2,8 @@ package com.androidexam.shubclassroom.model.exam_result;
 
 import android.util.Log;
 
+import com.androidexam.shubclassroom.utilities.DateHelper;
+
 public class ExamResult {
     private Exam exam;
     private User user;
@@ -33,8 +35,8 @@ public class ExamResult {
         this.user = user;
     }
 
-    public String getPoints() {
-        return String.valueOf(points);
+    public double getPoints() {
+        return points;
     }
 
     public void setPoints(double points) {
@@ -42,7 +44,7 @@ public class ExamResult {
     }
 
     public String getStartAt() {
-        return startAt;
+        return DateHelper.parseOsiToString(startAt);
     }
 
     public void setStartAt(String startAt) {
@@ -50,7 +52,7 @@ public class ExamResult {
     }
 
     public String getEndAt() {
-        return endAt;
+        return DateHelper.parseOsiToString(endAt);
     }
 
     public void setEndAt(String endAt) {

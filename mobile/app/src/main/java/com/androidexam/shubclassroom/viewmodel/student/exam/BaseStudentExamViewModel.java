@@ -18,6 +18,6 @@ public class BaseStudentExamViewModel {
 
 //    public void navigateTo(ExamStudentFragment fragment)
 //    {
-//        navigation.navigate(fragment.getValue());
+////        navigation.navigate(fragment.getValue());
 //    }
 }

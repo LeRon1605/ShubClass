@@ -32,7 +32,7 @@ public class DoExamStudentActivity extends AppCompatActivity {
             examDto = (ExamDto) bundle.getSerializable("examDto");
 
             viewModel = new DoExamStudentViewModel(getApplicationContext(), examDto);
-            binding.setDoExamViewModel(viewModel);
+            binding.setDoExamStudentViewModel(viewModel);
 
 
             viewModel.getQuestion().observe(this, new Observer<String>() {
