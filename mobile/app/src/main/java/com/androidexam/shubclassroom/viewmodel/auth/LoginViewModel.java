@@ -3,7 +3,6 @@ package com.androidexam.shubclassroom.viewmodel.auth;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.view.teacher.HomeTeacherActivity;
-import com.androidexam.shubclassroom.view.teacher.exam.TeacherExamActivity;
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
 
@@ -104,6 +102,7 @@ public class LoginViewModel extends BaseAuthViewModel {
             intent = new Intent(context, HomeTeacherActivity.class);
         } else {
             intent = new Intent(context, HomeStudentActivity.class);
+//            intent = new Intent(context, ClassDetailActivity.class);
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

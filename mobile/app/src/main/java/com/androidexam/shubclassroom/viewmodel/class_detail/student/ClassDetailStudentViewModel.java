@@ -13,6 +13,7 @@ import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.SummaryIn4Student;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.model.student.StudentExitClass;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
@@ -60,6 +61,10 @@ public class ClassDetailStudentViewModel extends BaseClassDetailViewModel {
 
     public void setSummaryIn4Student(SummaryIn4Student summaryIn4Student) {
         this.summaryIn4Student = summaryIn4Student;
+    }
+
+    public void onStudentExamClicked() {
+        navigation.navigate(ClassDetailFragment.StudentExam.getValue());
     }
 
     public String getNameStudent() {

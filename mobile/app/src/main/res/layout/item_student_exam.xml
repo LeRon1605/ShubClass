@@ -3,13 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
+    <data>
+        <variable
+            name="ExamStudentItemViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.student.exam.ExamStudentItemViewModel" />
+    </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_class"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardElevation="10dp"
         app:cardCornerRadius="20dp"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="10dp"
@@ -26,8 +30,8 @@
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kiểm tra 15 phút"
-                android:textSize="20sp"
+                android:text="@={ExamStudentItemViewModel.examDto.name}"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/deep_blue"
                 />
@@ -43,16 +47,14 @@
                     android:layout_height="wrap_content"
                     android:text="Thời gian bắt đầu"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
                     />
 
                 <TextView
                     android:id="@+id/tv_timestart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="19:30:00 23/04/2023"
+                    android:text="@={ExamStudentItemViewModel.examDto.startTime}"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
                     android:layout_weight="1"
                     android:gravity="end"
                     />
@@ -69,16 +71,14 @@
                     android:layout_height="wrap_content"
                     android:text="Thời gian kết thúc"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
                     />
 
                 <TextView
                     android:id="@+id/tv_timeend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="19:45:00 23/04/2023"
+                    android:text="@={ExamStudentItemViewModel.examDto.endTime}"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
                     android:layout_weight="1"
                     android:gravity="end"
                     />
@@ -94,8 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Đã hoàn thành"
-                    android:textSize="18sp"
+                    android:text='@{ExamStudentItemViewModel.examDto.isDone ? "Đã hoàn thành" : ""}'
                     android:gravity="center|start"
                     android:textColor="@color/green"
                     />
@@ -103,9 +102,9 @@
                     android:id="@+id/btn_doexam"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="Làm bài"
+                    android:text='@{ExamStudentItemViewModel.examDto.isDone ? "Xem kết quả" : "Làm bài"}'
                     android:textAllCaps="false"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/kantumruy"
                     android:layout_gravity="end"
