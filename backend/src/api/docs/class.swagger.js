@@ -107,7 +107,15 @@
  *          type: string
  *      student:
  *          $ref: '#/definitions/Student'
- *
+ *  StudentSummaryDto:
+ *    type: object
+ *    properties:
+ *      average:
+ *          type: number
+ *      completedExam:
+ *          type: number
+ *      numberOfExams:
+ *          type: number
  */
 
 /**
@@ -284,6 +292,35 @@
 /**
  * @swagger
  *
+ * /classes/{id}/students:
+ *   delete:
+ *     tags: [Class]
+ *     description: Exit class
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: class id
+ *         required: true
+ *         in: path
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *              type: array
+ *              items:
+ *                  $ref: '#/definitions/Student'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+
+/**
+ * @swagger
+ *
  * /classes/{id}/students/{studentId}:
  *   delete:
  *     tags: [Class]
@@ -428,6 +465,36 @@
  *     responses:
  *       200:
  *         $ref: '#/responses/Success'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       404:
+ *         $ref: '#/responses/NotFound'
+ *       403:
+ *         $ref: '#/responses/Forbidden'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+/**
+ * @swagger
+ *
+ * /classes/{id}/students/me:
+ *   get:
+ *     tags: [Class]
+ *     description: Get summary information about you in class
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: class id
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *            $ref: '#/definitions/StudentSummaryDto'
  *       401:
  *         $ref: '#/responses/Unauthorized'
  *       404:

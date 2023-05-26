@@ -1,5 +1,9 @@
 package com.androidexam.shubclassroom.adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +16,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.databinding.ClassItemBinding;
+import com.androidexam.shubclassroom.model.ClassCreateDto;
+import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.teacher.BottomSheetClassTeacherFragment;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
     private List<ClassItemViewModel> itemList = new ArrayList<>();
     private List<ClassItemViewModel> itemListCopy = new ArrayList<>();
+    private Context context;
     private int fragmentIndex;
-    public ItemAdapter(List<ClassItemViewModel> classList, int fragmentIndex) {
+    public ItemAdapter(List<ClassItemViewModel> classList, int fragmentIndex, Context context) {
         itemList = classList;
         itemListCopy = classList;
         this.fragmentIndex = fragmentIndex;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -41,8 +51,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.binding.setClassItem(itemList.get(position));
+        holder.binding.coverImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
+                    Bundle bundle = new Bundle();
+                    ClassCreateDto classCreateDto = new ClassCreateDto(
+                            itemList.get(position).getClassModel().getId(),
+                            itemList.get(position).getClassModel().getName(),
+                            itemList.get(position).getClassModel().getDescription(),
+                            itemList.get(position).getClassModel().getSubjectName(),
+                            itemList.get(position).getClassModel().getNumberOfStudent()
+                    );
+                    bundle.putSerializable("Class", (Serializable) classCreateDto);
+                    bundle.putInt("FragmentIndex", FragmentIndex.Teacher.getValue());
+                    Intent intent = new Intent(context, ClassDetailActivity.class);
+                    intent.putExtra("myBundle", bundle);
+                    context.startActivity(intent, bundle);
+                }
+            }
+        });
     }
 
     @Override
@@ -64,7 +94,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             binding.btnMoreAction.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(fragmentIndex == 0) {
+                    if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
                         BottomSheetClassTeacherFragment dialog = new BottomSheetClassTeacherFragment(binding.getClassItem());
                         binding.getClassItem().setBottomSheetClassTeacherFragment(dialog);
                         dialog.show(((AppCompatActivity) v.getContext()).getSupportFragmentManager(), dialog.getTag());
@@ -90,7 +120,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
         else {
             for (ClassItemViewModel item : itemList) {
-                if (item.getId().toLowerCase().contains(searchText.toLowerCase())) {
+                if (item.getClassModel().getId().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredList.add(item);
                 }
             }

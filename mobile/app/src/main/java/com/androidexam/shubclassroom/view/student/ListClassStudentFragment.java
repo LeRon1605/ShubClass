@@ -1,5 +1,7 @@
 package com.androidexam.shubclassroom.view.student;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.adapter.ItemAdapter;
+import com.androidexam.shubclassroom.api.ApiCallback;
+import com.androidexam.shubclassroom.api.ClassApiService;
+import com.androidexam.shubclassroom.api.RetrofitClient;
+import com.androidexam.shubclassroom.model.ClassDetail;
+import com.androidexam.shubclassroom.model.MessageResponse;
+import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListClassStudentFragment extends Fragment {
     private RecyclerView rvClass;
@@ -33,37 +47,37 @@ public class ListClassStudentFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvClass = view.findViewById(R.id.lv_class);
-        listClass.add(new ClassItemViewModel(
-                "1", ".NET", "Lap trinh .Net", "Lap Trinh", 20, "TT1", "1-1-2022", "1-2-2022", getContext()
-        ));
-        listClass.add(new ClassItemViewModel(
-                "2", ".JAVA", "Lap trinh Java", "Lap Trinh", 20, "TT2", "1-1-2022", "1-2-2022", getContext()
-        ));
-        listClass.add(new ClassItemViewModel(
-                "3", "NodeJS", "Lap trinh JS", "Lap Trinh", 20, "TT3", "1-1-2022", "1-2-2022", getContext()
-        ));
-        adapter = new ItemAdapter(listClass, 0);
+//        listClass.add(new ClassItemViewModel(
+//                "1", ".NET", "Lap trinh .Net", "Lap Trinh", 20, "TT1", "1-1-2022", "1-2-2022", getContext()
+//        ));
+//        listClass.add(new ClassItemViewModel(
+//                "2", ".JAVA", "Lap trinh Java", "Lap Trinh", 20, "TT2", "1-1-2022", "1-2-2022", getContext()
+//        ));
+//        listClass.add(new ClassItemViewModel(
+//                "3", "NodeJS", "Lap trinh JS", "Lap Trinh", 20, "TT3", "1-1-2022", "1-2-2022", getContext()
+//        ));
+        adapter = new ItemAdapter(listClass, FragmentIndex.Student.getValue(), getContext());
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
         ClassItemViewModel.adapter = adapter;
-        //        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-//        String token = sharedPreferences.getString("token", null);
-//        ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
-//        Call<List<ClassItemViewModel>> call = apiService.getListClass("Brear " + token);
-//        call.enqueue(new Callback<List<ClassItemViewModel>>() {
-//            @Override
-//            public void onResponse(Call<List<ClassItemViewModel>> call, Response<List<ClassItemViewModel>> response) {
-//                List<ClassItemViewModel> listClassApi = response.body();
-//                for(ClassItemViewModel i : listClassApi) {
-//                    listClass.add(i);
-//                    adapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ClassItemViewModel>> call, Throwable t) {
-//
-//            }
-//        });
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+        ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
+        Call<List<ClassDetail>> call = apiService.getListClass("Brear " + token);
+        call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {
+            @Override
+            public void handleSuccess(List<ClassDetail> responseObject) {
+                for(ClassDetail i : responseObject) {
+//                    i.setContext(getContext());
+                    listClass.add(new ClassItemViewModel(getContext(), i));
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void handleFailure(MessageResponse errorResponse) {
+                Toast.makeText(getContext(), errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -38,7 +38,7 @@ public class ClassMemberItemAdapter extends RecyclerView.Adapter<ClassMemberItem
     public void onBindViewHolder(@NonNull ClassMemberItemAdapter.ClassMemberItemViewHolder holder, int position) {
         ClassMemberItemViewModel viewModel = new ClassMemberItemViewModel();
         viewModel.setStudentDTO(students.get(position));
-        holder.binding.setExamTeacherItemViewModel(viewModel);
+        holder.binding.setClassMemberItemViewModel(viewModel);
     }
 
     @Override

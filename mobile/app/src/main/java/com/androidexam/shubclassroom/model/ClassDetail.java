@@ -1,18 +1,24 @@
 package com.androidexam.shubclassroom.model;
 
-public class Class {
+public class ClassDetail {
     private String id;
     private String name;
     private String description;
     private String subjectName;
     private int numberOfStudent;
+    private String teacherId;
+    private String createAt;
+    private String updateAt;
 
-    public Class(String id, String name, String description, String subjectName, int numberOfStudent) {
+    public ClassDetail(String id, String name, String description, String subjectName, int numberOfStudent, String teacherId, String createAt, String updateAt) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.subjectName = subjectName;
         this.numberOfStudent = numberOfStudent;
+        this.teacherId = teacherId;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
     public String getId() {
@@ -53,5 +59,29 @@ public class Class {
 
     public void setNumberOfStudent(int numberOfStudent) {
         this.numberOfStudent = numberOfStudent;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
     }
 }

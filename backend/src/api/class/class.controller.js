@@ -119,6 +119,18 @@ class ClassController {
         );
         return res.status(200).json(exams);
     }
+
+    async getStudentInfo(req, res, next) {
+        const info = await ClassService.getStudentSummaryInClass(req.session.id, req.params.id);
+        return res.status(200).json(info);
+    }
+
+    async existClass(req, res, next) {
+        await ClassService.exitClass(req.params.id, req.session.id);
+        return res.status(200).json({
+            message: 'Exit class successfully'
+        });
+    }
 }
 
 export default new ClassController();

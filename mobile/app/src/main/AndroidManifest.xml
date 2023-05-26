@@ -30,7 +30,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.ClassDetailActivity"
+            android:name=".view.class_detail.ClassDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

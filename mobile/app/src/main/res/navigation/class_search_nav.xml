@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/class_search_nav"
+    app:startDestination="@id/listClassTeacherFragment">
+
+    <fragment
+        android:id="@+id/listClassTeacherFragment"
+        android:name="com.androidexam.shubclassroom.view.student.ListClassFoundStudentFragment"
+        android:label="fragment_list_class_search"
+        tools:layout="@layout/fragment_list_class_search" />
+</navigation>
