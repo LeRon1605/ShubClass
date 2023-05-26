@@ -386,7 +386,8 @@
                         android:layout_height="50dp"
                         android:backgroundTint="@color/blue"
                         android:layout_gravity="center"
-                        app:cardCornerRadius="15dp">
+                        app:cardCornerRadius="15dp"
+                        android:onClick="@{() -> ViewModel.onClickExerciseButton()}">
 
                         <ImageView
                             android:layout_width="25dp"

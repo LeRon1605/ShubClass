@@ -18,6 +18,8 @@ import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.Exam
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ShowAllRequestInClassFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ShowStudentInClassFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.student.ClassDetailStudentFragment;
+import com.androidexam.shubclassroom.view.teacher.exam.CreateExamTeacherFragment;
+import com.androidexam.shubclassroom.view.teacher.exam.ListExamTeacherFragment;
 
 public class ClassDetailActivity extends AppCompatActivity implements INavigation {
     private ClassCreateDto classCreateDto;
@@ -69,6 +71,10 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
             transaction.replace(R.id.fr_classdetail, new ExamResultsTeacherFragment(this, classCreateDto.getId()));
         } else if (id == ClassDetailFragment.StudentExam.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ExamStudentFragment(this, idClass));
+        } else if (id == ClassDetailFragment.TeacherExam.getValue()) {
+            transaction.replace(R.id.fr_classdetail, new ListExamTeacherFragment(this, classCreateDto.getId()));
+        } else if (id == ClassDetailFragment.TeacherCreateExam.getValue()) {
+            transaction.replace(R.id.fr_classdetail, new CreateExamTeacherFragment(this, classCreateDto.getId()));
         }
         transaction.commit();
     }

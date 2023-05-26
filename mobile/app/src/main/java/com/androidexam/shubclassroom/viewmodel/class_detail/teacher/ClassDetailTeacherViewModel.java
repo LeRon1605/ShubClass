@@ -39,4 +39,7 @@ public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
     public void onClickArrowBack() {
         context.startActivity(new Intent(context, HomeTeacherActivity.class));
     }
+    public void onClickExerciseButton() {
+        navigateTo(ClassDetailFragment.TeacherExam);
+    }
 }
