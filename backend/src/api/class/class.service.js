@@ -276,7 +276,7 @@ class ClassService {
         return request;
     }
 
-    async getStudentSummaryInClass(classId, studentId) {
+    async getStudentSummaryInClass(studentId, classId) {
         const classEntity = await Class.findOne({
             where: {
                 id: classId,
@@ -285,7 +285,7 @@ class ClassService {
         });
 
         if (classEntity == null) {
-            throw new EntityNotFoundException('Class', id);
+            throw new EntityNotFoundException('Class', classId);
         }
 
         if (!classEntity.StudentClasses.some((x) => x.studentId == studentId)) {
