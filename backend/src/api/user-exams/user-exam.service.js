@@ -1,5 +1,9 @@
 import sequelize from '../../database/models/index.cjs';
-import { ANSWER_STATE, EXAM_STATE, EXAM_TYPE } from '../../shared/enum/index.js';
+import {
+    ANSWER_STATE,
+    EXAM_STATE,
+    EXAM_TYPE
+} from '../../shared/enum/index.js';
 import {
     BadRequestException,
     EntityNotFoundException,
@@ -11,7 +15,8 @@ import { DateHelper } from '../../shared/helpers/index.js';
 import { UserExamCreateDto } from './dto/user-exam-create.dto.js';
 import { UserExamDto } from './dto/user-exam.dto.js';
 
-const { UserExam, Exam, ExamDetail, UserAnswer, Class, StudentClass } = sequelize;
+const { UserExam, Exam, ExamDetail, UserAnswer, Class, StudentClass } =
+    sequelize;
 class UserExamService {
     async startDoingExam(examId, currentSession) {
         const exam = await Exam.findOne({
@@ -31,7 +36,9 @@ class UserExamService {
         }
 
         if (exam.state != EXAM_STATE.PUBLISHED) {
-            throw new BadRequestException('Invalid exam state, exam has already been closed or has not been opened yet');
+            throw new BadRequestException(
+                'Invalid exam state, exam has already been closed or has not been opened yet'
+            );
         }
 
         if (
@@ -39,10 +46,7 @@ class UserExamService {
                 (x) => x.studentId == currentSession.id
             )
         ) {
-            throw new EntityForbiddenAccessException(
-                'Class',
-                exam.Class.id
-            );
+            throw new EntityForbiddenAccessException('Class', exam.Class.id);
         }
 
         const userExam = await UserExam.findOne({
@@ -66,7 +70,11 @@ class UserExamService {
             }
         }
 
-        return UserExamDto.toDto(await UserExam.create(UserExamCreateDto.toEntity(currentSession.id, examId)));
+        return UserExamDto.toDto(
+            await UserExam.create(
+                UserExamCreateDto.toEntity(currentSession.id, examId)
+            )
+        );
     }
 
     async submitExam(id, currentSession) {

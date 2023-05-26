@@ -46,7 +46,7 @@ class ExamService {
                     }
                 }
             });
-    
+
             if (duplicate != null) {
                 throw new BadRequestException(
                     'Invalid exam duration time, there is existed exam in that duration'
@@ -267,7 +267,7 @@ class ExamService {
 
     async getStudentResultInExam(examId, userId) {
         const userExams = await UserExam.findAll({
-            where: {    
+            where: {
                 examId: examId,
                 studentId: userId
             },
@@ -278,7 +278,7 @@ class ExamService {
             throw NotFoundException('Student did not take this exam.');
         }
 
-        return userExams.map(x => ExamResultDto.toDto(x));
+        return userExams.map((x) => ExamResultDto.toDto(x));
     }
 }
 

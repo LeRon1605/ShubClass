@@ -8,8 +8,7 @@ class AccountController {
     }
 
     async getAllAccounts(req, res, next) {
-        const data = null;
-        data = await AccountService.getAllAccounts();
+        const data = await AccountService.getAllAccounts();
         return res.status(200).json(data);
     }
 
@@ -35,6 +34,15 @@ class AccountController {
         await AccountService.deleteAccount(req.params.id);
         return res.status(200).json({
             message: 'Deleted account'
+        });
+    }
+
+    async updateUser(req, res, next) {
+        const userEntity = AccountUpdateDto.toEntity(req.body).user;
+        const id = req.session.id;
+        await AccountService.updateUser(id, userEntity);
+        return res.status(200).json({
+            message: 'Update account successfully.'
         });
     }
 
@@ -95,7 +103,7 @@ class AccountController {
     async sayValid(req, res, next) {
         return res.status(200).json({
             message: 'Valid token'
-        })
+        });
     }
 }
 

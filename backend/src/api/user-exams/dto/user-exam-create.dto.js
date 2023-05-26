@@ -9,12 +9,10 @@ class Dto {
             examId: examId,
             startAt: DateHelper.getCurrentDate(),
             endAt: null
-        }
+        };
     }
 }
 
 const UserExamCreateDto = new Dto();
 
-export {
-    UserExamCreateDto
-}
+export { UserExamCreateDto };

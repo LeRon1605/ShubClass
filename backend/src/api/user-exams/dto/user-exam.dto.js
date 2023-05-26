@@ -6,19 +6,19 @@ class Dto {
             examId: entity.examId,
             startAt: entity.startAt,
             endAt: entity.endAt,
-            userAnswers: entity.UserAnswers ? entity.UserAnswers.map(x => {
-                return {
-                    userExamId: x.userExamId,
-                    examDetailId: x.examDetailId,
-                    answer: x.userAnswer
-                }
-            }) : []
-        }
+            userAnswers: entity.UserAnswers
+                ? entity.UserAnswers.map((x) => {
+                      return {
+                          userExamId: x.userExamId,
+                          examDetailId: x.examDetailId,
+                          answer: x.userAnswer
+                      };
+                  })
+                : []
+        };
     }
 }
 
 const UserExamDto = new Dto();
 
-export {
-    UserExamDto
-}
+export { UserExamDto };

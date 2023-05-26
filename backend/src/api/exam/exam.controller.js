@@ -27,7 +27,10 @@ class ExamController {
     }
 
     async getExamResultOfStudent(req, res, next) {
-        const result = await ExamService.getStudentResultInExam(req.params.id, req.params.studentId);
+        const result = await ExamService.getStudentResultInExam(
+            req.params.id,
+            req.params.studentId
+        );
         return res.status(200).json(result);
     }
 }

@@ -5,4 +5,11 @@ import ANSWER_STATE from './answer-state.enum.js';
 import EXAM_TYPE from './exam-type.enum.js';
 import DEFAULT_AVATAR from './default-avatar.enum.js';
 
-export { ACCOUNT_STATE, REQUEST_STATE, EXAM_STATE, ANSWER_STATE, EXAM_TYPE, DEFAULT_AVATAR };
+export {
+    ACCOUNT_STATE,
+    REQUEST_STATE,
+    EXAM_STATE,
+    ANSWER_STATE,
+    EXAM_TYPE,
+    DEFAULT_AVATAR
+};

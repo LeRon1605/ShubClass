@@ -1,4 +1,5 @@
 import sequelize from '../../database/models/index.cjs';
+import jwt from 'jsonwebtoken';
 import { AccountDto } from './dtos/account.dto.js';
 import {
     EntityNotFoundException,
@@ -129,6 +130,23 @@ class AccountService {
                 id: id
             }
         });
+    }
+
+    async updateUser(id, body) {
+        const userEntity = await User.findByPk(id);
+
+        if (!userEntity) {
+            throw new EntityNotFoundException('User', id);
+        }
+
+        await userEntity.update(
+            { body },
+            {
+                where: {
+                    id: id
+                }
+            }
+        );
     }
 
     async login(email, password) {
