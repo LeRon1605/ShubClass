@@ -12,7 +12,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:background="@drawable/backgrounddetail"
-        tools:context=".view.student.ClassDetailStudentFragment">
+        tools:context=".view.class_detail.student.ClassDetailStudentFragment">
 
         <LinearLayout
             android:id="@+id/ll_studentclassdetail"
@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
+                    android:onClick="@{() -> ViewModel.onClickArrowBack()}"
                     android:id="@+id/ib_back"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -143,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/kantumruy"
-                        android:text="Tao ne"
+                        android:text="@{ViewModel.nameStudent}"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />

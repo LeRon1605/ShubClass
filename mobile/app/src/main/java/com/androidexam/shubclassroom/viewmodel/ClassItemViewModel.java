@@ -22,6 +22,7 @@ import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.utilities.DecodeToken;
 import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.student.FindClassStudentActivity;
@@ -175,6 +176,14 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
     }
     public void redirectClassDetailStudent() {
         Bundle bundle = new Bundle();
+        String nameStudent = "";
+        try {
+            DecodeToken.decoded(token);
+            nameStudent = DecodeToken.getStringValueObjectByKey("name");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        bundle.putString("nameStudent", nameStudent);
         bundle.putString("idClass", classModel.getId());
         bundle.putString("nameClass", classModel.getName());
         bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());

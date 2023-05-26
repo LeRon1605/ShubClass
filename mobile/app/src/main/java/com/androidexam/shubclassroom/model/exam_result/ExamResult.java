@@ -5,11 +5,11 @@ import android.util.Log;
 public class ExamResult {
     private Exam exam;
     private User user;
-    private Double points;
+    private double points;
     private String startAt;
     private String endAt;
 
-    public ExamResult(Exam exam, User user, Double points, String startAt, String endAt) {
+    public ExamResult(Exam exam, User user, double points, String startAt, String endAt) {
         this.exam = exam;
         this.user = user;
         this.points = points;
@@ -33,11 +33,11 @@ public class ExamResult {
         this.user = user;
     }
 
-    public Double getPoints() {
-        return points;
+    public String getPoints() {
+        return String.valueOf(points);
     }
 
-    public void setPoints(Double points) {
+    public void setPoints(double points) {
         this.points = points;
     }
 
