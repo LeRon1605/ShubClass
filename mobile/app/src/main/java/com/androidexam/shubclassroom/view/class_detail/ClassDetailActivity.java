@@ -11,12 +11,13 @@ import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.view.class_detail.class_detail.student.ExamStudentFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ClassDetailTeacherFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ExamResultsTeacherFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ExamTeacherFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ShowAllRequestInClassFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ShowStudentInClassFragment;
-import com.androidexam.shubclassroom.view.student.ClassDetailStudentFragment;
+import com.androidexam.shubclassroom.view.class_detail.class_detail.student.ClassDetailStudentFragment;
 
 public class ClassDetailActivity extends AppCompatActivity implements INavigation {
     private ClassCreateDto classCreateDto;
@@ -32,12 +33,16 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
             Log.d("TAG", "FragmentIndex: " + fragmentIndex);
             if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
                 classCreateDto = (ClassCreateDto) bundle.getSerializable("Class");
-//                ClassDetailTeacherViewModel viewModel  = new ClassDetailTeacherViewModel(getApplicationContext(), classCreateDto);
                 navigate(ClassDetailFragment.TeacherClassDetail.getValue());
             } else {
                 idClass = bundle.getString("idClass");
                 nameClass = bundle.getString("nameClass");
-                navigate(ClassDetailFragment.StudentClassDetail.getValue());
+                int id = bundle.getInt("fragment");
+                if (id != 0) {
+                    navigate(id);
+                } else {
+                    navigate(ClassDetailFragment.StudentClassDetail.getValue());
+                }
             }
         }
     }
@@ -59,6 +64,8 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
             transaction.replace(R.id.fr_classdetail, new ExamTeacherFragment(this, classCreateDto.getId()));
         } else if(id == ClassDetailFragment.ShowExamResult.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ExamResultsTeacherFragment(this, classCreateDto.getId()));
+        } else if (id == ClassDetailFragment.StudentExam.getValue()) {
+            transaction.replace(R.id.fr_classdetail, new ExamStudentFragment(this, idClass));
         }
         transaction.commit();
     }

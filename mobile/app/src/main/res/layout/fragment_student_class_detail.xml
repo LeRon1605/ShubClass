@@ -12,7 +12,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:background="@drawable/backgrounddetail"
-        tools:context=".view.student.ClassDetailStudentFragment">
+        tools:context=".view.class_detail.class_detail.student.ClassDetailStudentFragment">
 
         <LinearLayout
             android:id="@+id/ll_studentclassdetail"
@@ -328,6 +328,7 @@
                         android:layout_gravity="center"
                         android:backgroundTint="@color/blue"
                         app:cardCornerRadius="15dp"
+                        android:onClick="@{() -> ViewModel.onStudentExamClicked()}"
                         >
 
                         <ImageView

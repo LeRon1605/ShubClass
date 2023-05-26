@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.androidexam.shubclassroom.view.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.auth.AuthActivity;
 
 public class MainActivity extends AppCompatActivity {

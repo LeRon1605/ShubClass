@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.model.SummaryIn4Student;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.viewmodel.class_detail.BaseClassDetailViewModel;
 
@@ -40,5 +41,9 @@ public class ClassDetailStudentViewModel extends BaseClassDetailViewModel {
 
     public void setSummaryIn4Student(SummaryIn4Student summaryIn4Student) {
         this.summaryIn4Student = summaryIn4Student;
+    }
+
+    public void onStudentExamClicked() {
+        navigation.navigate(ClassDetailFragment.StudentExam.getValue());
     }
 }

@@ -1,9 +1,8 @@
 package com.androidexam.shubclassroom.viewmodel.student.exam;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -18,10 +17,8 @@ import com.androidexam.shubclassroom.model.exam.ExamDto;
 import com.androidexam.shubclassroom.model.exam.SessionExamDto;
 import com.androidexam.shubclassroom.model.exam.UserAnswerDto;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
-import com.androidexam.shubclassroom.shared.INavigation;
-import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
-import com.androidexam.shubclassroom.view.ClassDetailActivity;
-import com.androidexam.shubclassroom.view.student.exam.DoExamStudentActivity;
+import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 
 import java.util.ArrayList;
 
@@ -107,10 +104,7 @@ public class DoExamStudentViewModel {
             @Override
             public void handleFailure(MessageResponse errorResponse) {
                 Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, ClassDetailActivity.class);
-                intent.putExtra("fragment", ClassDetailFragment.StudentExam.getValue());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                redirectToExamPage();
             }
         });
     }
@@ -170,10 +164,7 @@ public class DoExamStudentViewModel {
             @Override
             public void handleSuccess(MessageResponse responseObject) {
                 Toast.makeText(context, responseObject.getMessage(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ClassDetailActivity.class);
-                intent.putExtra("fragment", ClassDetailFragment.StudentExam.getValue());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                redirectToExamPage();
             }
 
             @Override
@@ -192,10 +183,7 @@ public class DoExamStudentViewModel {
     }
 
     public void onButtonCancelClicked() {
-        Intent intent = new Intent(context, ClassDetailActivity.class);
-        intent.putExtra("fragment", ClassDetailFragment.StudentExam.getValue());
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        redirectToExamPage();
     }
 
     public ExamDto getExamDto() {
@@ -292,5 +280,16 @@ public class DoExamStudentViewModel {
 
     public void setTotalQuestion(MutableLiveData<String> totalQuestion) {
         this.totalQuestion = totalQuestion;
+    }
+
+    private void redirectToExamPage() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());
+        bundle.putInt("fragment", ClassDetailFragment.StudentExam.getValue());
+        bundle.putString("idClass", examDto.getClassId());
+        Intent intent = new Intent(context, ClassDetailActivity.class);
+        intent.putExtra("myBundle", bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }

@@ -3,7 +3,6 @@ package com.androidexam.shubclassroom.viewmodel.student.exam;
 import android.content.Context;
 
 import com.androidexam.shubclassroom.shared.INavigation;
-import com.androidexam.shubclassroom.view.student.exam.ExamStudentFragment;
 
 public class BaseStudentExamViewModel {
 

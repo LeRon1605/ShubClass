@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view.student.exam;
+package com.androidexam.shubclassroom.view.class_detail.class_detail.student;
 
 import android.os.Bundle;
 
@@ -22,6 +22,7 @@ import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.databinding.FragmentStudentExamBinding;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.viewmodel.student.exam.ExamStudentViewModel;
 

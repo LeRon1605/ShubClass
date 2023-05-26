@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.view.student;
+package com.androidexam.shubclassroom.view.class_detail.class_detail.student;
 
 import android.content.Context;
 import android.content.SharedPreferences;

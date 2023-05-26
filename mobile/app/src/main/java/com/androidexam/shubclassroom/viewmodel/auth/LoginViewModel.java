@@ -3,7 +3,6 @@ package com.androidexam.shubclassroom.viewmodel.auth;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,10 +15,8 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.AuthFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
-import com.androidexam.shubclassroom.view.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.view.teacher.HomeTeacherActivity;
-import com.androidexam.shubclassroom.view.teacher.exam.TeacherExamActivity;
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
 
@@ -34,21 +31,21 @@ public class LoginViewModel extends BaseAuthViewModel {
         super(context, navigation);
         authApiService = RetrofitClient.getRetrofitInstance().create(AuthApiService.class);
 
-//        if (SharedPreferencesManager.getInstance(context).getAccessToken() != null) {
-//            Call<MessageResponse> validateToken = authApiService.validate(SharedPreferencesManager.getInstance(context).getAccessToken());
-//            validateToken.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
-//                @Override
-//                public void handleSuccess(MessageResponse responseObject) {
-//                    redirectByRole(SharedPreferencesManager.getInstance(context).getRole());
-//                }
-//
-//                @Override
-//                public void handleFailure(MessageResponse errorResponse) {
-//                    Toast.makeText(context, "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
-//                    SharedPreferencesManager.getInstance(context).clear();
-//                }
-//            });
-//        }
+        if (SharedPreferencesManager.getInstance(context).getAccessToken() != null) {
+            Call<MessageResponse> validateToken = authApiService.validate(SharedPreferencesManager.getInstance(context).getAccessToken());
+            validateToken.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
+                @Override
+                public void handleSuccess(MessageResponse responseObject) {
+                    redirectByRole(SharedPreferencesManager.getInstance(context).getRole());
+                }
+
+                @Override
+                public void handleFailure(MessageResponse errorResponse) {
+                    Toast.makeText(context, "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+                    SharedPreferencesManager.getInstance(context).clear();
+                }
+            });
+        }
         accountLoginDto = new AccountLoginDto();
     }
 
