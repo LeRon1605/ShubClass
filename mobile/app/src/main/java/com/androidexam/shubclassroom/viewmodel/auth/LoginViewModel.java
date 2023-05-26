@@ -16,6 +16,7 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.AuthFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.view.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.view.teacher.HomeTeacherActivity;
 import com.androidexam.shubclassroom.view.teacher.exam.TeacherExamActivity;

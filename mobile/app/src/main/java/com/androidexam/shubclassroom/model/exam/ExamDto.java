@@ -2,27 +2,31 @@ package com.androidexam.shubclassroom.model.exam;
 
 import com.androidexam.shubclassroom.utilities.DateHelper;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class ExamDto {
+public class ExamDto implements Serializable {
     private String id;
-    private int state;
-    private String type;
     private String name;
+    private String type;
+    private int state;
+    private String classId;
     private String startTime;
     private String endTime;
-    private String details;
-    private String classId;
+    private String createAt;
+    private String updateAt;
+    private boolean isDone;
 
-    public ExamDto(String id, int state, String type, String name, String startTime, String endTime, String details, String classId) {
+    public ExamDto(String id, String name, String type, int state, String classId, String startTime, String endTime, String createAt, String updateAt, boolean isDone) {
         this.id = id;
-        this.state = state;
-        this.type = type;
         this.name = name;
+        this.type = type;
+        this.state = state;
+        this.classId = classId;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.details = details;
-        this.classId = classId;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.isDone = isDone;
     }
 
     public String getId() {
@@ -80,15 +84,32 @@ public class ExamDto {
     public void setClassId(String classId) {
         this.classId = classId;
     }
+
     public String getStateString() {
         return state == 0 ? "Chưa mở" : (state == 1 ? "Đang diễn ra" : "Đã kết thúc");
     }
 
-    public String getDetails() {
-        return details;
+    public boolean getIsDone() {
+        return isDone;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
     }
 }
