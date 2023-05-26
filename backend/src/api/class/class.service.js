@@ -319,6 +319,31 @@ class ClassService {
             numberOfExams: numberOfExams
         }
     }
+
+    async exitClass(classId, studentId) {
+        const classEntity = await Class.findOne({
+            where: {
+                id: classId,
+            },
+            include: [Exam, StudentClass]
+        });
+
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', classId);
+        }
+
+        if (!classEntity.StudentClasses.some((x) => x.studentId == studentId && x.state == REQUEST_STATE.APPROVED)) {
+            throw new EntityForbiddenAccessException('Class', classId);
+        }
+
+        await StudentClass.destroy({
+            where: {
+                studentId: studentId,
+                classId: classId,
+                state: REQUEST_STATE.APPROVED
+            }
+        });
+    }
 }
 
 export default new ClassService();
