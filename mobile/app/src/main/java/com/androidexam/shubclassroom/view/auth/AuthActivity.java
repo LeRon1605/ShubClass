@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.androidexam.shubclassroom.R;
+import com.androidexam.shubclassroom.adapter.LoginFragment;
 import com.androidexam.shubclassroom.shared.AuthFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 

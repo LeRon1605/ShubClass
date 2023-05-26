@@ -2,6 +2,9 @@ package com.androidexam.shubclassroom.viewmodel.class_detail.teacher;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidexam.shubclassroom.adapter.ExamTeacherItemAdapter;
 import com.androidexam.shubclassroom.model.ClassDetail;
@@ -50,5 +53,14 @@ public class ExamViewModel extends BaseClassDetailViewModel {
     }
     public void onClickSeeResult() {
         navigation.navigate(ClassDetailFragment.ShowExamResult.getValue());
+    }
+    public void showErr() {
+        Toast.makeText(context, "Bài kiểm tra chưa kết thúc hoặc chưa mở", Toast.LENGTH_SHORT).show();
+    }
+    public void onClickArrowBack() {
+        int count = ((AppCompatActivity) context).getSupportFragmentManager().getBackStackEntryCount();
+        if(count == 0) {
+
+        }
     }
 }

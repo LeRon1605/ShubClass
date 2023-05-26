@@ -23,23 +23,17 @@ public class ViewPageStudentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new HomeStudentFragment();
-            case 1:
                 return new ClassStudentFragment();
-            case 2:
-                return new ScheduleStudentFragment();
-            case 3:
-                return new AlertStudentFragment();
-            case 4:
+            case 1:
                 return new ProfileStudentFragment();
             default:
-                return new HomeStudentFragment();
+                return new ClassStudentFragment();
         }
     }
 
 
     @Override
     public int getItemCount() {
-        return 5 ;
+        return 2 ;
     }
 }

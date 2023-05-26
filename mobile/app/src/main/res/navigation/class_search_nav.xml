@@ -9,5 +9,5 @@
         android:id="@+id/listClassTeacherFragment"
         android:name="com.androidexam.shubclassroom.view.student.ListClassFoundStudentFragment"
         android:label="fragment_list_class_search"
-        tools:layout="@layout/fragment_list_class_search" />
+        tools:layout="@layout/fragment_list_class_found_student" />
 </navigation>

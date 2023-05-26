@@ -16,12 +16,13 @@ import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.Exam
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ExamTeacherFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ShowAllRequestInClassFragment;
 import com.androidexam.shubclassroom.view.class_detail.class_detail.teacher.ShowStudentInClassFragment;
-import com.androidexam.shubclassroom.view.student.ClassDetailStudentFragment;
+import com.androidexam.shubclassroom.view.class_detail.student.ClassDetailStudentFragment;
 
 public class ClassDetailActivity extends AppCompatActivity implements INavigation {
     private ClassCreateDto classCreateDto;
     private String idClass;
     private String nameClass;
+    private String nameStudent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +33,11 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
             Log.d("TAG", "FragmentIndex: " + fragmentIndex);
             if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
                 classCreateDto = (ClassCreateDto) bundle.getSerializable("Class");
-//                ClassDetailTeacherViewModel viewModel  = new ClassDetailTeacherViewModel(getApplicationContext(), classCreateDto);
                 navigate(ClassDetailFragment.TeacherClassDetail.getValue());
             } else {
+                nameStudent = bundle.getString("nameStudent");
                 idClass = bundle.getString("idClass");
+                Log.d("TAG", "idClassClassDetailActivity: " + idClass);
                 nameClass = bundle.getString("nameClass");
                 navigate(ClassDetailFragment.StudentClassDetail.getValue());
             }
@@ -48,7 +50,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
         if(id == ClassDetailFragment.TeacherClassDetail.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ClassDetailTeacherFragment(this, classCreateDto));
         } else if(id == ClassDetailFragment.StudentClassDetail.getValue()) {
-            transaction.replace(R.id.fr_classdetail, new ClassDetailStudentFragment(this, idClass,nameClass));
+            transaction.replace(R.id.fr_classdetail, new ClassDetailStudentFragment(this, idClass,nameClass, nameStudent));
         }
         else if(id == ClassDetailFragment.ShowStudentOfClass.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ShowStudentInClassFragment(this, classCreateDto));

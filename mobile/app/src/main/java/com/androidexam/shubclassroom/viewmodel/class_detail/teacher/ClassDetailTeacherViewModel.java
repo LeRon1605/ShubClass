@@ -1,6 +1,7 @@
 package com.androidexam.shubclassroom.viewmodel.class_detail.teacher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
@@ -8,6 +9,7 @@ import androidx.databinding.BaseObservable;
 import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.view.teacher.HomeTeacherActivity;
 import com.androidexam.shubclassroom.viewmodel.class_detail.BaseClassDetailViewModel;
 
 public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
@@ -33,5 +35,8 @@ public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
     }
     public void onClickSeePointChart() {
         navigateTo(ClassDetailFragment.ShowAllExamInClass);
+    }
+    public void onClickArrowBack() {
+        context.startActivity(new Intent(context, HomeTeacherActivity.class));
     }
 }
