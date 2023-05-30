@@ -22,7 +22,7 @@
             android:orientation="vertical"
             >
             <ImageButton
-                android:onClick="@{() -> ViewModel.onClickArrowBack()}"
+                android:onClick="@{() -> ViewModel.onClickArrowBackActivity()}"
                 android:id="@+id/ib_back"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -457,8 +457,8 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="17dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:src="@drawable/user" />
                     </androidx.cardview.widget.CardView>

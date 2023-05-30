@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.androidexam.shubclassroom.adapter.ExamTeacherItemAdapter;
 import com.androidexam.shubclassroom.model.ClassDetail;
@@ -16,10 +17,15 @@ import com.androidexam.shubclassroom.viewmodel.class_detail.BaseClassDetailViewM
 public class ExamViewModel extends BaseClassDetailViewModel {
     private ExamDto examDto;
     private String txtSearch;
+    private FragmentManager fm;
     public static ExamTeacherItemAdapter adapter;
     public ExamViewModel(Context context, INavigation navigation, ExamDto examDto) {
         super(context, navigation);
         this.examDto = examDto;
+    }
+    public ExamViewModel(Context context, INavigation navigation, FragmentManager fm) {
+        super(context, navigation);
+        this.fm = fm;
     }
     public ExamViewModel(Context context, INavigation navigation) {
         super(context, navigation);
@@ -58,9 +64,8 @@ public class ExamViewModel extends BaseClassDetailViewModel {
         Toast.makeText(context, "Bài kiểm tra chưa kết thúc hoặc chưa mở", Toast.LENGTH_SHORT).show();
     }
     public void onClickArrowBack() {
-        int count = ((AppCompatActivity) context).getSupportFragmentManager().getBackStackEntryCount();
-        if(count == 0) {
-
+        if(fm.getBackStackEntryCount() >  0) {
+            fm.popBackStack();
         }
     }
 }

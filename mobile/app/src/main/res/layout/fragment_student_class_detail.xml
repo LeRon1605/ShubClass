@@ -391,6 +391,7 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
+                        android:onClick="@{() -> ViewModel.onClickShowStudentInClass()}"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"

@@ -25,6 +25,7 @@ import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.utilities.DecodeToken;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
@@ -54,8 +55,7 @@ public class ListClassStudentFragment extends Fragment {
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
         ClassItemViewModel.adapter = adapter;
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
+        String token = SharedPreferencesManager.getInstance(getContext()).getAccessToken();
         ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
         Call<List<ClassDetail>> call = apiService.getListClass("Brear " + token);
         call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {

@@ -18,6 +18,7 @@ import com.androidexam.shubclassroom.model.exam.SessionExamDto;
 import com.androidexam.shubclassroom.model.exam.UserAnswerDto;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 
 import java.util.ArrayList;
@@ -56,9 +57,9 @@ public class DoExamStudentViewModel {
         listQuestions = new ArrayList<>();
 
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODUxMDY0ODAsImV4cCI6MTY4NTM2NTY4MH0.z6wNFPBWfwgRS6qtdF9WJ6Q6zmPsow7Cm_aMWzZNci0";
+        token = SharedPreferencesManager.getInstance(context).getAccessToken();
 
-        Call<SessionExamDto> startSessionCall = examApiService.postSession(token, examDto.getId());
+        Call<SessionExamDto> startSessionCall = examApiService.postSession("Bear " + token, examDto.getId());
         startSessionCall.enqueue(new ApiCallback<SessionExamDto, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(SessionExamDto responseObject) {

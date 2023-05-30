@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
+import androidx.fragment.app.FragmentManager;
 
 import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.RequestApiService;
@@ -15,6 +16,7 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.request.RequestIn4;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.class_detail.BaseClassDetailViewModel;
 
 import retrofit2.Call;
@@ -24,16 +26,18 @@ public class RequestViewModel extends BaseClassDetailViewModel {
     private RequestApiService apiService;
     private String idClass;
     private String token;
-
+    private FragmentManager fm;
     public RequestViewModel(INavigation navigation, RequestIn4 requestIn4, Context context, String idClass) {
         super(context, navigation);
         this.requestIn4 = requestIn4;
         this.idClass = idClass;
         apiService = RetrofitClient.getRetrofitInstance().create(RequestApiService.class);
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        this.token = sharedPreferences.getString("token", null);
+        this.token = SharedPreferencesManager.getInstance(context).getAccessToken();
     }
-
+    public RequestViewModel(INavigation navigation, Context context, FragmentManager fm) {
+        super(context, navigation);
+        this.fm = fm;
+    }
     public void onClickAcceptRequest() {
         Call<MessageResponse> call = apiService.acceptRequest("Bear " + token, idClass, requestIn4.getStudent().getId());
         call.enqueue(new ApiCallback<MessageResponse, MessageResponse>(MessageResponse.class) {
@@ -80,5 +84,10 @@ public class RequestViewModel extends BaseClassDetailViewModel {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+    public void onClickArrowBack() {
+        if(fm.getBackStackEntryCount() >  0) {
+            fm.popBackStack();;
+        }
     }
 }

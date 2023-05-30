@@ -24,6 +24,7 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.student.StudentExitClass;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
 import com.androidexam.shubclassroom.utilities.DecodeToken;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.class_detail.ClassDetailActivity;
 import com.androidexam.shubclassroom.view.student.BottomSheetClassStudentFragment;
 import com.androidexam.shubclassroom.view.student.FindClassStudentActivity;
@@ -51,8 +52,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
         this.context = context;
         classApiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
         requestApiService = RetrofitClient.getRetrofitInstance().create(RequestApiService.class);
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
+        token = SharedPreferencesManager.getInstance(context).getAccessToken();
         this.classModel = classModel;
     }
 

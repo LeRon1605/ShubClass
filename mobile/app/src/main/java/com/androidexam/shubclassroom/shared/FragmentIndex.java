@@ -5,7 +5,7 @@ public enum FragmentIndex {
 
     private final int value;
 
-    private FragmentIndex(int value) {
+    FragmentIndex(int value) {
         this.value = value;
     }
 

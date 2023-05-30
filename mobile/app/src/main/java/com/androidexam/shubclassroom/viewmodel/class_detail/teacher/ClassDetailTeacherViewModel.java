@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 
 import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
@@ -14,12 +16,16 @@ import com.androidexam.shubclassroom.viewmodel.class_detail.BaseClassDetailViewM
 
 public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
     private ClassCreateDto classCreateDto;
-
+    private FragmentManager fm;
     public ClassDetailTeacherViewModel(Context context, INavigation navigation, ClassCreateDto classCreateDto) {
         super(context, navigation);
         this.classCreateDto = classCreateDto;
     }
-
+    public ClassDetailTeacherViewModel(Context context, INavigation navigation, ClassCreateDto classCreateDto, FragmentManager fm) {
+        super(context, navigation);
+        this.fm = fm;
+        this.classCreateDto = classCreateDto;
+    }
     public ClassCreateDto getClassCreateDto() {
         return classCreateDto;
     }
@@ -36,7 +42,12 @@ public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
     public void onClickSeePointChart() {
         navigateTo(ClassDetailFragment.ShowAllExamInClass);
     }
-    public void onClickArrowBack() {
+    public void onClickArrowBackActivity() {
         context.startActivity(new Intent(context, HomeTeacherActivity.class));
+    }
+    public void onClickArrowBack() {
+        if(fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();;
+        }
     }
 }

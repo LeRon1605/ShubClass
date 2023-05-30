@@ -73,22 +73,17 @@ public class LoginViewModel extends BaseAuthViewModel {
                     if (subscriptionMetaData.asInt() == 0) {
                         navigateTo(AuthFragment.ActivateAccount);
                     } else {
-//                        SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         subscriptionMetaData = jwt.getClaim("role");
                         String role = subscriptionMetaData.asString();
                         SharedPreferencesManager.getInstance(context).setAccessToken(token);
                         SharedPreferencesManager.getInstance(context).setRole(role);
-//                        editor.putString("token", token);
-//                        editor.putString("role", role);
-//                        editor.apply();
                         redirectByRole(role);
                     }
                 }
 
                 @Override
                 public void handleFailure(MessageResponse errorResponse) {
-                    Log.d("TAG", errorResponse.getMessage());
+                    Log.d("TAG", errorResponse.getMessage() + "zo day roi");
                     Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

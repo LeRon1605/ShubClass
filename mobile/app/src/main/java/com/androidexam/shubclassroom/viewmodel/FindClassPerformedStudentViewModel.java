@@ -14,6 +14,7 @@ import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,7 @@ public class FindClassPerformedStudentViewModel extends BaseObservable {
     public void onClickButtonSearch() {
         listClass.clear();
         ClassItemViewModel.itemSearchAdapter.updateItemList(listClass);
-        SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
+        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
         Call<List<ClassDetail>> call = apiService.searchClass(token, getTxtSearch());
         call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {
             @Override

@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ClassApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
@@ -16,6 +18,7 @@ import com.androidexam.shubclassroom.model.SummaryIn4Student;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.model.student.StudentExitClass;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 import com.androidexam.shubclassroom.viewmodel.class_detail.BaseClassDetailViewModel;
 
@@ -28,17 +31,20 @@ public class ClassDetailStudentViewModel extends BaseClassDetailViewModel {
     private SummaryIn4Student summaryIn4Student;
     private ClassApiService apiService;
     private String token;
+    private FragmentManager fm;
     public ClassDetailStudentViewModel(Context context, INavigation navigation, String idClass, String nameClass, SummaryIn4Student summaryIn4Student, String nameStudent) {
         super(context, navigation);
         this.idClass = idClass;
         this.nameClass = nameClass;
         this.summaryIn4Student = summaryIn4Student;
         this.nameStudent = nameStudent;
-        SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
+        token = SharedPreferencesManager.getInstance(context).getAccessToken();
         apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
     }
-
+    public ClassDetailStudentViewModel(Context context, INavigation navigation, FragmentManager fm) {
+        super(context, navigation);
+        this.fm = fm;
+    }
     public String getIdClass() {
         return idClass;
     }
@@ -102,5 +108,13 @@ public class ClassDetailStudentViewModel extends BaseClassDetailViewModel {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+    public void onClickArrowBackShowStudent() {
+        if(fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();;
+        }
+    }
+    public void onClickShowStudentInClass() {
+        navigateTo(ClassDetailFragment.ShowStudentInClassByStudent);
     }
 }

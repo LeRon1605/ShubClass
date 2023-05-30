@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.model.student.StudentDTO;
+import com.androidexam.shubclassroom.model.student.StudentIn4;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.viewmodel.ClassMemberItemViewModel;
 import com.androidexam.shubclassroom.databinding.ItemStudentClassMemberBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClassMemberItemAdapter extends RecyclerView.Adapter<ClassMemberItemAdapter.ClassMemberItemViewHolder>{
-    private ArrayList<StudentDTO> students;
+    private List<StudentIn4> students;
     private LayoutInflater layoutInflater;
-    private INavigation navigation;
 
-    public ClassMemberItemAdapter(INavigation navigation) {
-        this.students = new ArrayList<StudentDTO>();
-        this.navigation = navigation;
+    public ClassMemberItemAdapter() {
+        this.students = new ArrayList<>();
     }
 
     @NonNull
@@ -37,7 +37,7 @@ public class ClassMemberItemAdapter extends RecyclerView.Adapter<ClassMemberItem
     @Override
     public void onBindViewHolder(@NonNull ClassMemberItemAdapter.ClassMemberItemViewHolder holder, int position) {
         ClassMemberItemViewModel viewModel = new ClassMemberItemViewModel();
-        viewModel.setStudentDTO(students.get(position));
+        viewModel.setStudentIn4(students.get(position));
         holder.binding.setClassMemberItemViewModel(viewModel);
     }
 
@@ -46,7 +46,7 @@ public class ClassMemberItemAdapter extends RecyclerView.Adapter<ClassMemberItem
         return students.size();
     }
 
-    public void setStudents(ArrayList<StudentDTO> students) {
+    public void setStudents(List<StudentIn4> students) {
         this.students = students;
         notifyDataSetChanged();
     }

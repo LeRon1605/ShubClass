@@ -1,4 +1,4 @@
-package com.androidexam.shubclassroom.adapter;
+package com.androidexam.shubclassroom.view.auth;
 
 import android.os.Bundle;
 
@@ -15,7 +15,7 @@ import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.viewmodel.auth.LoginViewModel;
 
 public class LoginFragment extends Fragment {
-    private INavigation navigation;
+    private final INavigation navigation;
     private FragmentLoginBinding binding;
     private LoginViewModel viewModel;
 
