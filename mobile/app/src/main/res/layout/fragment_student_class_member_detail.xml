@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
+<!--    <data>-->
 
-        <variable
-            name="Member"
-            type="com.androidexam.shubclassroom.viewmodel.ClassMemberViewModel" />
-    </data>
+<!--        <variable-->
+<!--            name="Member"-->
+<!--            type="com.androidexam.shubclassroom.viewmodel.ClassMemberViewModel" />-->
+<!--    </data>-->
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,7 +28,6 @@
                 android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:contentDescription="backBtn"
-                android:onClick="@{() -> Member.onBackClicked()}"
                 android:padding="15dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24" />

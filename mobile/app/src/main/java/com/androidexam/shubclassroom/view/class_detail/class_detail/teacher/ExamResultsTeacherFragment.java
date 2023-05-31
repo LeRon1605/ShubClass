@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,9 +23,12 @@ import com.androidexam.shubclassroom.adapter.ExamResultItemAdapter;
 import com.androidexam.shubclassroom.api.ApiCallback;
 import com.androidexam.shubclassroom.api.ExamApiService;
 import com.androidexam.shubclassroom.api.RetrofitClient;
+import com.androidexam.shubclassroom.databinding.FragmentExamResultsTeacherBinding;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.exam_result.ExamResult;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.viewmodel.class_detail.teacher.ExamViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +43,7 @@ public class ExamResultsTeacherFragment extends Fragment {
     private ExamResultItemAdapter adapter;
     private List<ExamResult> examResultList;
     private String token;
+    private FragmentExamResultsTeacherBinding binding;
     public ExamResultsTeacherFragment(INavigation navigation, String examId) {
         this.examId = examId;
         this.navigation = navigation;
@@ -54,14 +60,16 @@ public class ExamResultsTeacherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exam_results_teacher, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam_results_teacher, container, false);
+        FragmentManager fm = getParentFragmentManager();
+        binding.setViewModel(new ExamViewModel(getContext(), navigation, fm));
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
+        token = SharedPreferencesManager.getInstance(getContext()).getAccessToken();
         rcvExamResult = view.findViewById(R.id.rcv_exam_result);
         examResultList = new ArrayList<>();
         adapter = new ExamResultItemAdapter(getContext(), navigation );

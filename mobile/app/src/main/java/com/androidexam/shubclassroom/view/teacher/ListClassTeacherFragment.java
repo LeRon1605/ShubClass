@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.shared.FragmentIndex;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
@@ -53,15 +55,13 @@ public class ListClassTeacherFragment extends Fragment {
         rvClass.setAdapter(adapter);
         rvClass.setLayoutManager(new GridLayoutManager(getContext(), 1));
         ClassItemViewModel.adapter = adapter;
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
+        String token = SharedPreferencesManager.getInstance(getContext()).getAccessToken();
         ClassApiService apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
         Call<List<ClassDetail>> call = apiService.getListClass("Brear " + token);
         call.enqueue(new ApiCallback<List<ClassDetail>, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(List<ClassDetail> responseObject) {
                 for(ClassDetail i : responseObject) {
-//                    i.setContext(getContext());
                     listClass.add(new ClassItemViewModel(getContext(), i));
                     adapter.notifyDataSetChanged();
                 }
@@ -69,6 +69,7 @@ public class ListClassTeacherFragment extends Fragment {
 
             @Override
             public void handleFailure(MessageResponse errorResponse) {
+                Log.d("TAG", "chua login");
                 Toast.makeText(getContext(), errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

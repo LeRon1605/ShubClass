@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageButton
+                android:onClick="@{() -> ViewModel.onClickArrowBack()}"
                 android:id="@+id/ib_back"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

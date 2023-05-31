@@ -16,35 +16,35 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 
-public class ClassMemberViewModel extends BaseClassMemberViewModel {
-    private ClassMemberItemAdapter adapter;
-    private ClassApiService classApiService;
-
-    public ClassMemberViewModel(Context context, INavigation navigation, String classId) {
-        super(context, navigation, classId);
-
-        adapter = new ClassMemberItemAdapter(navigation);
-        classApiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
-        Call<ArrayList<StudentDTO>> call = classApiService.getAllStudentsInClass(SharedPreferencesManager.getInstance(context).getAccessToken(), classId, "3");
-
-        call.enqueue(new ApiCallback<ArrayList<StudentDTO>, MessageResponse>(MessageResponse.class) {
-            @Override
-            public void handleSuccess(ArrayList<StudentDTO> responseObject) {
-                adapter.setStudents(responseObject);
-            }
-
-            @Override
-            public void handleFailure(MessageResponse errorResponse) {
-                Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public ClassMemberItemAdapter getAdapter() {
-        return adapter;
-    }
-
-    public void onBackClicked() {
-
-    }
-}
+//public class ClassMemberViewModel extends BaseClassMemberViewModel {
+//    private ClassMemberItemAdapter adapter;
+//    private ClassApiService classApiService;
+//
+//    public ClassMemberViewModel(Context context, INavigation navigation, String classId) {
+//        super(context, navigation, classId);
+//
+//        adapter = new ClassMemberItemAdapter(navigation);
+//        classApiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
+//        Call<ArrayList<StudentDTO>> call = classApiService.getAllStudentsInClass(SharedPreferencesManager.getInstance(context).getAccessToken(), classId, "3");
+//
+//        call.enqueue(new ApiCallback<ArrayList<StudentDTO>, MessageResponse>(MessageResponse.class) {
+//            @Override
+//            public void handleSuccess(ArrayList<StudentDTO> responseObject) {
+//                adapter.setStudents(responseObject);
+//            }
+//
+//            @Override
+//            public void handleFailure(MessageResponse errorResponse) {
+//                Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    public ClassMemberItemAdapter getAdapter() {
+//        return adapter;
+//    }
+//
+//    public void onBackClicked() {
+//
+//    }
+//}

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="ViewModel"
-            type="com.androidexam.shubclassroom.viewmodel.class_detail.teacher.RequestViewModel" />
+            type="com.androidexam.shubclassroom.viewmodel.class_detail.student.ClassDetailStudentViewModel" />
     </data>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.class_detail.class_detail.teacher.ShowAllRequestInClassFragment">
+        tools:context=".view.class_detail.class_detail.student.ShowStudentInClassStudentFragment">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -19,35 +19,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/background1">
+
                 <ImageButton
                     android:layout_gravity="center"
-                    android:onClick="@{() -> ViewModel.onClickArrowBack()}"
-                    android:id="@+id/ib_back"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:layout_marginLeft="10dp"
                     android:background="@null"
+                    android:onClick="@{() -> ViewModel.onClickArrowBackShowStudent()}"
                     android:padding="15dp"
                     android:scaleType="centerInside"
-                    android:layout_marginLeft="10dp"
-                    />
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24" />
                 <TextView
-                    android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="50dp"
                     android:gravity="center"
-                    android:text="Danh sách yêu cầu"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+                    android:textSize="26sp"
+                    android:text="THÀNH VIÊN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_request"
+                android:layout_marginTop="10dp"
+                android:id="@+id/rcv_list_student1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
-
     </FrameLayout>
 </layout>

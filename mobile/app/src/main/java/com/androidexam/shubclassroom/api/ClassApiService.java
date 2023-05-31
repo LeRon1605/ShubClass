@@ -8,6 +8,7 @@ import com.androidexam.shubclassroom.model.exam.ExamDto;
 import com.androidexam.shubclassroom.model.student.StudentDTO;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
 import com.androidexam.shubclassroom.model.student.StudentExitClass;
+import com.androidexam.shubclassroom.model.student.StudentIn4;
 import com.androidexam.shubclassroom.viewmodel.ClassItemViewModel;
 
 import java.util.ArrayList;
@@ -29,8 +30,10 @@ public interface ClassApiService {
     Call<List<ClassDetail>> getListClass(@Header("authorization") String token);
     @DELETE("classes/{id}")
     Call<MessageResponse> deleteClass(@Header("authorization") String token, @Path("id") String idClass);
-    @GET("{id}/students")
+    @GET("classes/{id}/students")
     Call<ArrayList<StudentDTO>> getAllStudentsInClass(@Header("authorization") String token, @Path("id") String id, @Query("type") String type);
+    @GET("classes/{id}/students")
+    Call<List<StudentIn4>> getAllStudentsInClass(@Header("authorization") String token, @Path("id") String id);
     @GET("classes/search")
     Call<List<ClassDetail>> searchClass(@Header("authorization") String token, @Query("id") String id);
     @GET("classes/{id}/exams")

@@ -2,7 +2,7 @@ package com.androidexam.shubclassroom.shared;
 
 public enum ClassDetailFragment {
     // student
-    StudentClassDetail(0), StudentExam(1), StudentMember(2),
+    StudentClassDetail(0), StudentExam(1), StudentMember(2), ShowStudentInClassByStudent(10),
 
     // teacher
     TeacherClassDetail(3), TeacherExam(4), TeacherMember(5), TeacherCreateExam(10),

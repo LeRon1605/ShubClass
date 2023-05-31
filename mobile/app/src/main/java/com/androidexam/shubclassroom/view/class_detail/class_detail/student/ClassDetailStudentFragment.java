@@ -24,6 +24,7 @@ import com.androidexam.shubclassroom.model.ClassCreateDto;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.SummaryIn4Student;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.class_detail.student.ClassDetailStudentViewModel;
 
 import retrofit2.Call;
@@ -53,8 +54,7 @@ public class ClassDetailStudentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
+        token = SharedPreferencesManager.getInstance(getContext()).getAccessToken();
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_student_class_detail , container, false);
         Log.d("TAG", "idClassClassDetailFragment: " + idClass);
         Call<SummaryIn4Student> call = apiService.getSummaryIn4Student("Bear " + token, idClass);
