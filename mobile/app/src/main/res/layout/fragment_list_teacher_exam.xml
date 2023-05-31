@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="ListExamTeacherViewModel"-->
-<!--            type="com.androidexam.shubclassroom.viewmodel.teacher.exam.ListExamTeacherViewModel" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="ListExamTeacherViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.teacher.exam.ListExamTeacherViewModel" />
+    </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -26,6 +26,7 @@
                 android:padding="15dp"
                 android:scaleType="centerInside"
                 android:layout_marginLeft="10dp"
+                android:onClick="@{() -> ListExamTeacherViewModel.navigateTo(com.androidexam.shubclassroom.shared.ClassDetailFragment.TeacherClassDetail)}"
                 />
 
             <LinearLayout
@@ -81,6 +82,7 @@
                 android:fontFamily="@font/kantumruy"
                 android:layout_marginRight="20dp"
                 android:layout_gravity="center"
+                android:onClick="@{() -> ListExamTeacherViewModel.onCreateExamClicked()}"
                 />
         </LinearLayout>
 

@@ -5,7 +5,7 @@ public enum ClassDetailFragment {
     StudentClassDetail(0), StudentExam(1), StudentMember(2), ShowStudentInClassByStudent(10),
 
     // teacher
-    TeacherClassDetail(3), TeacherExam(4), TeacherMember(5),
+    TeacherClassDetail(3), TeacherExam(4), TeacherMember(5), TeacherCreateExam(10),
 
     // same
     ShowStudentOfClass(6), ShowAllRequestOfClass(7), ShowAllExamInClass(8), ShowExamResult(9);

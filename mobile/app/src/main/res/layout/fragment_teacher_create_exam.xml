@@ -27,7 +27,7 @@
                 android:padding="15dp"
                 android:scaleType="fitXY"
                 android:layout_marginLeft="10dp"
-                android:onClick="@{() -> CreateExamTeacherViewModel.navigateTo(com.androidexam.shubclassroom.shared.TeacherExamFragment.ListExamTeacher)}"
+                android:onClick="@{() -> CreateExamTeacherViewModel.navigateTo(com.androidexam.shubclassroom.shared.ClassDetailFragment.TeacherExam)}"
                 />
 
             <LinearLayout
