@@ -17,11 +17,6 @@ router
         AccountController.createAccount
     )
     .put(
-        ':/id',
-        ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
-        AccountController.updateAccount
-    )
-    .put(
         '/',
         ValidationMiddleware(AccountUpdateScheme, APP_CONSTANT.REQUEST_BODY),
         AuthorizationMiddleware({ type: 'basic' }),
@@ -47,7 +42,7 @@ router
 router.get(
     '/me',
     AuthorizationMiddleware({ type: 'basic' }),
-    AccountController.sayValid
+    AccountController.getUserInfo
 );
 
 export default router;

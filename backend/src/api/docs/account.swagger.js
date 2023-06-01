@@ -73,6 +73,46 @@
  *    properties:
  *      access_token:
  *        type: string
+ *  UserInfoDto:
+ *    type: object
+ *    properties:
+ *      name:
+ *          type: string
+ *      email:
+ *          type: string
+ *      dateOfBirth:
+ *          type: string
+ *          format: date-time
+ *          example: '2023-01-01T00:00:00Z'
+ *      school:
+ *          type: string
+ *      grade:
+ *          type: number
+ *      phoneNumber:
+ *          type: string
+ *      address:
+ *          type: string
+ *      gender:
+ *          type: boolean
+ *  AccountUpdateDto:
+ *    type: object
+ *    properties:
+ *      name:
+ *          type: string
+ *      dateOfBirth:
+ *          type: string
+ *          format: date-time
+ *          example: '2023-01-01T00:00:00Z'
+ *      school:
+ *          type: string
+ *      grade:
+ *          type: number
+ *      phoneNumber:
+ *          type: string
+ *      address:
+ *          type: string
+ *      gender:
+ *          type: boolean
  */
 
 /**
@@ -164,25 +204,43 @@
 
 /**
  * @swagger
- * /accounts/forget-password:
- *   post:
+ * /accounts/me:
+ *   get:
  *     tags: [Auth]
- *     description: Request forget password mail
+ *     description: Get current login user info
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *          $ref: '#/definitions/UserInfoDto'
+ *       404:
+ *         $ref: '#/responses/NotFound'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */
+
+/**
+ * @swagger
+ * /accounts:
+ *   put:
+ *     tags: [Auth]
+ *     description: Update user info
  *     produces:
  *       - application/json
  *     parameters:
  *       - name: data
- *         description: email
+ *         description: account information
  *         required: true
  *         in: body
  *         schema:
- *           type: object
- *           properties:
- *              email:
- *                type: string
+ *           $ref: '#/definitions/AccountUpdateDto'
  *     responses:
  *       200:
  *         description: OK
+ *         schema:
+ *          $ref: '#/definitions/UserInfoDto'
  *       404:
  *         $ref: '#/responses/NotFound'
  *       500:
