@@ -79,7 +79,6 @@ public class ExamResultsTeacherFragment extends Fragment {
         call.enqueue(new ApiCallback<List<ExamResult>, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(List<ExamResult> responseObject) {
-                Log.d("TAG", responseObject.get(0).getPoints() + "");
                 examResultList = responseObject;
                 adapter.setExamResultList(examResultList);
             }

@@ -73,6 +73,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     bundle.putInt("FragmentIndex", FragmentIndex.Teacher.getValue());
                     Intent intent = new Intent(context, ClassDetailActivity.class);
                     intent.putExtra("myBundle", bundle);
+                    intent.putExtra("classId", itemList.get(position).getClassModel().getId());
                     context.startActivity(intent, bundle);
                 } else {
                     SharedPreferences sharedPreferences = context.getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
@@ -91,6 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());
                     Intent intent = new Intent(context, ClassDetailActivity.class);
                     intent.putExtra("myBundle", bundle);
+                    intent.putExtra("classId", itemList.get(position).getClassModel().getId());
                     context.startActivity(intent, bundle);
                 }
             }

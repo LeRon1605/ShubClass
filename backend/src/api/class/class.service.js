@@ -344,6 +344,16 @@ class ClassService {
             }
         });
     }
+
+    async getById(classId) {
+        const classEntity = await Class.findByPk(classId);
+
+        if (classEntity == null) {
+            throw new EntityNotFoundException('Class', classId);
+        }
+
+        return ClassDto.toDto(classEntity);
+    }
 }
 
 export default new ClassService();
