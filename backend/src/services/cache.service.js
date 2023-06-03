@@ -18,6 +18,7 @@ class CacheService {
         const value = await redis.get(key);
         await redis.quit();
         if (value != null) {
+            console.log('[Redis] Cache hit!!');
             return JSON.parse(value);
         }
         return null;
