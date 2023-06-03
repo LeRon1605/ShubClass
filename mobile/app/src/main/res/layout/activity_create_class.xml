@@ -118,7 +118,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:text="@={CreateClassViewModel.classCreateDto.subjectName}"
-                android:maxLength="5"
                 android:id="@+id/edt_subjectName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

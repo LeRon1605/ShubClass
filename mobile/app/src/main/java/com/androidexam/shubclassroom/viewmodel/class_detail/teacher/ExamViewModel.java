@@ -70,6 +70,6 @@ public class ExamViewModel extends BaseClassDetailViewModel {
         Toast.makeText(context, "Bài kiểm tra chưa kết thúc hoặc chưa mở", Toast.LENGTH_SHORT).show();
     }
     public void onClickArrowBack() {
-        navigateTo(ClassDetailFragment.TeacherExam);
+        navigateTo(ClassDetailFragment.TeacherClassDetail);
     }
 }

@@ -25,6 +25,7 @@ public class CreateClassViewModel extends BaseObservable {
 
     public CreateClassViewModel(Context context) {
         this.context = context;
+        classCreateDto = new ClassCreateDto();
         apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
     }
 
