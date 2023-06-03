@@ -40,7 +40,9 @@ class AccountController {
     async updateUser(req, res, next) {
         const userEntity = AccountUpdateDto.toEntity(req.body);
         const result = await AccountService.updateUser(req.session.id, userEntity);
-        return res.status(200).json(result);
+        return res.status(200).json({
+            message: 'Update information successfully!!.'
+        });
     }
 
     async login(req, res, next) {
