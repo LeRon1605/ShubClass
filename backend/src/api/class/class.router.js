@@ -45,7 +45,7 @@ router
     .delete(
         '/:id/students',
         AuthorizationMiddleware({ type: 'role', value: 'Student' }),
-        ClassController.existClass
+        ClassController.exitClass
     )
     .delete(
         '/:id/students/:studentId',

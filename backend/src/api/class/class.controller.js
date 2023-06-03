@@ -2,13 +2,22 @@ import ClassService from './class.service.js';
 import { ExamService } from '../exam/index.js';
 import { ClassCreateDto, ClassUpdateDto } from './dtos/index.js';
 import { REQUEST_STATE } from '../../shared/enum/index.js';
+import { CacheService } from '../../services/index.js';
 class ClassController {
     async getAllClasses(req, res, next) {
         let data = [];
         if (req.session.role == 'Student') {
-            data = await ClassService.getAllClassesOfStudent(req.session.id);
+            data = await CacheService.get(`classes_s${req.session.id}`);
+            if (!data) {
+                data = await ClassService.getAllClassesOfStudent(req.session.id);
+                await CacheService.set(`classes_s${req.session.id}`, data, 30);
+            }
         } else {
-            data = await ClassService.getAllClassesOfTeacher(req.session.id);
+            data = await CacheService.get(`classes_t${req.session.id}`);
+            if (!data) {
+                data = await ClassService.getAllClassesOfTeacher(req.session.id);
+                await CacheService.set(`classes_t${req.session.id}`, data, 30);
+            }
         }
         return res.status(200).json(data);
     }
@@ -53,9 +62,13 @@ class ClassController {
     }
 
     async getAllStudentsInClass(req, res, next) {
-        const students = await ClassService.getAllStudentsByClassId(
-            req.params.id
-        );
+        let students = await CacheService.get(`class_student_${req.params.id}`);
+        if (!students) {
+            students = await ClassService.getAllStudentsByClassId(
+                req.params.id
+            );
+            await CacheService.set(`class_student_${req.params.id}`, students, 60);
+        }
         return res.status(200).json(students);
     }
 
@@ -121,11 +134,15 @@ class ClassController {
     }
 
     async getStudentInfo(req, res, next) {
-        const info = await ClassService.getStudentSummaryInClass(req.session.id, req.params.id);
+        let info = await CacheService.get(`student_summary_c${req.session.id}_s${req.params.id}`);
+        if (!info) {
+            info = await ClassService.getStudentSummaryInClass(req.session.id, req.params.id);
+            await CacheService.set(`student_summary_c${req.session.id}_s${req.params.id}`, info, 3 * 60);
+        }
         return res.status(200).json(info);
     }
 
-    async existClass(req, res, next) {
+    async exitClass(req, res, next) {
         await ClassService.exitClass(req.params.id, req.session.id);
         return res.status(200).json({
             message: 'Exit class successfully'
