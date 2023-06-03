@@ -9,10 +9,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_margin="5dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        app:strokeWidth=".5dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="5dp"
         app:cardUseCompatPadding="true"
-        app:strokeColor="@color/gray"
+        app:strokeColor="@color/light_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout

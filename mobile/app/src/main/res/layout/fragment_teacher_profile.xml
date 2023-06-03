@@ -7,34 +7,46 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".view.teacher.ProfileTeacherFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:orientation="vertical"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/kantumruy"
             android:text="Hồ sơ của bạn"
             android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="bold"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_editprofile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:fontFamily="@font/kantumruy"
-            android:layout_marginVertical="10dp"
-            />
+            android:gravity="center|end"
+            android:text="Chỉnh sửa"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginHorizontal="10dp"
-            >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -69,358 +81,320 @@
                     app:cardCornerRadius="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    >
+                    app:layout_constraintStart_toStartOf="parent">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#d6d9e3"
-                        android:src="@drawable/ic_baseline_camera_alt_24"
                         android:scaleType="centerInside"
-                        />
+                        android:src="@drawable/ic_baseline_camera_alt_24" />
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kantumruy"
                     android:text="Điện thoại"
                     android:textColor="@color/black"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/tv_editphone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chỉnh sửa"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    />
+                    android:textStyle="bold" />
+
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Cung cấp đúng số điện thoại để đăng nhập hoặc lấy lại mật khẩu của bạn."
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_marginVertical="10dp"
-                />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/phone_call"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    />
+                    android:src="@drawable/phone_call" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="Số điện thoại"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_phonenumber"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="-"
-                        android:textSize="18sp"
                         android:textColor="@android:color/tab_indicator_text"
-                        />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/tv_editemail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chỉnh sửa"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    />
-            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/kantumruy"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Cung cấp đúng email cá nhân để có thể lấy mật khẩu khi cần thiết."
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_marginVertical="10dp"
-                />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/email_icon"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    />
+                    android:src="@drawable/email_icon" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="Email"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_email"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="-"
-                        android:textSize="18sp"
                         android:textColor="@android:color/tab_indicator_text"
-                        />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thông tin cá nhân"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/tv_editinfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chỉnh sửa"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    />
-            </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/kantumruy"
+                android:text="Thông tin cá nhân"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Cung cấp đúng thông tin các nhân của bạn để không bị nhầm lẫn khi tham gia lớp học hoặc bài kiểm tra."
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_marginVertical="10dp"
-                />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/user_icon"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    />
+                    android:src="@drawable/user_icon" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="Họ và tên"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="hello"
-                        android:textSize="18sp"
                         android:textColor="@android:color/tab_indicator_text"
-                        />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/love"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    />
+                    android:src="@drawable/love" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="Sinh nhật"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_birthday"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="hello"
-                        android:textSize="18sp"
                         android:textColor="@android:color/tab_indicator_text"
-                        />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/location_pin"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    />
+                    android:src="@drawable/location_pin" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="Tỉnh"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_province"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="hello"
-                        android:textSize="18sp"
                         android:textColor="@android:color/tab_indicator_text"
-                        />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="50dp"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/briefcase_green"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    />
+                    android:src="@drawable/briefcase_green" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="Trường"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_school"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:text="hello"
-                        android:textSize="18sp"
                         android:textColor="@android:color/tab_indicator_text"
-                        />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/blue"
+                android:gravity="center"
+                android:text="Đăng xuất"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -12,6 +12,7 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
 import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
+import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 
 import java.util.ArrayList;
 
@@ -33,11 +34,8 @@ public class ExamStudentViewModel extends BaseStudentExamViewModel {
 
         adapter = new ItemExamStudentAdapter(navigation);
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
-//        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiTMOqIFF14buRYyBSw7RuIiwiYXZhdGFyIjoiZW1wdHkiLCJzdGF0ZSI6MSwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE2ODUxMjY2MzQsImV4cCI6MTY4NTM4NTgzNH0.qp_dvUwUo4DENiQWxW0ZZFTWoT947dkijuks729DDsU";
-        Log.d("TOKEN", token);
+        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
         getListReceive(3);
-
     }
 
     public void getListReceive(int chip)
@@ -82,11 +80,6 @@ public class ExamStudentViewModel extends BaseStudentExamViewModel {
             }
         }
         return filterList;
-    }
-
-    public void onChipClicked(int chip)
-    {
-        adapter.setExams(filterExamByState(chip));
     }
 
     public void onBackClicked() {

@@ -33,15 +33,30 @@
                     android:scaleType="centerInside"
                     android:layout_marginLeft="10dp"
                     />
-                <TextView
-                    android:layout_marginRight="80dp"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="26sp"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="KẾT QUẢ" />
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    >
+                    <TextView
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Kết quả làm bài" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/result_exam"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        />
+                </LinearLayout>
             </LinearLayout>
             <TableRow android:layout_width="match_parent"
                 android:layout_height="wrap_content">

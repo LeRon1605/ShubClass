@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".view.teacher.HomeTeacherFragment">
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:paddingHorizontal="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -51,6 +52,9 @@
                     android:layout_weight=".4"
                     android:onClick="@{() -> ClassTeacherViewModel.onclickCreateClass()}"
                     android:text="Tạo lớp mới"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:layout_width="0dp"
                     android:layout_height="60dp"/>
             </LinearLayout>

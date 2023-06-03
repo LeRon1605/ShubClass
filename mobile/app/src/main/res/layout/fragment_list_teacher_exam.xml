@@ -98,27 +98,5 @@
                 android:layout_height="wrap_content"
                 />
         </ScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <pl.droidsonroids.gif.GifImageView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:src="@drawable/examgif"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chưa có bài tập nào"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:fontFamily="@font/kantumruy"
-                android:gravity="center"
-                />
-        </LinearLayout>
     </LinearLayout>
 </layout>

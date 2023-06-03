@@ -11,19 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
-        <ImageButton
-            android:id="@+id/ib_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_black_24"
-            android:background="@null"
-            android:padding="15dp"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="10dp"
-            android:contentDescription="imagebutton"
-            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +22,19 @@
             android:textStyle="bold"
             android:fontFamily="@font/kantumruy"
             android:layout_marginVertical="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_editprofile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Chỉnh sửa"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/kantumruy"
+            android:gravity="center|end"
+            android:layout_marginRight="10dp"
             />
     </LinearLayout>
 
@@ -93,32 +95,16 @@
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thông tin tài khoản"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/tv_editprofile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cập nhật"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    />
-            </LinearLayout>
+                android:text="Thông tin tài khoản"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/kantumruy"
+                android:layout_weight="1"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,18 +151,6 @@
                         android:textColor="@android:color/tab_indicator_text"
                         />
                 </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/ib_copy"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/copy"
-                    android:backgroundTint="@color/white"
-                    android:scaleType="centerInside"
-                    android:layout_gravity="center"
-                    android:contentDescription="imagebutton"
-                    />
-
             </LinearLayout>
 
             <LinearLayout
@@ -257,33 +231,16 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thông tin cá nhân"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/tv_editinfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chỉnh sửa"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/kantumruy"
-                    />
-            </LinearLayout>
+                android:text="Thông tin cá nhân"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/kantumruy"
+                android:layout_weight="1"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -489,21 +446,15 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_deleteaccount"
+                android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:drawableLeft="@drawable/delete"
-                android:drawablePadding="20dp"
-                android:width="40dp"
-                android:height="40dp"
-                android:text="Xóa tài khoản"
+                android:text="Đăng xuất"
                 android:textSize="18sp"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:paddingLeft="120dp"
-                android:paddingRight="100dp"
                 android:gravity="center"
-                android:backgroundTint="#f44236"
+                android:backgroundTint="@color/blue"
                 android:layout_marginVertical="20dp"
                 />
         </LinearLayout>
