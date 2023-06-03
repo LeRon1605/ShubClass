@@ -32,14 +32,12 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
         Bundle bundle  = getIntent().getBundleExtra("myBundle");
         if(bundle != null) {
             int fragmentIndex = bundle.getInt("FragmentIndex");
-            Log.d("TAG", "FragmentIndex: " + fragmentIndex);
             if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
                 classCreateDto = (ClassCreateDto) bundle.getSerializable("Class");
                 navigate(ClassDetailFragment.TeacherClassDetail.getValue());
             } else {
                 nameStudent = bundle.getString("nameStudent");
                 idClass = bundle.getString("idClass");
-                Log.d("TAG", "idClassClassDetailActivity: " + idClass);
                 nameClass = bundle.getString("nameClass");
                 int id = bundle.getInt("fragment");
                 if (id != 0) {

@@ -1,10 +1,7 @@
 package com.androidexam.shubclassroom.model.profile;
 
-import java.io.Serializable;
-
-public class ProfileIn4 implements Serializable {
+public class ProfileIn4Update {
     private String name;
-    private String email;
     private String dateOfBirth;
     private String school;
     private int grade;
@@ -12,9 +9,8 @@ public class ProfileIn4 implements Serializable {
     private String address;
     private boolean gender;
 
-    public ProfileIn4(String name, String email, String dateOfBirth, String school, int grade, String phoneNumber, String address, boolean gender) {
+    public ProfileIn4Update(String name, String dateOfBirth, String school, int grade, String phoneNumber, String address, boolean gender) {
         this.name = name;
-        this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.school = school;
         this.grade = grade;
@@ -31,16 +27,8 @@ public class ProfileIn4 implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDateOfBirth() {
-        return dateOfBirth.substring(0, 10);
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
@@ -55,12 +43,12 @@ public class ProfileIn4 implements Serializable {
         this.school = school;
     }
 
-    public String getGrade() {
-        return String.valueOf(grade);
+    public int getGrade() {
+        return grade;
     }
 
-    public void setGrade(String grade) {
-        this.grade = Integer.parseInt(grade);
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 
     public String getPhoneNumber() {
@@ -85,12 +73,5 @@ public class ProfileIn4 implements Serializable {
 
     public void setGender(boolean gender) {
         this.gender = gender;
-    }
-    public boolean isValid() {
-        if(name.isEmpty() || dateOfBirth.isEmpty() || school.isEmpty() || String.valueOf(grade).isEmpty() || phoneNumber.isEmpty()
-        || address.isEmpty() || String.valueOf(gender).isEmpty()) {
-            return false;
-        }
-        return true;
     }
 }
