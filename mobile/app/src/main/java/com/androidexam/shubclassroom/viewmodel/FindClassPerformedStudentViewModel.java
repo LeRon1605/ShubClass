@@ -1,6 +1,7 @@
 package com.androidexam.shubclassroom.viewmodel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.ClassDetail;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.view.student.HomeStudentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +68,8 @@ public class FindClassPerformedStudentViewModel extends BaseObservable {
                 Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void onClickArrowBack() {
+        context.startActivity(new Intent(context, HomeStudentActivity.class));
     }
 }

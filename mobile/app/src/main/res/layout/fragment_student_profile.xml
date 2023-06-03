@@ -87,6 +87,7 @@
                         android:layout_weight="1"
                         />
                     <TextView
+                        android:onClick="@{() -> ViewModel.onClickEditProfile()}"
                         android:id="@+id/tv_editprofile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

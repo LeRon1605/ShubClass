@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
+                android:onClick="@{() -> findClassModel.onClickArrowBack()}"
                 android:id="@+id/ib_back"
                 android:layout_width="60dp"
                 android:layout_height="60dp"

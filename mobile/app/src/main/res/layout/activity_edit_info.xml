@@ -1,142 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingHorizontal="10dp"
-    android:orientation="vertical"
-    tools:context=".view.EditInfoActivity">
-
-    <LinearLayout
+<layout>
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.androidexam.shubclassroom.viewmodel.profile.EditProfileViewModel" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingHorizontal="10dp"
+        android:orientation="vertical"
+        tools:context=".view.EditInfoActivity">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp">
+                    <ImageButton
+                        android:id="@+id/btn_close"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:contentDescription="close"
+                        android:src="@drawable/ic_baseline_close_24"
+                        android:backgroundTint="@color/white"/>
 
-        <ImageButton
-            android:id="@+id/btn_close"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:contentDescription="close"
-            android:src="@drawable/ic_baseline_close_24"
-            android:backgroundTint="@color/white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/kantumruy"
+                        android:text="Thay đổi thông tin"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"/>
+                </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/kantumruy"
-            android:text="Thay đổi thông tin"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangleshape"
+                    android:drawableLeft="@drawable/ic_baseline_info_24"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="15dp"
+                    android:text="Vui lòng cung cấp đúng thông tin cá nhân của bạn để không bị nhầm lẫn khi tham gia lớp học hoặc bài kiểm tra."
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textFontWeight="@integer/material_motion_duration_medium_2"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@{ViewModel.profileIn4.email}"
+                        android:background="@color/gray"
+                        android:focusable="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Số điện thoại"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={ViewModel.profileIn4.phoneNumber}"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Họ và tên"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={ViewModel.profileIn4.name}"
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ngày sinh"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={ViewModel.profileIn4.dateOfBirth}"
+                        android:id="@+id/et_date"
+                        android:inputType="datetime"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="20dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_weight="4"
+                    android:hint="Thành phố">
+
+                    <AutoCompleteTextView
+                        android:text="@={ViewModel.profileIn4.address}"
+                        android:textSize="20sp"
+                        android:id="@+id/edt_province"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Trường"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={ViewModel.profileIn4.school}"
+                        android:id="@+id/et_school"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_et_grade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Lớp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={ViewModel.profileIn4.grade}"
+                        android:id="@+id/et_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:onClick="@{() -> ViewModel.onClickUpdate()}"
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Lưu"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/blue"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangleshape"
-        android:drawableLeft="@drawable/ic_baseline_info_24"
-        android:drawablePadding="20dp"
-        android:paddingHorizontal="15dp"
-        android:text="Vui lòng cung cấp đúng thông tin cá nhân của bạn để không bị nhầm lẫn khi tham gia lớp học hoặc bài kiểm tra."
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:textFontWeight="@integer/material_motion_duration_medium_2"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Họ và tên"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/white"
-        android:layout_marginTop="20dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_name"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ngày sinh"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/white"
-        android:layout_marginTop="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_date"
-            android:inputType="datetime"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tỉnh"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/white"
-        android:layout_marginTop="20dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_province"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Trường"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/white"
-        android:layout_marginTop="20dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_school"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Lớp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/white"
-        android:layout_marginTop="20dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_class"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:text="Lưu"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:backgroundTint="@color/blue"
-        />
-</LinearLayout>
+</layout>
