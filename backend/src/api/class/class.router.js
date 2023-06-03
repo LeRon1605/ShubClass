@@ -14,6 +14,11 @@ router
         ClassController.getAllClasses
     )
     .get(
+        '/:id',
+        AuthorizationMiddleware({ type: 'basic' }),
+        ClassController.getById
+    )
+    .get(
         '/search',
         AuthorizationMiddleware({ type: 'basic' }),
         ClassController.searchClasses

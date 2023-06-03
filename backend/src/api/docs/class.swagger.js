@@ -504,3 +504,33 @@
  *       500:
  *         $ref: '#/responses/InternalServerError'
  */
+
+/**
+ * @swagger
+ *
+ * /classes/{id}:
+ *   get:
+ *     tags: [Class]
+ *     description: Get class information
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: class id
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *            $ref: '#/definitions/Class'
+ *       401:
+ *         $ref: '#/responses/Unauthorized'
+ *       404:
+ *         $ref: '#/responses/NotFound'
+ *       403:
+ *         $ref: '#/responses/Forbidden'
+ *       500:
+ *         $ref: '#/responses/InternalServerError'
+ */

@@ -28,6 +28,8 @@ public interface ClassApiService {
     Call<ClassDetail> createClass(@Header("authorization") String token, @Body ClassCreateDto classCreateDto);
     @GET("classes")
     Call<List<ClassDetail>> getListClass(@Header("authorization") String token);
+    @GET("classes/{id}")
+    Call<ClassDetail> getClassDetail(@Header("authorization") String token, @Path("id") String id);
     @DELETE("classes/{id}")
     Call<MessageResponse> deleteClass(@Header("authorization") String token, @Path("id") String idClass);
     @GET("classes/{id}/students")

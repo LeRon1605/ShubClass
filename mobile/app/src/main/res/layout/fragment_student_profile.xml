@@ -44,7 +44,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:background="#9396a9"
+                            android:background="#1D89E4"
                             android:src="@drawable/ic_baseline_person_white_24"
                             />
                     </androidx.cardview.widget.CardView>

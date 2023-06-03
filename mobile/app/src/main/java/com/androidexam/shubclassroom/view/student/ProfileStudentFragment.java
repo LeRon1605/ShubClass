@@ -1,5 +1,7 @@
 package com.androidexam.shubclassroom.view.student;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -19,6 +21,9 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.profile.ProfileIn4;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.profile.ProfileStudentViewModel;
+import com.squareup.picasso.Picasso;
+
+import java.net.URL;
 
 import retrofit2.Call;
 
@@ -43,6 +48,12 @@ public class ProfileStudentFragment extends Fragment {
             @Override
             public void handleSuccess(ProfileIn4 responseObject) {
                 viewModel = new ProfileStudentViewModel(getContext(), responseObject);
+                try {
+                    Picasso.get().load(responseObject.getAvatar())
+                                 .into(binding.ivProfileavatar);
+                } catch (Exception e) {
+
+                }
                 binding.setViewModel(viewModel);
             }
 

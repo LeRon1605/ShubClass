@@ -131,6 +131,11 @@ class ClassController {
             message: 'Exit class successfully'
         });
     }
+
+    async getById(req, res, next) {
+        const result = await ClassService.getById(req.params.id);
+        return res.status(200).json(result);
+    }
 }
 
 export default new ClassController();
