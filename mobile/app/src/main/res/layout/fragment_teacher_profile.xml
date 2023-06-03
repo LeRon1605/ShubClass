@@ -427,6 +427,26 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_deleteaccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginVertical="20dp"
+                    android:width="40dp"
+                    android:height="40dp"
+                    android:backgroundTint="@color/blue"
+                    android:drawablePadding="20dp"
+                    android:gravity="center"
+                    android:paddingLeft="120dp"
+                    android:paddingRight="120dp"
+                    android:text="Đăng xuất"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:onClick="@{() -> ViewModel.logout()}"
+                    />
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
