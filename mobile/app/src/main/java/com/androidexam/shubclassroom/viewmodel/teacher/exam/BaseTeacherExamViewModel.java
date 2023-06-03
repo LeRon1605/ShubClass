@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.databinding.BaseObservable;
 
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.TeacherExamFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 
@@ -17,7 +18,7 @@ public class BaseTeacherExamViewModel extends BaseObservable {
         this.classId = classId;
     }
 
-    public void navigateTo(TeacherExamFragment fragment) {
+    public void navigateTo(ClassDetailFragment fragment) {
         navigation.navigate(fragment.getValue());
     }
 }

@@ -18,6 +18,11 @@ router
         AuthorizationMiddleware({ type: 'basic' }),
         ClassController.searchClasses
     )
+    .get(
+        '/:id',
+        AuthorizationMiddleware({ type: 'basic' }),
+        ClassController.getById
+    )
     .post(
         '/',
         AuthorizationMiddleware({ type: 'role', value: 'Teacher' }),
@@ -45,7 +50,7 @@ router
     .delete(
         '/:id/students',
         AuthorizationMiddleware({ type: 'role', value: 'Student' }),
-        ClassController.existClass
+        ClassController.exitClass
     )
     .delete(
         '/:id/students/:studentId',

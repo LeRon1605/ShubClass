@@ -9,6 +9,10 @@ public class ClassCreateDto implements Serializable {
     private String subjectName;
     private int numberOfStudent;
 
+    public ClassCreateDto() {
+
+    }
+
     public ClassCreateDto(String id, String name, String description, String subjectName, int numberOfStudent) {
         this.id = id;
         this.name = name;

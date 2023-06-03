@@ -14,6 +14,7 @@ import TokenProvider from './token.provider.js';
 import { randomUUID } from 'crypto';
 import { CacheService } from '../../services/index.js';
 import { ACCOUNT_STATE } from '../../shared/enum/index.js';
+import { UserInfoDto } from './dtos/user-info.dto.js';
 
 const { User, Account, Role, StudentClass } = sequelize;
 
@@ -87,36 +88,6 @@ class AccountService {
         );
     }
 
-    async updateAccount(id, newAccount) {
-        const accountEntity = await Account.findByPk(id);
-        if (accountEntity == null) {
-            throw new EntityNotFoundException('Account', id);
-        }
-
-        const role = await Role.findByPk(newAccount.roleId);
-        if (role == null) {
-            throw new EntityNotFoundException('Role', newAccount.roleId);
-        }
-        if (role.roleId != newAccount.roleId) {
-            throw new EntityForbiddenUpdateException(
-                'Account',
-                accountEntity.id
-            );
-        }
-
-        await accountEntity.update(
-            { ...accountEntity, ...newAccount },
-            {
-                where: {
-                    id: id
-                }
-            }
-        );
-
-        const dto = AccountDto.toDto(await Account.findByPk(id));
-        return dto;
-    }
-
     async deleteAccount(id, roleId) {
         const accountEntity = await Account.findByPk(id);
         if (accountEntity == null) {
@@ -140,13 +111,21 @@ class AccountService {
         }
 
         await userEntity.update(
-            { body },
+            body,
             {
                 where: {
                     id: id
                 }
             }
         );
+
+        const updatedUserEntity = await Account.findOne({
+            where: {
+                id: id
+            },
+            include: [User]
+        });
+        return UserInfoDto.toDto(updatedUserEntity);
     }
 
     async login(email, password) {
@@ -346,6 +325,20 @@ class AccountService {
         }
 
         return AccountDto.toDto(account);
+    }
+
+    async getUserInfo(id) {
+        const account = await Account.findOne({
+            where: {
+                id: id
+            },
+            include: [User]
+        });
+        if (account == null) {
+            throw new EntityNotFoundException('Account', id);
+        }
+
+        return UserInfoDto.toDto(account);
     }
 }
 

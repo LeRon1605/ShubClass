@@ -93,10 +93,17 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             app:cardCornerRadius="50dp"
-                            />
+                            >
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_baseline_person_24"
+                                />
+                        </androidx.cardview.widget.CardView>
                         <TextView
-                            android:layout_width="230dp"
+                            android:layout_width="0dp"
                             android:layout_height="34dp"
+                            android:layout_weight="1"
                             android:text="Thông tin lớp của bạn"
                             android:textStyle="bold"
                             android:textColor="@color/white"
@@ -386,7 +393,8 @@
                         android:layout_height="50dp"
                         android:backgroundTint="@color/blue"
                         android:layout_gravity="center"
-                        app:cardCornerRadius="15dp">
+                        app:cardCornerRadius="15dp"
+                        android:onClick="@{() -> ViewModel.onClickExerciseButton()}">
 
                         <ImageView
                             android:layout_width="25dp"
@@ -457,8 +465,8 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:layout_gravity="center"
                             android:src="@drawable/user" />
                     </androidx.cardview.widget.CardView>

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".view.teacher.ListClassTeacherFragment">
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/lv_class"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

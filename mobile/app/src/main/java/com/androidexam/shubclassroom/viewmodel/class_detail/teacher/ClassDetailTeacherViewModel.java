@@ -47,7 +47,10 @@ public class ClassDetailTeacherViewModel extends BaseClassDetailViewModel {
     }
     public void onClickArrowBack() {
         if(fm.getBackStackEntryCount() > 0) {
-            fm.popBackStack();;
+            fm.popBackStack();
         }
+    }
+    public void onClickExerciseButton() {
+        navigateTo(ClassDetailFragment.TeacherExam);
     }
 }

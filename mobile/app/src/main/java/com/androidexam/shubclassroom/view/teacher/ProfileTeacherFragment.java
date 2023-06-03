@@ -19,6 +19,7 @@ import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.profile.ProfileIn4;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.profile.ProfileTeacherViewModel;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 
@@ -49,6 +50,13 @@ public class ProfileTeacherFragment extends Fragment {
             public void handleSuccess(ProfileIn4 responseObject) {
                 viewModel = new ProfileTeacherViewModel(getContext(), responseObject);
                 binding.setViewModel(viewModel);
+
+                try {
+                    Picasso.get().load(responseObject.getAvatar())
+                            .into(binding.ivProfileavatar);
+                } catch (Exception e) {
+
+                }
             }
 
             @Override

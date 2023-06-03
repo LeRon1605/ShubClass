@@ -12,6 +12,7 @@ import com.androidexam.shubclassroom.api.RetrofitClient;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.exam.ExamCreateDto;
 import com.androidexam.shubclassroom.model.exam.ExamDto;
+import com.androidexam.shubclassroom.shared.ClassDetailFragment;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 
@@ -36,7 +37,6 @@ public class CreateExamTeacherViewModel extends BaseTeacherExamViewModel {
 
     public void setDetail(String details, String filePath) {
         examCreateDto.setDetails(details);
-//        filePath = "mewo";
     }
 
     public LiveData<Boolean> getBtnUploadClickObservable() {
@@ -64,6 +64,7 @@ public class CreateExamTeacherViewModel extends BaseTeacherExamViewModel {
                 @Override
                 public void handleSuccess(ExamDto responseObject) {
                     Toast.makeText(context, "Tạo bài tập thành công", Toast.LENGTH_SHORT).show();
+                    navigateTo(ClassDetailFragment.TeacherExam);
                 }
 
                 @Override

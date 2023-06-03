@@ -7,14 +7,14 @@ import com.androidexam.shubclassroom.utilities.DateHelper;
 public class ExamResult {
     private Exam exam;
     private User user;
-    private double points;
+    private double point;
     private String startAt;
     private String endAt;
 
     public ExamResult(Exam exam, User user, double points, String startAt, String endAt) {
         this.exam = exam;
         this.user = user;
-        this.points = points;
+        this.point = points;
         this.startAt = startAt;
         this.endAt = endAt;
     }
@@ -36,11 +36,11 @@ public class ExamResult {
     }
 
     public double getPoints() {
-        return points;
+        return point;
     }
 
     public void setPoints(double points) {
-        this.points = points;
+        this.point = points;
     }
 
     public String getStartAt() {

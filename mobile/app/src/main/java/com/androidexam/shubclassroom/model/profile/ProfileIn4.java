@@ -11,6 +11,7 @@ public class ProfileIn4 implements Serializable {
     private String phoneNumber;
     private String address;
     private boolean gender;
+    private String avatar;
 
     public ProfileIn4(String name, String email, String dateOfBirth, String school, int grade, String phoneNumber, String address, boolean gender) {
         this.name = name;
@@ -22,6 +23,8 @@ public class ProfileIn4 implements Serializable {
         this.address = address;
         this.gender = gender;
     }
+
+    public String getAvatar() { return this.avatar; }
 
     public String getName() {
         return name;
@@ -93,4 +96,7 @@ public class ProfileIn4 implements Serializable {
         }
         return true;
     }
+
+    public void setAvatar(String avatar) { this.avatar = avatar; }
+
 }

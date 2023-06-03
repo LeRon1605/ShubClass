@@ -1,5 +1,5 @@
 import AccountService from './account.service.js';
-import { AccountCreateDto, AccountUpdateDto } from './dtos/index.js';
+import { AccountCreateDto, AccountUpdateDto, UserInfoDto } from './dtos/index.js';
 
 class AccountController {
     async getUserOfAccount(req, res, next) {
@@ -38,11 +38,10 @@ class AccountController {
     }
 
     async updateUser(req, res, next) {
-        const userEntity = AccountUpdateDto.toEntity(req.body).user;
-        const id = req.session.id;
-        await AccountService.updateUser(id, userEntity);
+        const userEntity = AccountUpdateDto.toEntity(req.body);
+        const result = await AccountService.updateUser(req.session.id, userEntity);
         return res.status(200).json({
-            message: 'Update account successfully.'
+            message: 'Update information successfully!!.'
         });
     }
 
@@ -100,10 +99,9 @@ class AccountController {
         res.status(200).json({ message: 'Thay đổi mật khẩu thành công' });
     }
 
-    async sayValid(req, res, next) {
-        return res.status(200).json({
-            message: 'Valid token'
-        });
+    async getUserInfo(req, res, next) {
+        const userInfo = await AccountService.getUserInfo(req.session.id);
+        return res.status(200).json(userInfo);
     }
 }
 

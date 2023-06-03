@@ -31,19 +31,34 @@
                     android:scaleType="centerInside"
                     android:layout_marginLeft="10dp"
                     />
-                <TextView
-                    android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center_horizontal"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Danh sách yêu cầu"
-                    android:textColor="@color/white"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+                    android:layout_marginRight="15dp"
+                    >
+                    <TextView
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Yêu cầu vào lớp" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/join"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
                 android:id="@+id/rcv_request"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

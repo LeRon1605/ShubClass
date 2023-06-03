@@ -105,7 +105,7 @@
                     android:textColor="@{ViewModel.examDto.state == 0 ? @color/red : (ViewModel.examDto.state == 1 ? @color/green : @color/blue)}"
                     />
                 <Button
-                    android:onClick="@{() -> ViewModel.examDto.state == 2 ? ViewModel.onClickSeeResult() : ViewModel.showErr()}"
+                    android:onClick="@{() -> ViewModel.onClickSeeResult()}"
                     android:id="@+id/btn_see_result"
                     android:layout_width="150dp"
                     android:layout_height="50dp"

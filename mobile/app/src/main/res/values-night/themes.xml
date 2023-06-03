@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <style name="formDropDown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="background">@drawable/edittext_spinner_background</item>
+        <item name="android:drawableRight">@drawable/ic_arrow_down</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>

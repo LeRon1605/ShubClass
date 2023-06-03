@@ -27,7 +27,7 @@
                 android:padding="15dp"
                 android:scaleType="fitXY"
                 android:layout_marginLeft="10dp"
-                android:onClick="@{() -> CreateExamTeacherViewModel.navigateTo(com.androidexam.shubclassroom.shared.TeacherExamFragment.ListExamTeacher)}"
+                android:onClick="@{() -> CreateExamTeacherViewModel.navigateTo(com.androidexam.shubclassroom.shared.ClassDetailFragment.TeacherExam)}"
                 />
 
             <LinearLayout
@@ -260,6 +260,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:fontFamily="@font/kantumruy"
+                    android:layout_marginVertical="30dp"
                     android:onClick="@{() -> CreateExamTeacherViewModel.onCreateClicked()}"
                     />
             </LinearLayout>

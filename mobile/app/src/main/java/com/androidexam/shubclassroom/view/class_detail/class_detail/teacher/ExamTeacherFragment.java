@@ -71,7 +71,7 @@ public class ExamTeacherFragment extends Fragment {
         ExamViewModel.adapter = adapter;
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        Call<List<ExamDto>> call = apiService.getExamsInClass("Bear " + token, classId);
+        Call<List<ExamDto>> call = apiService.getExamsInClass(token, classId);
         call.enqueue(new ApiCallback<List<ExamDto>, MessageResponse>(MessageResponse.class) {
             @Override
             public void handleSuccess(List<ExamDto> responseObject) {
