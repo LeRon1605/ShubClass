@@ -121,7 +121,6 @@
                     android:textSize="18sp"
                     android:layout_marginVertical="10dp"
                     />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -164,8 +163,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -234,13 +236,19 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:src="@drawable/love" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -250,16 +258,6 @@
                         android:textStyle="bold"
                         android:fontFamily="@font/kantumruy"
                         android:layout_weight="1"
-                        />
-                    <TextView
-                        android:id="@+id/tv_editinfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chỉnh sửa"
-                        android:textColor="@color/blue"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/kantumruy"
                         />
                 </LinearLayout>
                 <TextView
@@ -430,24 +428,18 @@
 
                 <Button
                     android:id="@+id/btn_deleteaccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginVertical="20dp"
-                    android:width="40dp"
-                    android:height="40dp"
-                    android:backgroundTint="@color/blue"
-                    android:drawablePadding="20dp"
-                    android:gravity="center"
-                    android:paddingLeft="120dp"
-                    android:paddingRight="120dp"
-                    android:text="Đăng xuất"
-                    android:textAllCaps="false"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                   android:layout_width="match_parent"
+                  android:layout_height="55dp"
+                  android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/blue"
+                android:gravity="center"
+                android:text="Đăng xuất"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold" 
                     android:onClick="@{() -> ViewModel.logout()}"
                     />
-
-            </LinearLayout>
+        </LinearLayout>
         </ScrollView>
     </LinearLayout>
 </layout>

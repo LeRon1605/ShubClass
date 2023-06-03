@@ -5,11 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.androidexam.shubclassroom.view.student.AlertStudentFragment;
 import com.androidexam.shubclassroom.view.student.ClassStudentFragment;
 import com.androidexam.shubclassroom.view.student.ProfileStudentFragment;
-import com.androidexam.shubclassroom.view.student.ScheduleStudentFragment;
-import com.androidexam.shubclassroom.view.student.HomeStudentFragment;
 
 public class ViewPageStudentAdapter extends FragmentStateAdapter {
 

@@ -37,7 +37,6 @@ public class CreateExamTeacherViewModel extends BaseTeacherExamViewModel {
 
     public void setDetail(String details, String filePath) {
         examCreateDto.setDetails(details);
-//        filePath = "mewo";
     }
 
     public LiveData<Boolean> getBtnUploadClickObservable() {

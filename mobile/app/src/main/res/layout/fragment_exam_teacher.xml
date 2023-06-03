@@ -53,6 +53,7 @@
                     android:paddingVertical="10dp"
                     android:layout_gravity="center_vertical"
                     android:text="Tìm kiếm"
+                    android:textAllCaps="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

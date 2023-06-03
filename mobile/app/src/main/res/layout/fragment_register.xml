@@ -234,7 +234,7 @@
                 android:onClick="@{() -> RegisterViewModel.onClickRegister()}"
                 android:layout_marginVertical="10dp"
                 android:textAllCaps="false"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/kantumruy"
                 android:text="Đăng ký" />

@@ -5,12 +5,16 @@
             name="ViewModel"
             type="com.androidexam.shubclassroom.viewmodel.class_detail.teacher.RequestViewModel" />
     </data>
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:elevation="10dp"
+        app:cardElevation="5dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/light_blue"
         app:cardUseCompatPadding="true"
+        android:layout_marginVertical="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -39,19 +43,22 @@
                         android:onClick="@{() -> ViewModel.onClickAcceptRequest()}"
                         android:textAllCaps="false"
                         android:text="Chấp nhận"
+                        android:layout_marginLeft="20dp"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:onClick="@{() -> ViewModel.onClickRejectRequest()}"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_gravity="right"
                         android:textColor="@color/black"
                         android:backgroundTint="#DDDDDD"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
-                        android:text="Xoá" />
+                        android:text="Xoá"
+                        android:textAllCaps="false"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

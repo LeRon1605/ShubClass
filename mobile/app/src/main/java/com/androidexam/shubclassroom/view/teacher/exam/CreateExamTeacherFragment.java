@@ -2,6 +2,10 @@ package com.androidexam.shubclassroom.view.teacher.exam;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -9,11 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.databinding.FragmentTeacherCreateExamBinding;
@@ -25,8 +24,6 @@ import com.androidexam.shubclassroom.viewmodel.teacher.exam.CreateExamTeacherVie
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 public class CreateExamTeacherFragment extends Fragment {

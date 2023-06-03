@@ -104,7 +104,7 @@
                     android:backgroundTint="@color/blue"
                     android:text="Đăng nhập"
                     android:textAllCaps="false"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/kantumruy"
                     android:layout_marginTop="10dp"

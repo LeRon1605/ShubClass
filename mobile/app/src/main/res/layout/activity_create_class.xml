@@ -28,15 +28,30 @@
                 android:scaleType="centerInside"
                 android:layout_marginLeft="10dp"
                 />
-            <TextView
-                android:layout_marginRight="60dp"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="TẠO LỚP HỌC"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_marginRight="20dp"
+                >
+                <TextView
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tạo lớp mới" />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/join"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    />
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_marginHorizontal="20dp"
