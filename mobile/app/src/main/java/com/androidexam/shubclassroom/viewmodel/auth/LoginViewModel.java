@@ -96,6 +96,7 @@ public class LoginViewModel extends BaseAuthViewModel {
         if (role.equals("Teacher")) {
             intent = new Intent(context, HomeTeacherActivity.class);
         } else {
+
             intent = new Intent(context, HomeStudentActivity.class);
 //            intent = new Intent(context, ClassDetailActivity.class);
         }

@@ -2,6 +2,7 @@ package com.androidexam.shubclassroom.view.student;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +21,7 @@ import com.androidexam.shubclassroom.databinding.FragmentStudentProfileBinding;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.profile.ProfileIn4;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
+import com.androidexam.shubclassroom.view.auth.AuthActivity;
 import com.androidexam.shubclassroom.viewmodel.profile.ProfileStudentViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -64,4 +66,6 @@ public class ProfileStudentFragment extends Fragment {
         });
         return binding.getRoot();
     }
+
+
 }
