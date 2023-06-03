@@ -6,6 +6,7 @@ import com.androidexam.shubclassroom.model.auth.AccountLoginDto;
 import com.androidexam.shubclassroom.model.auth.AuthCredential;
 import com.androidexam.shubclassroom.model.MessageResponse;
 import com.androidexam.shubclassroom.model.auth.ForgetPasswordDto;
+import com.androidexam.shubclassroom.model.profile.ProfileIn4;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,4 +30,6 @@ public interface AuthApiService {
     // dump endpoint for testing only
     @GET("accounts/me")
     Call<MessageResponse> validate(@Header("authorization") String token);
+    @GET("accounts/me")
+    Call<ProfileIn4> getProfileIn4(@Header("authorization") String token);
 }
