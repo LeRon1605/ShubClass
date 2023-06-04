@@ -26,6 +26,9 @@ import com.androidexam.shubclassroom.model.SummaryIn4Student;
 import com.androidexam.shubclassroom.shared.INavigation;
 import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.viewmodel.class_detail.student.ClassDetailStudentViewModel;
+import com.auth0.android.jwt.Claim;
+import com.auth0.android.jwt.JWT;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 
@@ -56,7 +59,13 @@ public class ClassDetailStudentFragment extends Fragment {
         // Inflate the layout for this fragment
         token = SharedPreferencesManager.getInstance(getContext()).getAccessToken();
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_student_class_detail , container, false);
-        Log.d("TAG", "idClassClassDetailFragment: " + idClass);
+
+        JWT jwt = new JWT(token);
+        Claim claim = jwt.getClaim("avatar");
+        String avatar = claim.asString();
+
+        Picasso.get().load(avatar).into(binding.ciwAvatar);
+
         Call<SummaryIn4Student> call = apiService.getSummaryIn4Student("Bear " + token, idClass);
         call.enqueue(new ApiCallback<SummaryIn4Student, MessageResponse>(MessageResponse.class) {
             @Override
