@@ -136,8 +136,7 @@ public class ItemExamStudentAdapter extends RecyclerView.Adapter<ItemExamStudent
                         ExamApiService examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
                         Log.d("DEBUG", "done");
                         try {
-                            SharedPreferences sharedPref = v.getContext().getSharedPreferences("my_shared_pref", Context.MODE_PRIVATE);
-                            String token = sharedPref.getString("token", null);
+                            String token = SharedPreferencesManager.getInstance(v.getContext()).getAccessToken();
                             DecodeToken.decoded(token);
                             String studentId = DecodeToken.getStringValueObjectByKey("id");
                             Log.d("DEBUG", "intry");

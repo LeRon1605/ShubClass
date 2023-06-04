@@ -287,9 +287,9 @@ public class DoExamStudentViewModel {
         Bundle bundle = new Bundle();
         bundle.putInt("FragmentIndex", FragmentIndex.Student.getValue());
         bundle.putInt("fragment", ClassDetailFragment.StudentExam.getValue());
-        bundle.putString("idClass", examDto.getClassId());
         Intent intent = new Intent(context, ClassDetailActivity.class);
         intent.putExtra("myBundle", bundle);
+        intent.putExtra("classId", examDto.getClassId());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

@@ -34,7 +34,7 @@ public class ExamStudentViewModel extends BaseStudentExamViewModel {
 
         adapter = new ItemExamStudentAdapter(navigation);
         examApiService = RetrofitClient.getRetrofitInstance().create(ExamApiService.class);
-        String token = SharedPreferencesManager.getInstance(context).getAccessToken();
+        token = SharedPreferencesManager.getInstance(context).getAccessToken();
         getListReceive(3);
     }
 
