@@ -17,8 +17,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="140dp"
                 android:orientation="vertical"
+                android:paddingTop="20dp"
                 android:background="@drawable/background1">
                 <ImageButton
                     android:layout_width="50dp"

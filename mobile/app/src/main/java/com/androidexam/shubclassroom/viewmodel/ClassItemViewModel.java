@@ -210,6 +210,7 @@ public class ClassItemViewModel extends BaseObservable implements Serializable {
         bundle.putInt("FragmentIndex", FragmentIndex.Teacher.getValue());
         Intent intent = new Intent(context, ClassDetailActivity.class);
         intent.putExtra("myBundle", bundle);
+        intent.putExtra("classId", classCreateDto.getId());
         context.startActivity(intent, bundle);
     }
 
