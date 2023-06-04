@@ -83,7 +83,6 @@ public class LoginViewModel extends BaseAuthViewModel {
 
                 @Override
                 public void handleFailure(MessageResponse errorResponse) {
-                    Log.d("TAG", errorResponse.getMessage() + "zo day roi");
                     Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -98,7 +97,6 @@ public class LoginViewModel extends BaseAuthViewModel {
         } else {
 
             intent = new Intent(context, HomeStudentActivity.class);
-//            intent = new Intent(context, ClassDetailActivity.class);
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
