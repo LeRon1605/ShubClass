@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.androidexam.shubclassroom.R;
 import com.androidexam.shubclassroom.api.ApiCallback;
@@ -63,6 +64,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
 
                 Bundle bundle = intent.getBundleExtra("myBundle");
                 if(bundle != null) {
+                    Log.d("TAG", "handleSuccess: zo day roi");
                     int fragmentIndex = bundle.getInt("FragmentIndex");
                     if(fragmentIndex == FragmentIndex.Teacher.getValue()) {
                         navigate(ClassDetailFragment.TeacherClassDetail.getValue());
@@ -79,7 +81,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
 
             @Override
             public void handleFailure(MessageResponse errorResponse) {
-
+                Toast.makeText(ClassDetailActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -87,6 +89,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
     @Override
     public void navigate(int id) {
         FragmentTransaction transaction  = getSupportFragmentManager().beginTransaction();
+        transaction.addToBackStack(null);
         if(id == ClassDetailFragment.TeacherClassDetail.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ClassDetailTeacherFragment(this, classCreateDto));
         } else if(id == ClassDetailFragment.StudentClassDetail.getValue()) {
@@ -94,6 +97,7 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
         }
         else if(id == ClassDetailFragment.ShowStudentOfClass.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ShowStudentInClassFragment(this, classCreateDto));
+            transaction.addToBackStack("FragmentShowStudent");
         }
         else if(id == ClassDetailFragment.ShowAllRequestOfClass.getValue()) {
             transaction.replace(R.id.fr_classdetail, new ShowAllRequestInClassFragment(this, classCreateDto.getId()));
@@ -110,7 +114,6 @@ public class ClassDetailActivity extends AppCompatActivity implements INavigatio
         } else if (id == ClassDetailFragment.TeacherCreateExam.getValue()) {
             transaction.replace(R.id.fr_classdetail, new CreateExamTeacherFragment(this, classCreateDto.getId()));
         }
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 }
