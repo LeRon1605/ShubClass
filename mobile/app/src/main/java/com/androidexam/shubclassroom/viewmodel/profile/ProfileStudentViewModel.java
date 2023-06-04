@@ -37,6 +37,7 @@ public class ProfileStudentViewModel extends BaseProfileViewModel {
         bundle.putSerializable("ProfileIn4", profileIn4);
         bundle.putInt("role", FragmentIndex.Student.getValue());
         intent.putExtra("bundle", bundle);
+        context.startActivity(intent);
     }
 
     public void logout() {
