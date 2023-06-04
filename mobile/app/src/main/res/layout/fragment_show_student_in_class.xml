@@ -18,6 +18,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:orientation="vertical"
+                android:paddingTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageButton
@@ -54,12 +55,11 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+
             <androidx.cardview.widget.CardView
                 android:elevation="15dp"
                 app:cardCornerRadius="5dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="10dp"
                 app:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
@@ -98,16 +98,8 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginVertical="10dp"
-                android:background="@color/blue"
-                />
-
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/rcv_list_student"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

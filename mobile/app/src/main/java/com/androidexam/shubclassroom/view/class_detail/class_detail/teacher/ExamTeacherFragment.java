@@ -47,7 +47,6 @@ public class ExamTeacherFragment extends Fragment {
     public ExamTeacherFragment(INavigation navigation, String classId) {
         this.navigation = navigation;
         this.classId = classId;
-        Log.d("TAG", token + " token ne");
         apiService = RetrofitClient.getRetrofitInstance().create(ClassApiService.class);
     }
 
