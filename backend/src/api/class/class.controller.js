@@ -7,17 +7,9 @@ class ClassController {
     async getAllClasses(req, res, next) {
         let data = [];
         if (req.session.role == 'Student') {
-            data = await CacheService.get(`classes_s${req.session.id}`);
-            if (!data) {
-                data = await ClassService.getAllClassesOfStudent(req.session.id);
-                await CacheService.set(`classes_s${req.session.id}`, data, 3 * 60);
-            }
+            data = await ClassService.getAllClassesOfStudent(req.session.id);
         } else {
-            data = await CacheService.get(`classes_t${req.session.id}`);
-            if (!data) {
-                data = await ClassService.getAllClassesOfTeacher(req.session.id);
-                await CacheService.set(`classes_t${req.session.id}`, data, 60);
-            }
+            data = await ClassService.getAllClassesOfTeacher(req.session.id);
         }
         return res.status(200).json(data);
     }
@@ -44,7 +36,6 @@ class ClassController {
             teacherId: req.session.id
         });
         const result = await ClassService.createClass(entity);
-        await CacheService.remove(`classes_t${req.session.id}`);
         return res.status(201).json(result);
     }
 
