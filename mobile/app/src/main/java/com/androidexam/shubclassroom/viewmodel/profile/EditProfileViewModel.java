@@ -103,4 +103,13 @@ public class EditProfileViewModel {
         }
 
     }
+    public void onClickClose() {
+        Intent intent;
+        if(role == FragmentIndex.Teacher.getValue()) {
+            intent = new Intent(context, HomeTeacherActivity.class);
+        } else {
+            intent = new Intent(context, HomeStudentActivity.class);
+        }
+        context.startActivity(intent);
+    }
 }
