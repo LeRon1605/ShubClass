@@ -29,9 +29,8 @@
                 android:layout_height="45dp"/>
             <TextView
                 android:layout_marginLeft="10dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:text="@{ClassMemberItemViewModel.studentIn4.name}"
                 android:id="@+id/tv_studentname"
                 android:layout_width="wrap_content"

@@ -15,8 +15,9 @@ import com.androidexam.shubclassroom.utilities.SharedPreferencesManager;
 import com.androidexam.shubclassroom.view.auth.AuthActivity;
 
 
-public class ProfileStudentViewModel extends BaseProfileViewModel{
+public class ProfileStudentViewModel extends BaseProfileViewModel {
     private ProfileIn4 profileIn4;
+
     public ProfileStudentViewModel(Context context, ProfileIn4 profileIn4) {
         super(context);
         this.profileIn4 = profileIn4;
@@ -41,7 +42,6 @@ public class ProfileStudentViewModel extends BaseProfileViewModel{
     public void logout() {
         SharedPreferencesManager.getInstance(context).clear();
         Intent intent = new Intent(context, AuthActivity.class);
-
         context.startActivity(intent);
     }
 }

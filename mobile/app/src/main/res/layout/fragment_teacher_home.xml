@@ -33,12 +33,13 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:layout_weight=".5"
-                    android:hint="Tìm kiếm..">
+                    >
                     <com.google.android.material.textfield.TextInputEditText
                         android:onTextChanged="@{() -> ClassTeacherViewModel.searchItem()}"
                         android:text="@={ClassTeacherViewModel.textSearch}"
                         android:drawableStart="@drawable/ic_baseline_search_24"
                         android:id="@+id/edt_search"
+                        android:hint="Tìm kiếm.."
                         android:layout_width="match_parent"
                         android:layout_height="50dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +55,7 @@
                     android:text="Tạo lớp mới"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_width="0dp"
                     android:layout_height="60dp"/>
             </LinearLayout>
