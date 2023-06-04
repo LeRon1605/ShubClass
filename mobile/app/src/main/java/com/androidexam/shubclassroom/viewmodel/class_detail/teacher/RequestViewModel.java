@@ -87,7 +87,7 @@ public class RequestViewModel extends BaseClassDetailViewModel {
     }
     public void onClickArrowBack() {
         if(fm.getBackStackEntryCount() >  0) {
-            fm.popBackStack();;
+            fm.popBackStack("FragmentShowStudent", 0);
         }
     }
 }
