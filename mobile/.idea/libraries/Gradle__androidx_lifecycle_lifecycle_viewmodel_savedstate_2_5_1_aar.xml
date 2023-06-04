@@ -18,6 +18,7 @@
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-viewmodel-savedstate/2.5.1/11f7a8fab7793634b9cc07891180c35fbf4315c/lifecycle-viewmodel-savedstate-2.5.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-viewmodel-savedstate/2.5.1/11f7a8fab7793634b9cc07891180c35fbf4315c/lifecycle-viewmodel-savedstate-2.5.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-viewmodel-savedstate/2.5.1/11f7a8fab7793634b9cc07891180c35fbf4315c/lifecycle-viewmodel-savedstate-2.5.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

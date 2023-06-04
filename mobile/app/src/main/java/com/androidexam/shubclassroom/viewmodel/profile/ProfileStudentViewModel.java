@@ -31,11 +31,12 @@ public class ProfileStudentViewModel extends BaseProfileViewModel{
     }
 
     public void onClickEditProfile() {
-        Intent intent  = new Intent(context, EditInfoActivity.class);
+        Intent intent = new Intent(context, EditInfoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ProfileIn4", profileIn4);
         bundle.putInt("role", FragmentIndex.Student.getValue());
         intent.putExtra("bundle", bundle);
+    }
 
 
     public void logout() {

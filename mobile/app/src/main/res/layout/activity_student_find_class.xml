@@ -62,7 +62,7 @@
                     android:text="@={findClassModel.txtSearch}"
                     android:id="@+id/et_classid"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:textSize="20sp"
                     />
             </com.google.android.material.textfield.TextInputLayout>

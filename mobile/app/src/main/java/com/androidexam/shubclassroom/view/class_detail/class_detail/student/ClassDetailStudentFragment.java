@@ -39,6 +39,7 @@ public class ClassDetailStudentFragment extends Fragment {
     private final ClassApiService apiService;
     private String token;
     public ClassDetailStudentFragment(INavigation navigation, String idClass, String nameClass, String nameStudent) {
+        Log.d("TAG", "zp day roi");
         this.navigation = navigation;
         this.idClass = idClass;
         this.nameClass = nameClass;
