@@ -10,13 +10,13 @@ class ClassController {
             data = await CacheService.get(`classes_s${req.session.id}`);
             if (!data) {
                 data = await ClassService.getAllClassesOfStudent(req.session.id);
-                await CacheService.set(`classes_s${req.session.id}`, data, 30);
+                await CacheService.set(`classes_s${req.session.id}`, data, 3 * 60);
             }
         } else {
             data = await CacheService.get(`classes_t${req.session.id}`);
             if (!data) {
                 data = await ClassService.getAllClassesOfTeacher(req.session.id);
-                await CacheService.set(`classes_t${req.session.id}`, data, 30);
+                await CacheService.set(`classes_t${req.session.id}`, data, 60);
             }
         }
         return res.status(200).json(data);
@@ -44,6 +44,7 @@ class ClassController {
             teacherId: req.session.id
         });
         const result = await ClassService.createClass(entity);
+        await CacheService.remove(`classes_t${req.session.id}`);
         return res.status(201).json(result);
     }
 
@@ -144,6 +145,7 @@ class ClassController {
 
     async exitClass(req, res, next) {
         await ClassService.exitClass(req.params.id, req.session.id);
+        await CacheService.remove(`classes_s${req.session.id}`);
         return res.status(200).json({
             message: 'Exit class successfully'
         });
